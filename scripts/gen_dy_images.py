@@ -33,28 +33,43 @@ import os
 import re
 import subprocess
 import sys
+import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib_dy import (DY_IMG_HEIGHT, DY_IMG_WIDTH, DY_IMAGE_ROLES,  # noqa: E402
+                     STAGE_INFO, STAGE_MONETIZE, STAGE_WARMUP,
                      ensure_out_dir, out_dir, read_json, resolve_date)
 
 MMX_RATIO = "3:4"
 AI_ROLES = ("cover", "scene")   # 这两个交给 mmx
 
 
-def mmx_generate(prompt: str, out_path: str) -> bool:
-    """调 mmx 出图。内部已处理代理, 外层别再加。"""
+def mmx_generate(prompt: str, out_path: str, retries: int = 2) -> bool:
+    """调 mmx 出图。内部已处理代理, 外层别再加。
+
+    ⚠️ **必须重试**: 2026-10-29 实测, 15 张批量出图里有 1 次 mmx 调用
+       直接失败(瞬时接口抖动), 整批就 14/15 判失败, 白跑 5 分钟。
+       → 失败自动重试(退避 4s/10s), 重试仍失败才算真失败。
+    """
     cmd = ["mmx", "image", "generate", "--prompt", prompt,
            "--aspect-ratio", MMX_RATIO, "--out", out_path, "--quiet"]
-    try:
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
-    except subprocess.TimeoutExpired:
-        print("   ❌ mmx 超时")
-        return False
-    if r.returncode != 0:
-        print(f"   ❌ mmx 失败: {(r.stderr or r.stdout)[:200]}")
-        return False
-    return os.path.exists(out_path) and os.path.getsize(out_path) > 5000
+    for attempt in range(retries + 1):
+        if attempt:
+            wait = 4 if attempt == 1 else 10
+            print(f"   ↻ 第 {attempt} 次重试 (等 {wait}s) ...")
+            time.sleep(wait)
+        try:
+            r = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
+        except subprocess.TimeoutExpired:
+            print("   ❌ mmx 超时")
+            continue
+        if r.returncode != 0:
+            print(f"   ❌ mmx 失败: {(r.stderr or r.stdout)[:200]}")
+            continue
+        if os.path.exists(out_path) and os.path.getsize(out_path) > 5000:
+            return True
+        print("   ❌ mmx 返回成功但文件缺失/过小")
+    return False
 
 
 def fit_1080x1440(im):
@@ -99,11 +114,42 @@ def _fit_text(draw, text, font, max_width):
     return out.rstrip("，。、· ") + ("…" if out else "")
 
 
-def compose_price_card(cover_path: str, dst: str, product: dict) -> bool:
-    """尾图 = cover 打底 + 价格文案叠加 (PIL, 中文精确)。
+def _wrap_text(draw, text, font, max_width, max_lines=2):
+    """按**像素宽度**折行, 返回行列表。
+
+    ⚠️ 只用 _fit_text 截断会把干货句砍成半句(2026-10-29 踩到:
+       "收纳箱先量衣柜深度再挑容量…" 后面直接没了, 读者看到的是残句)。
+    → 先折行, 放不下再在最后一行截断。
+    """
+    lines, cur = [], ""
+    for ch in str(text or ""):
+        if draw.textlength(cur + ch, font=font) <= max_width:
+            cur += ch
+            continue
+        if cur:
+            lines.append(cur)
+        cur = ch
+        if len(lines) >= max_lines:
+            break
+    if cur and len(lines) < max_lines:
+        lines.append(cur)
+    if not lines:
+        return []
+    if len(lines) == max_lines:
+        lines[-1] = _fit_text(draw, lines[-1], font, max_width)
+    return lines
+
+
+def compose_price_card(cover_path: str, dst: str, product: dict,
+                       stage: str = STAGE_MONETIZE) -> bool:
+    """尾图 = cover 打底 + 文案叠加 (PIL, 中文精确)。
 
     ⚠️ 叠加文案只用**产品事实**: 价格 / 卖点 / 规格。
        禁止写库存紧张、"最后 X 件"这类编造的紧迫感 —— 平台判虚假宣传会扣分。
+
+    ⚠️ **养号期(stage=warmup)绝不显示价格** —— 价格是营销属性最强的信号,
+       新号带价格会被判定为带货内容, 自然流量直接打折。
+       养号期尾图改成"卖点/知识卡": 一句干货 + 引导看主页。
     """
     try:
         from PIL import Image, ImageDraw, ImageFont
@@ -113,7 +159,7 @@ def compose_price_card(cover_path: str, dst: str, product: dict) -> bool:
 
     font_path = find_cn_font()
     if not font_path:
-        print("   ❌ 找不到中文字体, 无法合成价格尾图")
+        print("   ❌ 找不到中文字体, 无法合成尾图")
         return False
 
     try:
@@ -145,16 +191,47 @@ def compose_price_card(cover_path: str, dst: str, product: dict) -> bool:
         except Exception:
             return ImageFont.load_default()
 
+    pad = 56
+    max_w = DY_IMG_WIDTH - pad * 2
+    y = band_top + 40
+
+    if stage == STAGE_WARMUP:
+        # ---- 养号期: 挑货知识卡, 无价格 ----
+        # ⚠️ 大字是**干货句**(方法论), 小字是**商品事实**(榜单名次/规格/评价数)。
+        #    干货句才是读者收藏的理由, 商品事实才是"这不是广告"的信任来源。
+        f_chip = font(28)
+        f_title = font(46)
+        f_body = font(30)
+        f_foot = font(28)
+
+        chip = "挑货笔记"
+        draw.text((pad, y), chip, font=f_chip, fill=(228, 228, 228))
+        y += 58
+
+        title = str(product.get("tip") or product.get("display_name") or "").strip()
+        if title:
+            for ln in _wrap_text(draw, title, f_title, max_w, max_lines=2):
+                draw.text((pad, y), ln, font=f_title, fill=(255, 255, 255))
+                y += 58
+        y += 8
+
+        body = str(product.get("fact_line") or "").strip()
+        if body:
+            for ln in _wrap_text(draw, body, f_body, max_w, max_lines=2):
+                draw.text((pad, y), ln, font=f_body, fill=(200, 200, 200))
+                y += 40
+
+        y += 10
+        draw.text((pad, y), "更多同类整理中 · 持续更新", font=f_foot,
+                  fill=(160, 160, 160))
+        base.convert("RGB").save(dst, "JPEG", quality=90, optimize=True)
+        return True
+
+    # ---- 带货期: 价格大字 + 名称 + 规格 ----
     f_price = font(92)
     f_name = font(38)
     f_note = font(32)
 
-    pad = 56
-    max_w = DY_IMG_WIDTH - pad * 2
-
-    # ---- 价格: 大字 ----
-    # ⚠️ 输入 price 可能是 "¥40.9(24包整箱·京东自营)" 这种长串,
-    #    大字区只放**数字部分**, 规格放小字行 —— 否则字号被挤到看不清。
     raw_price = str(product.get("price", "")).strip()
     m = re.search(r"[¥￥]?\s*(\d+(?:\.\d+)?)", raw_price)
     price_big = f"¥{m.group(1)}" if m else raw_price[:12]
@@ -164,20 +241,22 @@ def compose_price_card(cover_path: str, dst: str, product: dict) -> bool:
     if not spec:
         spec = str(product.get("price_note") or product.get("category") or "")
 
-    y = band_top + 40
     draw.text((pad, y), price_big, font=f_price, fill=(255, 255, 255))
     y += 112
 
     # ---- 名称 ----
-    name = str(product.get("name", ""))
-    draw.text((pad, y), _fit_text(draw, name, f_name, max_w), font=f_name,
-              fill=(240, 240, 240))
-    y += 54
+    # ⚠️ 用 display_name(品牌+品类短名), 不用完整 JD 商品名 ——
+    #    完整名 30+ 字, 卡片上根本放不下, 截半句更难认。
+    name = str(product.get("display_name") or product.get("name", ""))
+    for ln in _wrap_text(draw, name, f_name, max_w, max_lines=2):
+        draw.text((pad, y), ln, font=f_name, fill=(240, 240, 240))
+        y += 50
 
     # ---- 规格/卖点 ----
     if spec:
-        draw.text((pad, y), _fit_text(draw, spec, f_note, max_w), font=f_note,
-                  fill=(190, 190, 190))
+        for ln in _wrap_text(draw, spec, f_note, max_w, max_lines=2):
+            draw.text((pad, y), ln, font=f_note, fill=(190, 190, 190))
+            y += 42
 
     base.convert("RGB").save(dst, "JPEG", quality=90, optimize=True)
     return True
@@ -186,6 +265,9 @@ def compose_price_card(cover_path: str, dst: str, product: dict) -> bool:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("date", nargs="?", default=None)
+    ap.add_argument("--only", default=None,
+                    help="只重出指定商品 id (如 100353738728), 其余跳过。"
+                         "用于单张失败后补出, 不必整批重跑")
     args = ap.parse_args()
     d = resolve_date(args.date)
 
@@ -196,10 +278,18 @@ def main():
     feed = read_json(feed_path)
     od = ensure_out_dir(d)
 
+    # 阶段: 从 feed.json 里第一个商品的 stage 字段继承(由 build_feed 写入)
+    stage = (feed[0].get("stage") if feed else None) or STAGE_WARMUP
+    info = STAGE_INFO[stage]
+    print(f"📌 阶段: {info['label']} ({stage}) — {info['rule']}")
+    print(f"   尾图内容: {'卖点/知识卡(无价格)' if stage == STAGE_WARMUP else '价格锚点'}\n")
+
     ok = 0
     fail = 0
     for p in feed:
         pid = p["id"]
+        if args.only and str(pid) != str(args.only):
+            continue
         prompts = p.get("image_prompts") or {}
         cover_path = os.path.join(od, f"dy_p{pid}_cover.jpg")
         scene_path = os.path.join(od, f"dy_p{pid}_scene.jpg")
@@ -234,7 +324,7 @@ def main():
 
         # 尾图: PIL 合成
         print(f"🎨 {pid} / price (PIL 合成) ...")
-        if os.path.exists(cover_path) and compose_price_card(cover_path, price_path, p):
+        if os.path.exists(cover_path) and compose_price_card(cover_path, price_path, p, stage):
             kb = os.path.getsize(price_path) // 1024
             print(f"   ✅ {os.path.basename(price_path)} ({kb}KB, "
                   f"{DY_IMG_WIDTH}x{DY_IMG_HEIGHT})")

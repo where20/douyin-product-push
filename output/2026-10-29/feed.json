@@ -1,122 +1,232 @@
 [
   {
-    "id": "1",
-    "name": "洁柔 C&S 粉Face 抽纸 3层110抽*24包 原生木浆 可湿水纸巾 整箱卫生纸",
-    "price": "¥40.9(24包整箱·京东自营)",
-    "price_num": 40.9,
-    "price_note": "24包整箱·京东自营",
-    "category": "家居日用 · 家庭囤货纸品",
-    "desc": "双十一囤纸清单的常青款。洁柔粉Face系列精选原生木浆,不含荧光增白剂,自然无香,整箱24包、单包110抽的三层结构,湿水后不易破,擦手擦脸擦台面都能应付。实测单包折算不到1.71元,按三口之家一个月用量囤两三箱非常合适;包装走的是淡奶油色调,放在客厅或餐边柜不违和。评论区高频词是柔韧、不掉屑、囤货划算,京东该单品累计评价已超500万条,好评率99%,属于闭眼囤不会踩雷的日用消耗品。",
-    "color": "#F0E6DA",
-    "commission_rate": 0.15,
-    "sales": 100000,
-    "good_rate": 0.97,
-    "image": "",
+    "id": "100053486864",
+    "stage": "warmup",
+    "name": "百草园收纳箱衣服裤子收纳盒筐布艺内衣柜储物折叠分层整理分隔神器大号",
+    "category": "家居日用 · 收纳清洁",
+    "desc": "",
+    "color": "#A7987A",
+    "commission_rate": null,
+    "sales": null,
+    "good_rate": null,
+    "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/512836/13/12061/220146/6a9e5b54F777ba834/00835a05a0e4847d.jpg",
     "links": {
-      "primary": "https://www.smzdm.com/p/184179478",
-      "extra": []
+      "primary": "https://www.jd.com/phb/key_1620212ced4ff47c972d.html",
+      "source": "京东榜单页",
+      "extra": [
+        "https://item.jd.com/100053486864.html"
+      ]
     },
-    "copy": "家居日用 · 家庭囤货纸品党看过来，洁柔 C&S 粉Face 抽纸 3层110抽。双十一囤纸清单的常青款。洁柔粉Face系列精选原生木浆,不含荧光增白剂,自然现在到手¥40.9。",
+    "rank": 1,
+    "source_label": "收纳折叠整理箱",
+    "reviews_text": "5万条",
+    "spec": "",
+    "keywords": [
+      "收纳箱",
+      "整理箱",
+      "收纳筐",
+      "收纳篮",
+      "收纳"
+    ],
+    "brand": "百草园",
+    "product_word": "收纳箱",
+    "product_en": "foldable fabric storage box",
+    "display_name": "百草园收纳箱",
+    "tip": "收纳箱先量衣柜深度再挑容量，容量再大叠不进去等于白买",
+    "fact_line": "京东「收纳折叠整理箱」榜第1名 · 累计评价5万条",
+    "price": "",
+    "price_num": null,
+    "price_note": "",
+    "copy": "说个可能有点反常识的事：收纳箱先量衣柜深度再挑容量，容量再大叠不进去等于白买。比如百草园收纳箱，在京东「收纳折叠整理箱」排行榜排第1，京东累计评价5万条。你踩过这个坑吗？评论区说说。",
     "image_prompts": {
-      "cover": "Striking hero product close-up of 洁柔 C&S 粉Face 抽纸 3层110抽*24包 原生木浆 可湿水纸巾 整箱卫生纸, product color warm cream beige, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, large product filling the frame, dynamic diagonal composition, high contrast, eye-catching first impression, vertical 3:4 format, premium commercial styling",
-      "scene": "Lifestyle usage scene of 洁柔 C&S 粉Face 抽纸 3层110抽*24包 原生木浆 可湿水纸巾 整箱卫生纸, product color warm cream beige, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, product placed in a realistic everyday 家居日用 · 家庭囤货纸品 situation, soft focus background, natural props, warm authentic mood, vertical 3:4 format",
-      "price": "Clean minimal product backdrop of 洁柔 C&S 粉Face 抽纸 3层110抽*24包 原生木浆 可湿水纸巾 整箱卫生纸, product color warm cream beige, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, empty lower area for text overlay, soft studio lighting, vertical 3:4 format"
+      "cover": "Striking hero close-up of a foldable fabric storage box, the product itself is beige tan in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, large product filling the frame, dynamic diagonal composition, high contrast, eye-catching first impression, vertical 3:4 format, premium commercial styling",
+      "scene": "Lifestyle usage scene of a foldable fabric storage box, the product itself is beige tan in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, the foldable fabric storage box placed in a realistic tidy everyday home situation, soft focus background, natural props, warm authentic mood, vertical 3:4 format, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface",
+      "price": "Clean minimal product backdrop of a foldable fabric storage box, the product itself is beige tan in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, empty lower area for text overlay, soft studio lighting, vertical 3:4 format, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface"
     }
   },
   {
-    "id": "2",
-    "name": "美的 Midea YBD-X6PD AI交互吸烫机6.0 吸附式手持挂烫机 大蒸汽家用电熨斗",
-    "price": "¥277.1(京东自营·实付低至)",
-    "price_num": 277.1,
-    "price_note": "京东自营·实付低至",
-    "category": "衣物护理 · 换季手持挂烫机",
-    "desc": "深秋换季衣柜翻出来的毛衣大衣皱成一团,熨衣板又占地方,这台就是为小户型准备的。美的YBD-X6PD是新一代吸附式手持挂烫机,喷蒸汽的同时把衣物吸住固定在挂烫面板上,不用手拽着布料来回推,褶皱一烫就平。智能显示屏把干熨、湿熨、面料模式直接标出来,不用盲猜档位;机身小巧,塞进衣柜侧袋都行,出差带着也方便。评论里高频词是吸力大、升温快、不漏水不留水渍,京东该单品累计评价超200万条,深秋和冬天都是高频刚需。",
-    "color": "#F2F2F0",
-    "commission_rate": 0.15,
-    "sales": 100000,
-    "good_rate": 0.97,
-    "image": "",
+    "id": "100353738728",
+    "stage": "warmup",
+    "name": "八海鸟收纳箱大容量布艺衣服衣物被子衣柜整理储物箱百纳箱收纳盒子",
+    "category": "家居日用 · 收纳清洁",
+    "desc": "",
+    "color": "#795B48",
+    "commission_rate": null,
+    "sales": null,
+    "good_rate": null,
+    "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/505513/19/6048/93328/6a85968fF1a663253/008332032027ab4e.jpg",
     "links": {
-      "primary": "https://www.smzdm.com/p/184375908/",
-      "extra": []
+      "primary": "https://www.jd.com/phb/key_16204e3c801a50a89c3d.html",
+      "source": "京东榜单页",
+      "extra": [
+        "https://item.jd.com/100353738728.html"
+      ]
     },
-    "copy": "衣物护理 · 换季手持挂烫机党看过来，美的 Midea YBD-X6PD AI交互。深秋换季衣柜翻出来的毛衣大衣皱成一团,熨衣板又占地方,这台就是为小户型准备的现在到手¥277.1。",
+    "rank": 2,
+    "source_label": "布储物箱",
+    "reviews_text": "5000条",
+    "spec": "",
+    "keywords": [
+      "储物箱",
+      "收纳箱",
+      "百纳箱",
+      "收纳袋",
+      "收纳"
+    ],
+    "brand": "八海鸟",
+    "product_word": "收纳箱",
+    "product_en": "fabric storage bin basket",
+    "display_name": "八海鸟收纳箱",
+    "tip": "布艺箱一定要看底部有没有防水层，衣柜潮气重的地方渗了水最先发霉",
+    "fact_line": "京东「布储物箱」榜第2名 · 累计评价5000条",
+    "price": "",
+    "price_num": null,
+    "price_note": "",
+    "copy": "90% 的人第一步就做错了：布艺箱一定要看底部有没有防水层，衣柜潮气重的地方渗了水最先发霉。比如八海鸟收纳箱，在京东「布储物箱」排行榜排第2，京东累计评价5000条。",
     "image_prompts": {
-      "cover": "Striking hero product close-up of 美的 Midea YBD-X6PD AI交互吸烫机6.0 吸附式手持挂烫机 大蒸汽家用电熨斗, product color clean white, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, large product filling the frame, dynamic diagonal composition, high contrast, eye-catching first impression, vertical 3:4 format, premium commercial styling",
-      "scene": "Lifestyle usage scene of 美的 Midea YBD-X6PD AI交互吸烫机6.0 吸附式手持挂烫机 大蒸汽家用电熨斗, product color clean white, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, product placed in a realistic everyday 衣物护理 · 换季手持挂烫机 situation, soft focus background, natural props, warm authentic mood, vertical 3:4 format",
-      "price": "Clean minimal product backdrop of 美的 Midea YBD-X6PD AI交互吸烫机6.0 吸附式手持挂烫机 大蒸汽家用电熨斗, product color clean white, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, empty lower area for text overlay, soft studio lighting, vertical 3:4 format"
+      "cover": "Striking hero close-up of a fabric storage bin basket, the product itself is beige tan in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, large product filling the frame, dynamic diagonal composition, high contrast, eye-catching first impression, vertical 3:4 format, premium commercial styling",
+      "scene": "Lifestyle usage scene of a fabric storage bin basket, the product itself is beige tan in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, the fabric storage bin basket placed in a realistic tidy everyday home situation, soft focus background, natural props, warm authentic mood, vertical 3:4 format, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface",
+      "price": "Clean minimal product backdrop of a fabric storage bin basket, the product itself is beige tan in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, empty lower area for text overlay, soft studio lighting, vertical 3:4 format, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface"
     }
   },
   {
-    "id": "3",
-    "name": "斑马牌 ZEBRA JJ15 按动黑色中性笔 0.5mm 子弹头签字笔 学生考试刷题笔 10支装",
-    "price": "¥28.65(10支装·京东自营凑单价)",
-    "price_num": 28.65,
-    "price_note": "10支装·京东自营凑单价",
-    "category": "学习办公 · 考研季文具",
-    "desc": "考研季和双11撞在一起,笔袋里这支是刚需。日本斑马1897年创立的老牌书写工具,JJ15是它的经典按动款型,0.5mm子弹头笔尖出墨均匀、不断墨不飞白;墨迹速干不易洇纸,考卷卷面不容易弄脏。半透明笔杆可以观察笔芯余量,防滑螺纹握位久写也不累手,弧形笔夹上印着品牌LOGO,10支装的排面摆桌上也好看。京东该单品累计评价超200万条,评论区反复出现的一支笔用了六年、囤着过中考高考的说法,属于学生党和办公族都认的签字笔。",
-    "color": "#1F1F1F",
-    "commission_rate": 0.15,
-    "sales": 100000,
-    "good_rate": 0.97,
-    "image": "",
+    "id": "100208835137",
+    "stage": "warmup",
+    "name": "独特扫把扫帚簸箕两件套装组合家用新款笤帚扫地神器打扫卫生工具扫把",
+    "category": "家居日用 · 收纳清洁",
+    "desc": "",
+    "color": "#4B3B36",
+    "commission_rate": null,
+    "sales": null,
+    "good_rate": null,
+    "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/457757/4/1622/129783/6a2b9f7fF2503cb57/008332032038bfe8.jpg",
     "links": {
-      "primary": "https://www.smzdm.com/p/184561077",
-      "extra": []
+      "primary": "https://www.jd.com/phb/1590118f7f46972c01696.html",
+      "source": "京东榜单页",
+      "extra": [
+        "https://item.jd.com/100208835137.html"
+      ]
     },
-    "copy": "学习办公 · 考研季文具党看过来，斑马牌 ZEBRA JJ15 按动黑色中性笔。考研季和双11撞在一起,笔袋里这支是刚需。日本斑马1897年创立的老牌书写工现在到手¥28.65。",
+    "rank": 1,
+    "source_label": "清洁工具簸箕",
+    "reviews_text": "2万条",
+    "spec": "",
+    "keywords": [
+      "簸箕",
+      "撮箕",
+      "畚箕",
+      "垃圾铲",
+      "扫把",
+      "扫帚",
+      "笤帚"
+    ],
+    "brand": "独特",
+    "product_word": "扫把",
+    "product_en": "broom and dustpan set",
+    "display_name": "独特扫把",
+    "tip": "簸箕带梳齿的才不粘碎屑，边缘直口的头发全挂在边上",
+    "fact_line": "京东「清洁工具簸箕」榜第1名 · 累计评价2万条",
+    "price": "",
+    "price_num": null,
+    "price_note": "",
+    "copy": "我后悔没早点知道这个：簸箕带梳齿的才不粘碎屑，边缘直口的头发全挂在边上。比如独特扫把，在京东「清洁工具簸箕」排行榜排第1，京东累计评价2万条。还有更省的吗？评论区交流下。",
     "image_prompts": {
-      "cover": "Striking hero product close-up of 斑马牌 ZEBRA JJ15 按动黑色中性笔 0.5mm 子弹头签字笔 学生考试刷题笔 10支装, product color matte black, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, large product filling the frame, dynamic diagonal composition, high contrast, eye-catching first impression, vertical 3:4 format, premium commercial styling",
-      "scene": "Lifestyle usage scene of 斑马牌 ZEBRA JJ15 按动黑色中性笔 0.5mm 子弹头签字笔 学生考试刷题笔 10支装, product color matte black, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, product placed in a realistic everyday 学习办公 · 考研季文具 situation, soft focus background, natural props, warm authentic mood, vertical 3:4 format",
-      "price": "Clean minimal product backdrop of 斑马牌 ZEBRA JJ15 按动黑色中性笔 0.5mm 子弹头签字笔 学生考试刷题笔 10支装, product color matte black, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, empty lower area for text overlay, soft studio lighting, vertical 3:4 format"
+      "cover": "Striking hero close-up of a broom and dustpan set, the product itself is red in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, large product filling the frame, dynamic diagonal composition, high contrast, eye-catching first impression, vertical 3:4 format, premium commercial styling",
+      "scene": "Lifestyle usage scene of a broom and dustpan set, the product itself is red in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, the broom and dustpan set placed in a realistic tidy everyday home situation, soft focus background, natural props, warm authentic mood, vertical 3:4 format, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface",
+      "price": "Clean minimal product backdrop of a broom and dustpan set, the product itself is red in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, empty lower area for text overlay, soft studio lighting, vertical 3:4 format, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface"
     }
   },
   {
-    "id": "4",
-    "name": "海康威视 HIKVISION C6LITE 行车记录仪 单镜头 2K超清星光夜视 4G远程停车监控",
-    "price": "¥289(京东自营·单镜头64GB版)",
-    "price_num": 289.0,
-    "price_note": "京东自营·单镜头64GB版",
-    "category": "汽车出行 · 停车监控记录仪",
-    "desc": "双11前后自驾出行频率高,记录仪属于上车就该装好的一次性投入。海康威视依托自家安防监控技术做行车记录仪,C6LITE是京东行车记录仪单品热卖榜第1名。2560×1440P的2K分辨率,相比1080P清晰度提升约30%,车牌和路牌白天夜里都能认;内置RTC超级电容,停车监控状态下不亏电不怕高温,循环覆盖也稳定。4G远程监控支持手机远程查看,遇到剐蹭不用等交警到场也能调出画面。京东该单品累计评价超20万条,画质清晰、安装简单是评论区最集中的好评点。",
-    "color": "#2B2B2E",
-    "commission_rate": 0.15,
-    "sales": 100000,
-    "good_rate": 0.97,
-    "image": "",
+    "id": "100362686636",
+    "stage": "warmup",
+    "name": "索邦扫把簸箕套装家用不粘头发梳齿防缠发扫帚两件套大扫除神器笤帚",
+    "category": "家居日用 · 收纳清洁",
+    "desc": "",
+    "color": "#45392F",
+    "commission_rate": null,
+    "sales": null,
+    "good_rate": null,
+    "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/557722/30/1391/103984/6adff3e3F0c02cae5/0083320320ede316.png",
     "links": {
-      "primary": "https://www.smzdm.com/p/184427454",
-      "extra": []
+      "primary": "https://www.jd.com/phb/key_15901694e17af323d15ac.html",
+      "source": "京东榜单页",
+      "extra": [
+        "https://item.jd.com/100362686636.html"
+      ]
     },
-    "copy": "汽车出行 · 停车监控记录仪党看过来，海康威视 HIKVISION C6LITE 。双11前后自驾出行频率高,记录仪属于上车就该装好的一次性投入。海康威视依托自现在到手¥289。",
+    "rank": 1,
+    "source_label": "扫把套装组合",
+    "reviews_text": "50万条",
+    "spec": "",
+    "keywords": [
+      "扫把",
+      "扫帚",
+      "簸箕",
+      "撮箕",
+      "套装",
+      "笤帚",
+      "拖把"
+    ],
+    "brand": "索邦",
+    "product_word": "扫把",
+    "product_en": "broom and dustpan cleaning set",
+    "display_name": "索邦扫把",
+    "tip": "套装比单买划算的前提是尺寸合适，扫头太宽墙角还是够不着",
+    "fact_line": "京东「扫把套装组合」榜第1名 · 累计评价50万条",
+    "price": "",
+    "price_num": null,
+    "price_note": "",
+    "copy": "别再瞎买了，真的：套装比单买划算的前提是尺寸合适，扫头太宽墙角还是够不着。比如索邦扫把，在京东「扫把套装组合」排行榜排第1，京东累计评价50万条。你会怎么选？评论区聊聊。",
     "image_prompts": {
-      "cover": "Striking hero product close-up of 海康威视 HIKVISION C6LITE 行车记录仪 单镜头 2K超清星光夜视 4G远程停车监控, product color matte black, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, large product filling the frame, dynamic diagonal composition, high contrast, eye-catching first impression, vertical 3:4 format, premium commercial styling",
-      "scene": "Lifestyle usage scene of 海康威视 HIKVISION C6LITE 行车记录仪 单镜头 2K超清星光夜视 4G远程停车监控, product color matte black, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, product placed in a realistic everyday 汽车出行 · 停车监控记录仪 situation, soft focus background, natural props, warm authentic mood, vertical 3:4 format",
-      "price": "Clean minimal product backdrop of 海康威视 HIKVISION C6LITE 行车记录仪 单镜头 2K超清星光夜视 4G远程停车监控, product color matte black, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, empty lower area for text overlay, soft studio lighting, vertical 3:4 format"
+      "cover": "Striking hero close-up of a broom and dustpan cleaning set, the product itself is deep beige tan in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, large product filling the frame, dynamic diagonal composition, high contrast, eye-catching first impression, vertical 3:4 format, premium commercial styling",
+      "scene": "Lifestyle usage scene of a broom and dustpan cleaning set, the product itself is deep beige tan in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, the broom and dustpan cleaning set placed in a realistic tidy everyday home situation, soft focus background, natural props, warm authentic mood, vertical 3:4 format, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface",
+      "price": "Clean minimal product backdrop of a broom and dustpan cleaning set, the product itself is deep beige tan in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, empty lower area for text overlay, soft studio lighting, vertical 3:4 format, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface"
     }
   },
   {
-    "id": "5",
-    "name": "乖明星 我的世界磁力方块 磁吸积木拼装 儿童玩具 160多款自由组合DIY",
-    "price": "¥28(京东自营·50颗粒4人仔礼盒)",
-    "price_num": 28.0,
-    "price_note": "京东自营·50颗粒4人仔礼盒",
-    "category": "潮玩手办 · 磁力积木拼装",
-    "desc": "秋天的周末带娃出门,比商场更省心的方案是给一套能自己拼的东西。乖明星这款我的世界磁力方块主打160多款图案自由组合,全部颗粒六面磁吸、不分正负极,吸力牢固不容易散块,颗粒表面光滑无毛刺,低龄宝宝也能上手搭。六面可拼意味着同一个方块六种用法,既能搭造型也能拿来做简单的立体数学启蒙,拼好之后还能当桌面摆件,一套顶两套。京东该单品累计评价超50万条,评论区高频词是咬合紧实、无异味、拼好能摆桌面,双11 作为礼物或亲子囤货都合适。",
-    "color": "#C9A227",
-    "commission_rate": 0.15,
-    "sales": 100000,
-    "good_rate": 0.97,
-    "image": "",
+    "id": "100264350608",
+    "stage": "warmup",
+    "name": "京东京造高硼硅耐热玻璃保鲜盒微波炉饭盒便当盒家用饭盒【六件套】",
+    "category": "家居日用 · 收纳清洁",
+    "desc": "",
+    "color": "#B36D47",
+    "commission_rate": null,
+    "sales": null,
+    "good_rate": null,
+    "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/507617/16/4662/2690955/6a85b7dbFa4bfe5f9/008349b49b39b26c.png",
     "links": {
-      "primary": "https://www.smzdm.com/p/183668306",
-      "extra": []
+      "primary": "https://www.jd.com/phb/key_6196596257ab673b80dc.html",
+      "source": "京东榜单页",
+      "extra": [
+        "https://item.jd.com/100264350608.html"
+      ]
     },
-    "copy": "潮玩手办 · 磁力积木拼装党看过来，乖明星 我的世界磁力方块 磁吸积木拼装 儿童。秋天的周末带娃出门,比商场更省心的方案是给一套能自己拼的东西。乖明星这款我的现在到手¥28。",
+    "rank": 1,
+    "source_label": "保鲜盒6件套",
+    "reviews_text": "2万条",
+    "spec": "六件套",
+    "keywords": [
+      "保鲜盒",
+      "饭盒",
+      "保鲜碗",
+      "玻璃碗",
+      "收纳盒",
+      "盒子"
+    ],
+    "brand": "京东京造",
+    "product_word": "保鲜盒",
+    "product_en": "glass food storage container set",
+    "display_name": "京东京造保鲜盒",
+    "tip": "保鲜盒先确认能不能叠放，冰箱里叠不上去等于白买",
+    "fact_line": "京东「保鲜盒6件套」榜第1名 · 规格六件套 · 累计评价2万条",
+    "price": "",
+    "price_num": null,
+    "price_note": "",
+    "copy": "说个可能有点反常识的事：保鲜盒先确认能不能叠放，冰箱里叠不上去等于白买。比如京东京造保鲜盒，在京东「保鲜盒6件套」排行榜排第1，规格是六件套，京东累计评价2万条。你踩过这个坑吗？评论区说说。",
     "image_prompts": {
-      "cover": "Striking hero product close-up of 乖明星 我的世界磁力方块 磁吸积木拼装 儿童玩具 160多款自由组合DIY, product color golden yellow, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, large product filling the frame, dynamic diagonal composition, high contrast, eye-catching first impression, vertical 3:4 format, premium commercial styling",
-      "scene": "Lifestyle usage scene of 乖明星 我的世界磁力方块 磁吸积木拼装 儿童玩具 160多款自由组合DIY, product color golden yellow, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, product placed in a realistic everyday 潮玩手办 · 磁力积木拼装 situation, soft focus background, natural props, warm authentic mood, vertical 3:4 format",
-      "price": "Clean minimal product backdrop of 乖明星 我的世界磁力方块 磁吸积木拼装 儿童玩具 160多款自由组合DIY, product color golden yellow, e-commerce minimalist photography, soft natural daylight, clean background, no text, no logo, no watermark, no price tag, empty lower area for text overlay, soft studio lighting, vertical 3:4 format"
+      "cover": "Striking hero close-up of a glass food storage container set, the product itself is orange in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, large product filling the frame, dynamic diagonal composition, high contrast, eye-catching first impression, vertical 3:4 format, premium commercial styling",
+      "scene": "Lifestyle usage scene of a glass food storage container set, the product itself is orange in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, the glass food storage container set placed in a realistic tidy everyday home situation, soft focus background, natural props, warm authentic mood, vertical 3:4 format, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface",
+      "price": "Clean minimal product backdrop of a glass food storage container set, the product itself is orange in colour, standing on a plain neutral light grey background, e-commerce minimalist product photography, soft natural daylight, clean simple backdrop, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface, no watermark, empty lower area for text overlay, soft studio lighting, vertical 3:4 format, absolutely no text, no letters, no characters, no numbers, no logo, no label, no writing, no symbols, no brand name, plain unmarked smooth surface"
     }
   }
 ]

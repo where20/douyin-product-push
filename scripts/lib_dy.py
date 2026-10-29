@@ -22,6 +22,7 @@ TASK_DIR = os.environ.get("TASK_DY_DIR") or os.path.dirname(
     os.path.dirname(os.path.abspath(__file__)))
 OUT_ROOT = os.path.join(TASK_DIR, "output")
 MEM_ROOT = os.path.join(TASK_DIR, "memory")
+POOL_ROOT = os.path.join(TASK_DIR, "pool")
 
 # ---------- 抖音图文规范 (2026-10-29 实测 + 平台公开规则) ----------
 # 图文作品: 3:4 竖版图, 1-3 张, 首图最关键(决定点击率)
@@ -35,6 +36,36 @@ DY_COPY_MAX = 100             # 文案上限(超 100 字折叠)
 # 抖音图文的三图分工 —— 不是随便 3 张, 有明确叙事结构
 DY_IMAGE_ROLES = ("cover", "scene", "price")
 
+# ---------- 账号阶段 (2026-10-29 调研固化) ----------
+# ⚠️ **新号前 20 条别挂小黄车** —— 系统默认带货内容营销属性强,
+#    会给自然流量打折扣; 前 7 天挂购物车/导流/第三方联系方式 = 违规降权。
+#    所以"养号"和"带货"是**两个阶段**, 内容形态完全不同。
+#
+#   warmup   (0-1000 粉): 普通图文, 不挂车, 不带价格锚点, 走垂直干货/情绪路线
+#   monetize(1000+ 粉): 带货图文, 挂小黄车, 价格锚点
+STAGE_WARMUP = "warmup"
+STAGE_MONETIZE = "monetize"
+DY_STAGES = (STAGE_WARMUP, STAGE_MONETIZE)
+
+# 阶段说明(写进发布清单, 防止手滑在养号期挂车)
+STAGE_INFO = {
+    STAGE_WARMUP: {
+        "label": "养号期",
+        "rule": "不挂小黄车 · 不带价格 · 不写第三方联系方式",
+        "why": "新号前 20 条挂车会被判定为营销号, 自然流量打折; 前 7 天导流直接降权",
+        "can_cart": False,
+    },
+    STAGE_MONETIZE: {
+        "label": "带货期",
+        "rule": "挂小黄车 · 带价格锚点 · 引导橱窗下单",
+        "why": "图文挂车需 1000 有效粉丝; 0 粉只能开基础橱窗(每周限挂 1 款)",
+        "can_cart": True,
+    },
+}
+
+# 阶段默认阈值(有效粉丝) —— 用来自动判断当前该走哪条路
+STAGE_FANS_THRESHOLD = {STAGE_WARMUP: 0, STAGE_MONETIZE: 1000}
+
 # ---------- 价格带 (与小红书支线对齐) ----------
 PRICE_MIN = 10.0
 PRICE_MAX = 500.0
@@ -42,9 +73,50 @@ PRICE_MAX = 500.0
 # ---------- 违规词 (平台合规红线, 2026 广告法 + 抖音社区规范) ----------
 # ⚠️ 这些词一旦出现 = 扣分/限流/封号, 断言直接拦下
 BANNED_WORDS = (
-    "最好", "最佳", "第一", "顶级", "极致", "绝对", "国家级", "世界级",
-    "全网最低", "史上最低", "永久", "根治", "治愈", "特效", "包治",
+    "最好", "最佳", "顶级", "极致", "国家级", "世界级",
+    "全网最低", "史上最低", "永久", "包治",
     "无效退款", "假一赔十", "独家", "唯一", "纯天然", "零风险", "100%有效",
+)
+
+# ⚠️ **上面某些词有正常语义用法**, 裸匹配会误伤。
+#    例: "第一步就做错了" 里的"第一"是正常口语, 但"行业第一"是违规广告语。
+#    2026-10-29 实测踩到: warmup 文案模板里的"第一步"被误判 → 断言直接拦下。
+#    → 对这类词用"上下文模式"判定, 只有命中广告语境才算违规。
+BANNED_PATTERNS = (
+    # "第一" 只有接品牌/名次/销量类词时才算违规
+    (r"第一\s*(品牌|销量|品质|名次|名牌|档次|高端|大品牌|官方)", "第一"),
+    (r"(行业|全国|全球|市场|销量|品质|技术|科技)第一", "第一"),
+    # "绝对" 只有接正面承诺词时才算违规
+    (r"绝对\s*(安全|可靠|有效|正品|放心|不会|保证|值得|划算|好用)", "绝对"),
+    # 功效类词: 指医疗/功效时违规
+    (r"根治|治愈", "根治/治愈"),
+    (r"特效", "特效"),
+)
+
+
+def find_banned(text: str):
+    """返回命中的违规词列表。
+
+    ⚠️ 裸词直接拦(那些没有正常用法的);
+       上下文词走正则模式判定(避免"第一步"这类正常口语被误伤)。
+    """
+    hits = []
+    t = str(text or "")
+    for w in BANNED_WORDS:
+        if w in t:
+            hits.append(w)
+    for pat, label in BANNED_PATTERNS:
+        if re.search(pat, t):
+            hits.append(label)
+    return sorted(set(hits))
+
+
+# ⚠️ **养号期专属禁写清单** —— 带货期的"营销感"在养号期是毒药。
+#    新号前 20 条只要出现价格/下单信号, 系统就判营销号, 自然流量直接打折。
+#    这些词在带货期是正常的, 但在 warmup 阶段一个字都不能出现。
+WARMUP_FORBIDDEN = (
+    "¥", "￥", "到手", "下单", "加购", "橱窗", "小黄车", "购物车",
+    "包邮", "优惠券", "券后", "秒杀", "库存", "抢", "链接", "下单",
 )
 
 
@@ -85,22 +157,37 @@ def _fail(msg: str):
     raise SystemExit(1)
 
 
+def _main_cat(category: str) -> str:
+    """类目取第一段("家居日用 · 收纳清洁" → "家居日用")。"""
+    return re.split(r"[·|｜]", str(category or ""))[0].strip()
+
+
 def assert_feed(data):
     """校验当天 feed.json (5 个商品的抖音图文稿)。
 
     拦的是**会直接导致限流/违规/图文不符**的问题, 不是格式洁癖。
+
+    ⚠️ 断言**阶段化**(2026-10-29 加):
+       养号期(warmup)的数据源是垂直池 —— 真实商品名/榜单名次/评论数/主图,
+       但**没有价格也没有 desc**(京东榜单页抓不到这两样)。
+       所以养号期: 价格/desc 可空, 但**必须单垂直 + 文案零营销信号**。
+       带货期(monetize): 价格必须是真实数字且在主力价位带, desc ≥100 字。
     """
     if not isinstance(data, list):
         _fail("feed.json 必须是 list")
     if len(data) != 5:
         _fail(f"feed.json 必须恰好 5 个商品, 实际 {len(data)}")
 
+    stage = (data[0].get("stage") if data else None) or STAGE_WARMUP
+    if stage not in DY_STAGES:
+        _fail(f"未知 stage: {stage!r}")
+    warmup = stage == STAGE_WARMUP
+
     for i, p in enumerate(data, 1):
         tag = f"feed[{i}]"
         # ⚠️ 只校验**内容**字段。images / image_urls 是出图后的产物,
         #    写稿阶段还不存在 —— 把产物写进断言会让 build_feed 永远失败。
-        for fld in ("id", "name", "price", "desc", "color", "copy",
-                    "image_prompts", "links"):
+        for fld in ("id", "name", "color", "copy", "image_prompts", "links"):
             if fld not in p or p[fld] in (None, "", [], {}):
                 _fail(f"{tag} 缺字段 {fld}")
 
@@ -108,17 +195,28 @@ def assert_feed(data):
         if not re.fullmatch(r"#[0-9A-Fa-f]{6}", str(p["color"])):
             _fail(f"{tag}.color 非法: {p['color']!r} (必须 #RRGGBB)")
 
-        # price 必须能解析出数字, 且在带货主力价位带
-        m = re.search(r"(\d+(?:\.\d+)?)", str(p["price"]))
-        if not m:
-            _fail(f"{tag}.price 解析不出数字: {p['price']!r}")
-        price = float(m.group(1))
-        if not (PRICE_MIN <= price <= PRICE_MAX):
-            _fail(f"{tag}.price ¥{price} 超出 ¥{PRICE_MIN}-{PRICE_MAX} 主力价位带")
+        # ---- 价格 ----
+        # 带货期: 必须能解析出数字, 且在带货主力价位带
+        # 养号期: 允许空(价格压根不展示), 但**不允许**出现解析不出来的假价格
+        raw_price = p.get("price")
+        if not warmup:
+            if not raw_price:
+                _fail(f"{tag}.price 为空 —— 带货期价格必须来自真实接口")
+            m = re.search(r"(\d+(?:\.\d+)?)", str(raw_price))
+            if not m:
+                _fail(f"{tag}.price 解析不出数字: {raw_price!r}")
+            price = float(m.group(1))
+            if not (PRICE_MIN <= price <= PRICE_MAX):
+                _fail(f"{tag}.price ¥{price} 超出 ¥{PRICE_MIN}-{PRICE_MAX} 主力价位带")
+        elif raw_price:
+            if not re.search(r"(\d+(?:\.\d+)?)", str(raw_price)):
+                _fail(f"{tag}.price 解析不出数字: {raw_price!r}")
 
-        # desc 太短 = 平台判低质
-        if len(str(p["desc"])) < 100:
-            _fail(f"{tag}.desc 仅 {len(str(p['desc']))} 字, 至少 100 字")
+        # ---- desc ----
+        # 带货期: 至少 100 字(平台判低质)
+        # 养号期: 池子商品没有 desc, 用榜单事实代替, 允许空
+        if not warmup and len(str(p.get("desc", ""))) < 100:
+            _fail(f"{tag}.desc 仅 {len(str(p.get('desc', '')))} 字, 至少 100 字")
 
         # 文案长度
         copy = str(p["copy"]).strip()
@@ -126,9 +224,17 @@ def assert_feed(data):
             _fail(f"{tag}.copy {len(copy)} 字, 必须在 {DY_COPY_MIN}-{DY_COPY_MAX} 字")
 
         # 违规词
-        for w in BANNED_WORDS:
-            if w in copy or w in str(p["desc"]) or w in str(p["name"]):
-                _fail(f"{tag} 含抖音违规词 {w!r} → 会扣分/限流, 换掉")
+        for fld in ("copy", "desc", "name"):
+            hits = find_banned(p.get(fld, ""))
+            if hits:
+                _fail(f"{tag}.{fld} 含抖音违规词 {hits} → 会扣分/限流, 换掉")
+
+        # ---- 养号期专属: 零营销信号 ----
+        if warmup:
+            bad = [w for w in WARMUP_FORBIDDEN if w in copy]
+            if bad:
+                _fail(f"{tag}.copy 含养号期禁写营销信号 {bad} → "
+                      f"新号带价格/下单词会被判营销号, 自然流量打折")
 
         # 三图结构: cover/scene/price 三份 prompt, 且 image_prompts 里 color 对齐
         prompts = p["image_prompts"]
@@ -149,7 +255,16 @@ def assert_feed(data):
             if not str(u).startswith(("http://", "https://")):
                 _fail(f"{tag}.links.extra 含非 http(s) 地址: {u!r}")
 
-    print(f"✅ feed schema 校验通过: {len(data)} 个商品")
+    # ---- 养号期专属: 单垂直 ----
+    # ⚠️ 抖音靠内容判定账号标签, 类目一散标签就散, 涨粉就慢, 图文挂车永远不解锁。
+    if warmup:
+        cats = {_main_cat(p.get("category", "")) for p in data}
+        if len(cats) > 1:
+            _fail(f"养号期必须单垂直, 实际跨了 {len(cats)} 个类目: {sorted(cats)}")
+
+    print(f"✅ feed schema 校验通过: {len(data)} 个商品 "
+          f"(stage={stage}"
+          f"{', 单垂直' if warmup else ''})")
 
 
 def assert_api_creds():

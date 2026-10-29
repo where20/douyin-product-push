@@ -3,15 +3,19 @@
   "count": 5,
   "posts": [
     {
-      "id": "1",
-      "name": "洁柔 C&S 粉Face 抽纸 3层110抽*24包 原生木浆 可湿水纸巾 整箱卫生纸",
-      "price": "¥40.9(24包整箱·京东自营)",
-      "category": "家居日用 · 家庭囤货纸品",
-      "copy": "家居日用 · 家庭囤货纸品党看过来，洁柔 C&S 粉Face 抽纸 3层110抽。双十一囤纸清单的常青款。洁柔粉Face系列精选原生木浆,不含荧光增白剂,自然现在到手¥40.9。",
+      "id": "100053486864",
+      "stage": "warmup",
+      "name": "百草园收纳箱衣服裤子收纳盒筐布艺内衣柜储物折叠分层整理分隔神器大号",
+      "display_name": "百草园收纳箱",
+      "price": "（养号期不展示）",
+      "price_real": "",
+      "category": "家居日用 · 收纳清洁",
+      "copy": "说个可能有点反常识的事：收纳箱先量衣柜深度再挑容量，容量再大叠不进去等于白买。比如百草园收纳箱，在京东「收纳折叠整理箱」排行榜排第1，京东累计评价5万条。你踩过这个坑吗？评论区说说。",
+      "fact_line": "京东「收纳折叠整理箱」榜第1名 · 累计评价5万条",
       "images": [
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p1_cover_1793248543632_1.jpg",
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p1_scene_1793248544305_1.jpg",
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p1_price_1793248544803_1.jpg"
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100053486864_cover.jpg",
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100053486864_scene.jpg",
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100053486864_price.jpg"
       ],
       "image_roles": [
         "cover",
@@ -19,11 +23,14 @@
         "price"
       ],
       "links": {
-        "primary": "https://www.smzdm.com/p/184179478",
-        "extra": []
+        "primary": "https://www.jd.com/phb/key_1620212ced4ff47c972d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100053486864.html"
+        ]
       },
-      "commission_rate": 0.15,
-      "commission_display": "15%",
+      "commission_rate": null,
+      "commission_display": "（养号期不展示）",
       "dy_item_id": "",
       "posting": {
         "type": "image_text",
@@ -35,25 +42,32 @@
           "20:00"
         ],
         "need_ai_declaration": true,
+        "can_cart": false,
         "steps": [
           "抖音App → 左下角「+」→ 选「图文」",
           "按 cover→scene→price 顺序上传 3 张图",
-          "点「添加商品」→ 从橱窗选对应商品(挂小黄车)",
           "粘贴文案 → 勾选「作者声明:内容由AI生成」",
-          "选 BGM(轻快钢琴/城市清晨) → 发布"
+          "🚫 **不加小黄车**、不放任何第三方联系方式/二维码",
+          "选 BGM(轻快钢琴/城市清晨) → 发布",
+          "发布后 30 分钟内回复前 5 条评论(激活二次推荐池)",
+          "发布后 2 小时回来看完播率/互动率, 低于大盘就换钩子重发"
         ]
       }
     },
     {
-      "id": "2",
-      "name": "美的 Midea YBD-X6PD AI交互吸烫机6.0 吸附式手持挂烫机 大蒸汽家用电熨斗",
-      "price": "¥277.1(京东自营·实付低至)",
-      "category": "衣物护理 · 换季手持挂烫机",
-      "copy": "衣物护理 · 换季手持挂烫机党看过来，美的 Midea YBD-X6PD AI交互。深秋换季衣柜翻出来的毛衣大衣皱成一团,熨衣板又占地方,这台就是为小户型准备的现在到手¥277.1。",
+      "id": "100353738728",
+      "stage": "warmup",
+      "name": "八海鸟收纳箱大容量布艺衣服衣物被子衣柜整理储物箱百纳箱收纳盒子",
+      "display_name": "八海鸟收纳箱",
+      "price": "（养号期不展示）",
+      "price_real": "",
+      "category": "家居日用 · 收纳清洁",
+      "copy": "90% 的人第一步就做错了：布艺箱一定要看底部有没有防水层，衣柜潮气重的地方渗了水最先发霉。比如八海鸟收纳箱，在京东「布储物箱」排行榜排第2，京东累计评价5000条。",
+      "fact_line": "京东「布储物箱」榜第2名 · 累计评价5000条",
       "images": [
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p2_cover_1793248544951_1.jpg",
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p2_scene_1793248545120_1.jpg",
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p2_price_1793248545398_1.jpg"
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100353738728_cover.jpg",
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100353738728_scene.jpg",
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100353738728_price.jpg"
       ],
       "image_roles": [
         "cover",
@@ -61,11 +75,14 @@
         "price"
       ],
       "links": {
-        "primary": "https://www.smzdm.com/p/184375908/",
-        "extra": []
+        "primary": "https://www.jd.com/phb/key_16204e3c801a50a89c3d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100353738728.html"
+        ]
       },
-      "commission_rate": 0.15,
-      "commission_display": "15%",
+      "commission_rate": null,
+      "commission_display": "（养号期不展示）",
       "dy_item_id": "",
       "posting": {
         "type": "image_text",
@@ -77,25 +94,32 @@
           "20:00"
         ],
         "need_ai_declaration": true,
+        "can_cart": false,
         "steps": [
           "抖音App → 左下角「+」→ 选「图文」",
           "按 cover→scene→price 顺序上传 3 张图",
-          "点「添加商品」→ 从橱窗选对应商品(挂小黄车)",
           "粘贴文案 → 勾选「作者声明:内容由AI生成」",
-          "选 BGM(轻快钢琴/城市清晨) → 发布"
+          "🚫 **不加小黄车**、不放任何第三方联系方式/二维码",
+          "选 BGM(轻快钢琴/城市清晨) → 发布",
+          "发布后 30 分钟内回复前 5 条评论(激活二次推荐池)",
+          "发布后 2 小时回来看完播率/互动率, 低于大盘就换钩子重发"
         ]
       }
     },
     {
-      "id": "3",
-      "name": "斑马牌 ZEBRA JJ15 按动黑色中性笔 0.5mm 子弹头签字笔 学生考试刷题笔 10支装",
-      "price": "¥28.65(10支装·京东自营凑单价)",
-      "category": "学习办公 · 考研季文具",
-      "copy": "学习办公 · 考研季文具党看过来，斑马牌 ZEBRA JJ15 按动黑色中性笔。考研季和双11撞在一起,笔袋里这支是刚需。日本斑马1897年创立的老牌书写工现在到手¥28.65。",
+      "id": "100208835137",
+      "stage": "warmup",
+      "name": "独特扫把扫帚簸箕两件套装组合家用新款笤帚扫地神器打扫卫生工具扫把",
+      "display_name": "独特扫把",
+      "price": "（养号期不展示）",
+      "price_real": "",
+      "category": "家居日用 · 收纳清洁",
+      "copy": "我后悔没早点知道这个：簸箕带梳齿的才不粘碎屑，边缘直口的头发全挂在边上。比如独特扫把，在京东「清洁工具簸箕」排行榜排第1，京东累计评价2万条。还有更省的吗？评论区交流下。",
+      "fact_line": "京东「清洁工具簸箕」榜第1名 · 累计评价2万条",
       "images": [
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p3_cover_1793248545708_1.jpg",
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p3_scene_1793248545905_1.jpg",
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p3_price_1793248546055_1.jpg"
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100208835137_cover.jpg",
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100208835137_scene.jpg",
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100208835137_price.jpg"
       ],
       "image_roles": [
         "cover",
@@ -103,11 +127,14 @@
         "price"
       ],
       "links": {
-        "primary": "https://www.smzdm.com/p/184561077",
-        "extra": []
+        "primary": "https://www.jd.com/phb/1590118f7f46972c01696.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100208835137.html"
+        ]
       },
-      "commission_rate": 0.15,
-      "commission_display": "15%",
+      "commission_rate": null,
+      "commission_display": "（养号期不展示）",
       "dy_item_id": "",
       "posting": {
         "type": "image_text",
@@ -119,25 +146,32 @@
           "20:00"
         ],
         "need_ai_declaration": true,
+        "can_cart": false,
         "steps": [
           "抖音App → 左下角「+」→ 选「图文」",
           "按 cover→scene→price 顺序上传 3 张图",
-          "点「添加商品」→ 从橱窗选对应商品(挂小黄车)",
           "粘贴文案 → 勾选「作者声明:内容由AI生成」",
-          "选 BGM(轻快钢琴/城市清晨) → 发布"
+          "🚫 **不加小黄车**、不放任何第三方联系方式/二维码",
+          "选 BGM(轻快钢琴/城市清晨) → 发布",
+          "发布后 30 分钟内回复前 5 条评论(激活二次推荐池)",
+          "发布后 2 小时回来看完播率/互动率, 低于大盘就换钩子重发"
         ]
       }
     },
     {
-      "id": "4",
-      "name": "海康威视 HIKVISION C6LITE 行车记录仪 单镜头 2K超清星光夜视 4G远程停车监控",
-      "price": "¥289(京东自营·单镜头64GB版)",
-      "category": "汽车出行 · 停车监控记录仪",
-      "copy": "汽车出行 · 停车监控记录仪党看过来，海康威视 HIKVISION C6LITE 。双11前后自驾出行频率高,记录仪属于上车就该装好的一次性投入。海康威视依托自现在到手¥289。",
+      "id": "100362686636",
+      "stage": "warmup",
+      "name": "索邦扫把簸箕套装家用不粘头发梳齿防缠发扫帚两件套大扫除神器笤帚",
+      "display_name": "索邦扫把",
+      "price": "（养号期不展示）",
+      "price_real": "",
+      "category": "家居日用 · 收纳清洁",
+      "copy": "别再瞎买了，真的：套装比单买划算的前提是尺寸合适，扫头太宽墙角还是够不着。比如索邦扫把，在京东「扫把套装组合」排行榜排第1，京东累计评价50万条。你会怎么选？评论区聊聊。",
+      "fact_line": "京东「扫把套装组合」榜第1名 · 累计评价50万条",
       "images": [
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p4_cover_1793248546209_1.jpg",
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p4_scene_1793248546391_1.jpg",
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p4_price_1793248546597_1.jpg"
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100362686636_cover.jpg",
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100362686636_scene.jpg",
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100362686636_price.jpg"
       ],
       "image_roles": [
         "cover",
@@ -145,11 +179,14 @@
         "price"
       ],
       "links": {
-        "primary": "https://www.smzdm.com/p/184427454",
-        "extra": []
+        "primary": "https://www.jd.com/phb/key_15901694e17af323d15ac.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100362686636.html"
+        ]
       },
-      "commission_rate": 0.15,
-      "commission_display": "15%",
+      "commission_rate": null,
+      "commission_display": "（养号期不展示）",
       "dy_item_id": "",
       "posting": {
         "type": "image_text",
@@ -161,25 +198,32 @@
           "20:00"
         ],
         "need_ai_declaration": true,
+        "can_cart": false,
         "steps": [
           "抖音App → 左下角「+」→ 选「图文」",
           "按 cover→scene→price 顺序上传 3 张图",
-          "点「添加商品」→ 从橱窗选对应商品(挂小黄车)",
           "粘贴文案 → 勾选「作者声明:内容由AI生成」",
-          "选 BGM(轻快钢琴/城市清晨) → 发布"
+          "🚫 **不加小黄车**、不放任何第三方联系方式/二维码",
+          "选 BGM(轻快钢琴/城市清晨) → 发布",
+          "发布后 30 分钟内回复前 5 条评论(激活二次推荐池)",
+          "发布后 2 小时回来看完播率/互动率, 低于大盘就换钩子重发"
         ]
       }
     },
     {
-      "id": "5",
-      "name": "乖明星 我的世界磁力方块 磁吸积木拼装 儿童玩具 160多款自由组合DIY",
-      "price": "¥28(京东自营·50颗粒4人仔礼盒)",
-      "category": "潮玩手办 · 磁力积木拼装",
-      "copy": "潮玩手办 · 磁力积木拼装党看过来，乖明星 我的世界磁力方块 磁吸积木拼装 儿童。秋天的周末带娃出门,比商场更省心的方案是给一套能自己拼的东西。乖明星这款我的现在到手¥28。",
+      "id": "100264350608",
+      "stage": "warmup",
+      "name": "京东京造高硼硅耐热玻璃保鲜盒微波炉饭盒便当盒家用饭盒【六件套】",
+      "display_name": "京东京造保鲜盒",
+      "price": "（养号期不展示）",
+      "price_real": "",
+      "category": "家居日用 · 收纳清洁",
+      "copy": "说个可能有点反常识的事：保鲜盒先确认能不能叠放，冰箱里叠不上去等于白买。比如京东京造保鲜盒，在京东「保鲜盒6件套」排行榜排第1，规格是六件套，京东累计评价2万条。你踩过这个坑吗？评论区说说。",
+      "fact_line": "京东「保鲜盒6件套」榜第1名 · 规格六件套 · 累计评价2万条",
       "images": [
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p5_cover_1793248546824_1.jpg",
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p5_scene_1793248546982_1.jpg",
-        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p5_price_1793248547175_1.jpg"
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100264350608_cover.jpg",
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100264350608_scene.jpg",
+        "https://cloudimgs.iepose.cn/api/images/douyin_2026-10-29_p100264350608_price.jpg"
       ],
       "image_roles": [
         "cover",
@@ -187,11 +231,14 @@
         "price"
       ],
       "links": {
-        "primary": "https://www.smzdm.com/p/183668306",
-        "extra": []
+        "primary": "https://www.jd.com/phb/key_6196596257ab673b80dc.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100264350608.html"
+        ]
       },
-      "commission_rate": 0.15,
-      "commission_display": "15%",
+      "commission_rate": null,
+      "commission_display": "（养号期不展示）",
       "dy_item_id": "",
       "posting": {
         "type": "image_text",
@@ -203,12 +250,15 @@
           "20:00"
         ],
         "need_ai_declaration": true,
+        "can_cart": false,
         "steps": [
           "抖音App → 左下角「+」→ 选「图文」",
           "按 cover→scene→price 顺序上传 3 张图",
-          "点「添加商品」→ 从橱窗选对应商品(挂小黄车)",
           "粘贴文案 → 勾选「作者声明:内容由AI生成」",
-          "选 BGM(轻快钢琴/城市清晨) → 发布"
+          "🚫 **不加小黄车**、不放任何第三方联系方式/二维码",
+          "选 BGM(轻快钢琴/城市清晨) → 发布",
+          "发布后 30 分钟内回复前 5 条评论(激活二次推荐池)",
+          "发布后 2 小时回来看完播率/互动率, 低于大盘就换钩子重发"
         ]
       }
     }

@@ -25,8 +25,8 @@ import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from lib_dy import (DY_IMAGE_ROLES, ensure_out_dir, out_dir, read_json,  # noqa: E402
-                     resolve_date, write_json)
+from lib_dy import (DY_IMAGE_ROLES, STAGE_INFO, STAGE_WARMUP,  # noqa: E402
+                     ensure_out_dir, out_dir, read_json, resolve_date, write_json)
 
 HOST = "https://cloudimgs.iepose.cn"
 UPLOAD_PATH = "/api/upload-file"
@@ -109,23 +109,35 @@ def main():
                 "uploaded": ok_n, "failed": fail_n})
 
     # ---- 2. 生成发布清单 ----
+    stage = (feed[0].get("stage") if feed else None) or STAGE_WARMUP
+    info = STAGE_INFO[stage]
+    can_cart = info["can_cart"]
+
     manifest = []
     for p in feed:
         pid = p["id"]
         # 佣金率: 0.15 → 15% (小数值是接口原始值, 直接显示没意义)
         cr = p.get("commission_rate")
         cr_display = f"{float(cr) * 100:.0f}%" if cr is not None else "待接口填充"
+        # ⚠️ 养号期**不展示价格和佣金** —— 清单是人读版, 看到价格就容易手滑写进文案
+        price_display = p["price"] if can_cart else "（养号期不展示）"
         manifest.append({
             "id": pid,
+            "stage": stage,
             "name": p["name"],
-            "price": p["price"],
+            # 短名(品牌+品类)给人看, 完整 JD 名太长, 清单读不下去
+            "display_name": p.get("display_name") or p["name"],
+            "price": price_display,
+            "price_real": p["price"],
             "category": p.get("category", ""),
             "copy": p["copy"],
+            # 养号期尾图上那行事实(榜单名次/规格/评价数), 方便人工核对图文是否一致
+            "fact_line": p.get("fact_line", ""),
             "images": [urls.get(pid, {}).get(r) for r in DY_IMAGE_ROLES],
             "image_roles": list(DY_IMAGE_ROLES),
             "links": p.get("links", {}),
             "commission_rate": cr,
-            "commission_display": cr_display,
+            "commission_display": cr_display if can_cart else "（养号期不展示）",
             # 抖音挂车需要商品ID(精选联盟), 资质到位后由 dy_api.py 填
             "dy_item_id": p.get("dy_item_id", ""),
             "posting": {
@@ -134,13 +146,26 @@ def main():
                 "image_count": len(DY_IMAGE_ROLES),
                 "suggested_times": ["07:00", "12:30", "20:00"],
                 "need_ai_declaration": True,
-                "steps": [
-                    "抖音App → 左下角「+」→ 选「图文」",
-                    "按 cover→scene→price 顺序上传 3 张图",
-                    "点「添加商品」→ 从橱窗选对应商品(挂小黄车)",
-                    "粘贴文案 → 勾选「作者声明:内容由AI生成」",
-                    "选 BGM(轻快钢琴/城市清晨) → 发布",
-                ],
+                "can_cart": can_cart,
+                "steps": (
+                    [
+                        "抖音App → 左下角「+」→ 选「图文」",
+                        "按 cover→scene→price 顺序上传 3 张图",
+                        "粘贴文案 → 勾选「作者声明:内容由AI生成」",
+                        "🚫 **不加小黄车**、不放任何第三方联系方式/二维码",
+                        "选 BGM(轻快钢琴/城市清晨) → 发布",
+                        "发布后 30 分钟内回复前 5 条评论(激活二次推荐池)",
+                        "发布后 2 小时回来看完播率/互动率, 低于大盘就换钩子重发",
+                    ] if not can_cart else
+                    [
+                        "抖音App → 左下角「+」→ 选「图文」",
+                        "按 cover→scene→price 顺序上传 3 张图",
+                        "点「添加商品」→ 从橱窗选对应商品(挂小黄车)",
+                        "粘贴文案 → 勾选「作者声明:内容由AI生成」",
+                        "选 BGM(轻快钢琴/城市清晨) → 发布",
+                        "发布后 30 分钟内回复前 5 条评论(激活二次推荐池)",
+                    ]
+                ),
             },
         })
 
@@ -149,25 +174,47 @@ def main():
 
     # ---- 3. 人读版 markdown ----
     lines = [f"# 抖音图文发布清单 · {d}", "",
-             f"> {len(manifest)} 条图文待发布。图床上传 {ok_n} 张, 失败 {fail_n} 张。", "",
-             "> ⚠️ 每条都要勾选「作者声明:内容由AI生成」—— 平台要求 AI 内容必须标注。", "",
-             "> ⚠️ 挂车需要抖音橱窗权限: 图文挂车 **1000 有效粉**; 0 粉只能开基础橱窗(每周限挂 1 款)。", ""]
+             f"> **阶段: {info['label']}** · {len(manifest)} 条待发布 · 图床上传 {ok_n} 张 / 失败 {fail_n} 张",
+             "",
+             f"> 📌 本阶段规则: **{info['rule']}**",
+             f"> 💡 原因: {info['why']}", ""]
+    if not can_cart:
+        lines += [
+            "> 🚫 **本批次不要挂小黄车**。新号前 20 条挂车会被系统判为营销号，"
+            "自然流量直接打折；前 7 天出现第三方联系方式 = 违规降权。",
+            "> 🚫 **文案里不要出现价格/下单/橱窗/包邮**。带营销信号的内容"
+            "在新号阶段同样会被判营销号。",
+            "> 📌 养号期看的是**完播率 / 点赞率 / 评论率 / 转粉率**，不是成交。",
+            "",
+        ]
+    else:
+        lines += [
+            "> ⚠️ 每条都要勾选「作者声明:内容由AI生成」—— 平台要求 AI 内容必须标注。",
+            "> ⚠️ 挂车需要橱窗权限: 图文挂车 **1000 有效粉**; 0 粉只能开基础橱窗(每周限挂 1 款)。",
+            "",
+        ]
     for m in manifest:
-        lines += [f"---", "", f"## [{m['id']}] {m['name']}", "",
-                  f"**价格**: {m['price']}  |  **类目**: {m['category']}  |  "
-                  f"**佣金**: {m['commission_display']}", "",
+        lines += [f"---", "", f"## [{m['id']}] {m['display_name']}", "",
+                  f"**类目**: {m['category']}"
+                  + (f"  |  **价格**: {m['price']}  |  **佣金**: {m['commission_display']}"
+                     if can_cart else ""), "",
                   "**文案** (直接复制):", "", f"```\n{m['copy']}\n```", ""]
+        if not can_cart and m.get("fact_line"):
+            lines += [f"**尾图文案**: {m['fact_line']}", "",
+                      "> 核对: 尾图上的这行字 = 文案里的事实, 对不上就别发", ""]
         for i, (role, u) in enumerate(zip(m["image_roles"], m["images"]), 1):
             role_cn = {"cover": "首图(强视觉冲击)", "scene": "中图(使用场景)",
-                       "price": "尾图(价格锚点)"}.get(role, role)
+                       "price": ("尾图(价格锚点)" if can_cart
+                                 else "尾图(挑货知识卡·无价格)")}.get(role, role)
             lines.append(f"{i}. **{role_cn}**: {u or '❌ 上传失败, 需重传'}")
-        lines += ["", "**商品链接**:", ""]
-        for k, v in (m["links"] or {}).items():
-            if k == "extra":
-                for u in v:
-                    lines.append(f"- {u}")
-            else:
-                lines.append(f"- {v}")
+        if can_cart:
+            lines += ["", "**商品链接**:", ""]
+            for k, v in (m["links"] or {}).items():
+                if k == "extra":
+                    for u in v:
+                        lines.append(f"- {u}")
+                else:
+                    lines.append(f"- {v}")
         lines += ["", "**发布步骤**: " + " → ".join(m["posting"]["steps"]), ""]
 
     md_path = os.path.join(od, "publish_manifest.md")

@@ -1,0 +1,17 @@
+# 输出图片 (不进 git, 体积大)
+output/**/*.jpg
+output/**/*.png
+
+# 但内容文件要入库(落地页/清单兜底数据源)
+!output/**/*.json
+!output/**/*.md
+
+# 凭证
+*.env
+credentials/
+.env
+
+# 系统
+.DS_Store
+__pycache__/
+*.pyc

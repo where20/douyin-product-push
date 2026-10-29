@@ -34,6 +34,7 @@ import re
 import subprocess
 import sys
 import time
+from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib_dy import (DY_IMG_HEIGHT, DY_IMG_WIDTH, DY_IMAGE_ROLES,  # noqa: E402
@@ -42,6 +43,30 @@ from lib_dy import (DY_IMG_HEIGHT, DY_IMG_WIDTH, DY_IMAGE_ROLES,  # noqa: E402
 
 MMX_RATIO = "3:4"
 AI_ROLES = ("cover", "scene")   # 这两个交给 mmx
+
+
+def mmx_quota_check() -> dict:
+    """出图前查 mmx 区间额度。
+
+    ⚠️ 2026-10-29 实测: 额度打满时 mmx 报
+       `已达到 Token Plan 用量上限`(HTTP 200, 错误藏在 body 里),
+       重试又变成 `code 6 Network request failed` —— **看着像网络抖动,
+       实际是配额耗尽**, 排查时极易走错路。
+    → 批量出图前先探一次, 不够就**立刻**停。
+       否则 15 张 × 3 次重试 = 45 次无效调用, 白等好几分钟。
+
+    探不到就放行(体检失败不该挡住正事)。
+    """
+    try:
+        r = subprocess.run(["mmx", "quota", "show", "--output", "json"],
+                           capture_output=True, text=True, timeout=60)
+        data = json.loads(r.stdout)
+    except Exception:
+        return {}
+    for m in (data.get("model_remains") or []):
+        if m.get("model_name") == "general":
+            return m
+    return {}
 
 
 def mmx_generate(prompt: str, out_path: str, retries: int = 2) -> bool:
@@ -265,6 +290,8 @@ def compose_price_card(cover_path: str, dst: str, product: dict,
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("date", nargs="?", default=None)
+    ap.add_argument("--ignore-quota", action="store_true",
+                    help="跳过 mmx 额度闸门(额度体检本身出问题时用)")
     ap.add_argument("--only", default=None,
                     help="只重出指定商品 id (如 100353738728), 其余跳过。"
                          "用于单张失败后补出, 不必整批重跑")
@@ -283,6 +310,22 @@ def main():
     info = STAGE_INFO[stage]
     print(f"📌 阶段: {info['label']} ({stage}) — {info['rule']}")
     print(f"   尾图内容: {'卖点/知识卡(无价格)' if stage == STAGE_WARMUP else '价格锚点'}\n")
+
+    # ---- 额度闸门: 不够就立刻停, 别白烧 45 次重试 ----
+    if not args.ignore_quota:
+        q = mmx_quota_check()
+        pct = q.get("current_interval_remaining_percent")
+        if pct is not None and int(pct) <= 0:
+            end = q.get("end_time")
+            reset = ("%s 自动重置" % datetime.fromtimestamp(end / 1000).strftime("%H:%M")
+                     if end else "下个窗口重置")
+            print(f"❌ mmx 区间额度已用尽 (general 剩余 {pct}%), {reset}")
+            print("   · 等重置     → 到点直接重跑本脚本")
+            print("   · 立即继续   → platform.minimaxi.com 充值积分, 再重跑")
+            print("   · 额度体检本身有问题 → 加 --ignore-quota 硬闯")
+            return 3
+        if pct is not None:
+            print(f"🔋 mmx 区间额度剩余 {pct}%\n")
 
     ok = 0
     fail = 0

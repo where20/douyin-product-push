@@ -22,6 +22,22 @@
 新号前 20 条挂车 = 主动告诉算法"我是广告号" → 自然流量直接打折；
 前 7 天导流 = 违规降权。
 
+## 自动化入口（cron 实际走这条，2026-10-29 起）
+
+```bash
+bash /Users/xiaoan/Documents/TimeTask/douyin-product-push/scripts/run_daily.sh
+```
+
+一条命令跑完全流程：`build_feed` → `gen_dy_images` → `publish_pack` → `verify_links`
+→ 飞书推送 → 写 `memory/{date}.md` → git commit + push。
+
+- **幂等**：成品图已存在就跳过（不烧 mmx 额度）；上传记录与当前 feed 匹配就复用。
+- **失败分级**：exit 1 = 硬失败（产物不完整，别发）；exit 0 = 降级完成
+  （例：mmx 额度用尽，等下个窗口重跑）。
+- 定时任务：`douyin-warmup-daily`（每天 15:05）、`douyin-pool-refresh`（每周一 09:00）。
+
+> 下面的分步流程是**排查时**用的。定时任务只调 `run_daily.sh`，不要拆开跑。
+
 ## 每日流程
 
 ### 1. 加载环境
@@ -92,6 +108,9 @@ python3 scripts/gen_dy_images.py $TODAY
   - 带货期 = 价格锚点卡（¥大字 + 名称 + 规格）
 
 **必须 15/15 全绿**才能往下走。
+
+- ⚠️ **默认幂等**：成品图已存在就跳过，不重烧 mmx 额度。
+  要重出某一张用 `--only <商品id>`；要整批强制重出用 `--force`（会烧 15 张额度，别乱用）。
 
 ### 6. 肉眼核对（别跳这步）
 ```bash

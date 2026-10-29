@@ -295,6 +295,8 @@ def main():
     ap.add_argument("--only", default=None,
                     help="只重出指定商品 id (如 100353738728), 其余跳过。"
                          "用于单张失败后补出, 不必整批重跑")
+    ap.add_argument("--force", action="store_true",
+                    help="强制重出已存在的图 (默认跳过已出好的图, 别白烧 mmx 额度)")
     args = ap.parse_args()
     d = resolve_date(args.date)
 
@@ -346,6 +348,19 @@ def main():
                 continue
             raw = os.path.join(od, f"_raw_{role}_{pid}.jpg")
             final = cover_path if role == "cover" else scene_path
+            # ⚠️ 幂等闸门 (2026-10-29 补):
+            #    出图成功后 raw 会被删掉, 所以 mmx_generate 里的"文件已存在"检查
+            #    永远不成立 → 每次复跑都会重新调 mmx 重出 15 张, 白烧额度。
+            #    实测: 同一天连跑两次 = 30 张图烧掉。
+            #    → 这里在调 mmx 之前先看成品图在不在, 在就跳过。
+            #    (商品池按日期轮转, pid 每天换 → 文件名不同, 不会误跳别的商品)
+            if (not args.force and os.path.exists(final)
+                    and os.path.getsize(final) > 50000):
+                kb = os.path.getsize(final) // 1024
+                print(f"⏭️  {pid} / {role} 已存在 ({kb}KB), 跳过"
+                      f"  [--force 可强制重出]")
+                ok += 1
+                continue
             print(f"🎨 {pid} / {role} ...")
             if not mmx_generate(prompt, raw):
                 fail += 1

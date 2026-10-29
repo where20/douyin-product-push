@@ -24,7 +24,10 @@ douyin-product-push/
 │   ├── dy_pool.py        养号期垂直商品池 (京东榜单页 → 真实商品)  → 养号期数据源
 │   ├── build_feed.py     选品/商品池 → feed.json (文案 + 三图 prompt)
 │   ├── gen_dy_images.py  出 15 张图 (cover/scene 用 mmx, 尾图用 PIL)
-│   └── publish_pack.py   图床上传 + 生成发布清单 (json/md)
+│   ├── publish_pack.py   图床上传 + 生成发布清单 (json/md)
+│   ├── verify_links.py   全量 URL 核验闸门 (软失败/硬失败分级)
+│   ├── feishu_push.py    推飞书卡片 (--dry-run 可只自检不真发)
+│   └── run_daily.sh      一键流水线 (cron 入口, 含幂等判定与失败分级)
 ├── pool/
 │   ├── sources.json      垂直定义: 榜单页 URL + 类目关键词 + 干货方法论
 │   └── {slug}.json       抓下来的商品池 (真实 name/sku/名次/评论数/主图/主色)
@@ -185,8 +188,51 @@ python3 scripts/dy_api.py --live --category 日用百货
   "京东京造高硼硅耐热玻璃"这种材质词 → `_trim_brand()` 在括号/材质词/数字处切断。
 - **规格串只认"数字+单位"短片段**：按 token 取会把整段商品名当规格
   （"规格是京东京造高硼硅耐热玻璃保鲜盒微波炉饭盒便当盒"）。
+- **重抓商品池不能覆盖旧池子**（2026-10-29 为每周自动换血加的闸门）：
+  榜单页改版 / 网络抖动会让抓取大面积失败，而取色失败的商品主色是 `null` ——
+  这种残缺池子一旦写进磁盘，第二天的流水线在 `build_feed` 阶段直接崩。
+  → `dy_pool.py` 现在会**剔除取色失败项**，有效商品 < 20 就**整体放弃本次重抓、
+  保留旧池子**（exit 1）。失败时不要手动改 `pool/home_storage.json`，更不要重试刷。
+- **执行日志只能追加，不能覆盖**（2026-10-29 实测踩到）：
+  `run_daily.sh` 最初用 `open(..., "w")` 写 `memory/{date}.md`，
+  把当天已写好的 372 行排查记录直接覆盖成 44 行流水线日志。
+  → 同一天可能既有排查结论又有流水线日志，现在日志段用**追加模式**，
+  并在中间插 `---` 分隔线。补跑历史日期时尤其注意。
+- **出图原本不幂等，复跑会白烧额度**（2026-10-29 实测踩到）：
+  `gen_dy_images.py` 出图成功后会把 `_raw_*.jpg` 删掉，导致 `mmx_generate` 里
+  「文件已存在就复用」的检查**永远不成立** → 每次复跑都重新调 mmx 出 15 张。
+  实测同一天连跑两次 = 30 张图额度烧光，还把 10:00→15:00 窗口打满。
+  → 现在在调 mmx **之前**先看成品图（`final`）在不在，在就跳过；
+  要重出用 `--force`（或删掉对应 jpg）。**cron 化后这条是刚需** ——
+  否则每天定时任务失败重试一次就是 15 张额度。
+- **飞书推送也要幂等**（2026-10-29 实测踩到）：
+  同一天连跑三次流水线 → 飞书收到 3 条一模一样的卡片。
+  → `feishu_push.py` 现在把清单的 sha256 写进 `output/{date}/.feishu_pushed`，
+  清单没变就跳过推送。强制重推用 `--force`。该标记是本机状态，已 gitignore。
 
 ## 每日流程
+
+### 一键（cron 实际走这条）
+
+```bash
+source /Users/xiaoan/Documents/TimeTask/config/xhs.env.sh
+export TASK_DY_DIR=/Users/xiaoan/Documents/TimeTask/douyin-product-push
+bash $TASK_DY_DIR/scripts/run_daily.sh          # 今天
+bash $TASK_DY_DIR/scripts/run_daily.sh 2026-10-29   # 补跑指定日期
+```
+
+`run_daily.sh` 内部依次做：`build_feed` → `gen_dy_images` → `publish_pack` →
+`verify_links` → `feishu_push` → 写 `memory/{date}.md` → git commit + push。
+
+- **幂等**：`gen_dy_images` 先看成品图在不在，在就跳过（`--force` 可强制重出），
+  同日重跑**不烧 mmx 额度**（实测复跑 0.7 秒跑完）；
+  `publish_pack` 先比对 `uploaded_urls.json` 的 key 集合与当前 feed 是否一致，
+  一致且图都在 → `--reuse-upload`，不产生图床垃圾。
+- **失败分级**：exit 1 = 硬失败（产物不完整，别发）；exit 0 = 降级完成
+  （例：mmx 额度用尽，等下个窗口重跑）。
+- **日志追加而非覆盖**：同一天可能已写过排查记录，`memory/{date}.md` 用追加模式。
+
+### 手动分步（排查时用）
 
 ```bash
 source /Users/xiaoan/Documents/TimeTask/config/xhs.env.sh
@@ -207,14 +253,44 @@ python3 scripts/gen_dy_images.py $TODAY
 # 3) 图床上传 + 发布清单
 python3 scripts/publish_pack.py $TODAY
 
-# 4) 人工在抖音 App 发布 (照 publish_manifest.md 操作, 不挂小黄车)
+# 4) URL 核验闸门 (发布前必过)
+python3 scripts/verify_links.py $TODAY
+
+# 5) 推飞书
+python3 scripts/feishu_push.py $TODAY          # 加 --dry-run 只自检不真发
+
+# 6) 人工在抖音 App 发布 (照 publish_manifest.md 操作, 不挂小黄车)
 
 # ---- 带货期 (>=1000 粉): 挂车, 带价格 ----
-python3 scripts/dy_api.py --live --category 日用百货 > output/$TODAY/picked.json
+python3 scripts/dy_api.py --live --category 日用百货 --out output/$TODAY/picked.json
 python3 scripts/build_feed.py $TODAY --stage monetize
 python3 scripts/gen_dy_images.py $TODAY
 python3 scripts/publish_pack.py $TODAY
 ```
+
+## 自动化调度（cron，2026-10-29 建）
+
+用 **mavis 自带 cron**，不碰 macOS launchd/crontab（避免污染系统设置、卸载干净）。
+
+| 任务 | 时间 | 做什么 |
+|---|---|---|
+| `douyin-warmup-daily` | 每天 **15:05** | 跑完整 warmup 流水线 + 推飞书 + commit/push |
+| `douyin-pool-refresh` | 每周一 **09:00** | 重抓垂直商品池换血 + commit/push |
+
+cron ID（管理用，`mavis cron` 工具按 ID 查/改/停）：
+
+- `douyin-warmup-daily` → `2fbbbeeb-13de-454d-8e0b-88ea76a11c0c`
+- `douyin-pool-refresh` → `ea9d1f0c-6feb-4874-88bd-1ac5ccf85bb6`
+
+> 两个任务都用 `session.mode = new`（每次新对话），跟仓库里其它 cron 保持一致 —— 每日流水线互相独立，不累积上下文。
+
+**为什么定 15:05**：mmx 是 5 小时滚动窗口，2026-10-29 实测 15:00 准时从 0% 重置到 99%。
+新窗口刚开时出 15 张图最稳。`gen_dy_images.py` 内置额度闸门，不够会自动停并打重置时间，
+不会白烧重试。
+**为什么周一换血**：池子 44 个商品 / 每天 5 个 ≈ 8.8 天轮回一轮；京东榜单页内容会轮换，
+重抓能换一批新品，避免 30 天养号期反复发同一批商品。
+
+> `run_daily.sh` 是唯一入口 —— **不要让 agent 自己拆开跑各脚本**，幂等判定和失败分级都在里面。
 
 ## 自动化边界（说清楚，别误会）
 

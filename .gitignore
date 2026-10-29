@@ -6,6 +6,9 @@ output/**/*.png
 !output/**/*.json
 !output/**/*.md
 
+# 飞书推送标记 (本机状态: 清单hash, 用于"没变就不重复推", 不该入库)
+output/**/.feishu_pushed
+
 # 凭证
 *.env
 credentials/

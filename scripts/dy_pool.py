@@ -200,6 +200,12 @@ def parse_page(url: str, label: str, category: str) -> list:
     return products
 
 
+# 自动重抓的保底阈值: 有效商品少于这个数就放弃本次重抓, 保留旧池子。
+# 理由: 榜单页结构改版 / 网络抖动 会让抓取大面积失败, 此时覆盖池子等于投毒
+#       —— 坏池子会让第二天的流水线在 build_feed 阶段崩掉。
+MIN_POOL_SIZE = 20
+
+
 def main():
     ap = argparse.ArgumentParser(description="养号期垂直商品池构建器")
     ap.add_argument("--source", default=None, help="只抓指定源(名字匹配 sources.json)")
@@ -260,23 +266,39 @@ def main():
             p["color"] = None
             print(f"   [{i:2d}] ❌ 取色失败: {e}")
 
+    # ⚠️ 2026-10-29 加固(为每周自动重抓做准备):
+    #    取色失败的商品**绝不能进池** —— 颜色缺失 = 图文不符的种子。
+    #    更关键: 自动重抓时若网络抖动导致大面积取色失败, 绝不能把残缺池子
+    #    覆盖到磁盘, 那会让第二天的流水线拿到坏池子直接崩。
+    #    处置: 剔除失败项; 剩余不足阈值就整体放弃本次重抓, 保留旧池子。
+    good = [p for p in uniq if p.get("color")]
+    dropped = len(uniq) - len(good)
+    slug = cfg.get("slug") or "pool"
+    os.makedirs(POOL_ROOT, exist_ok=True)
+    out_path = os.path.join(POOL_ROOT, f"{slug}.json")
+
+    if dropped:
+        print(f"\n⚠️ 剔除取色失败商品 {dropped} 个 (颜色缺失=图文不符)")
+    if len(good) < MIN_POOL_SIZE:
+        print(f"\n❌ 有效商品仅 {len(good)} 个 < 阈值 {MIN_POOL_SIZE} —— 放弃本次重抓",
+              file=sys.stderr)
+        print(f"   旧池子保持不变: {out_path}", file=sys.stderr)
+        return 1
+    uniq = good
+
     out = {
         "vertical": vertical,
         "category": category,
         "fetched_at": date.today().strftime("%Y-%m-%d"),
         "count": len(uniq),
-        "color_failed": len(color_fail),
+        "color_failed": dropped,
         "products": uniq,
     }
-    slug = cfg.get("slug") or "pool"
-    os.makedirs(POOL_ROOT, exist_ok=True)
-    out_path = os.path.join(POOL_ROOT, f"{slug}.json")
     write_json(out_path, out)
     print(f"\n💾 写入 {out_path} ({len(uniq)} 个商品, 单垂直)")
     if color_fail:
-        print(f"\n❌ {len(color_fail)} 个商品取色失败 —— 这些商品不能出图(颜色缺失=图文不符)",
+        print(f"\n⚠️ 本次有 {len(color_fail)} 个商品取色失败, 已剔除(详见上方清单)",
               file=sys.stderr)
-        return 1
     return 0
 
 

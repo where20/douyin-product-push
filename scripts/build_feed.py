@@ -425,7 +425,12 @@ def _color_en(hex_color: str) -> str:
         base = "warm taupe brown"
     # 明度
     if light < 0.25:
-        if sat < 0.18:
+        # ⚠️ 2026-11-05 补: **深色 + 低饱和时色相同样不可靠**。
+        #   #16171C(悦卡后备箱, 实为黑灰) sat=0.21 → 按 hue 落进 blue →
+        #   输出 "deep blue", mmx 会画成**蓝箱子** = 图文不符。
+        #   → 深色区把 sat 阈值从 0.18 提到 0.35: 近黑但有色偏的, 一律 black。
+        #   (高饱和深色不受影响: 藏青 #1B2A4A sat=0.64 / 深酒红 sat=0.66)
+        if sat < 0.35:
             base = "black"
         elif base in ("orange", "yellow"):
             base = "dark brown"
@@ -629,6 +634,14 @@ def main():
             # 材质自带典型色语义(如"玻璃"→clear transparent glass)
             mat = detect_material(name)
             color_en_override = mat.get("family_en") or ""
+        if not color_en_override:
+            # ⚠️ 2026-11-05 补: 字段必须和 **prompt 实际用的颜色语义同一个来源**。
+            #   原来字段只填名色词/材质语义 → 布艺箱(无色词)字段是空串,
+            #   而 build_prompts 里走的是 `_color_en(color)` 回落 —— 同一份数据两个来源,
+            #   读 feed.json 的人会以为"这个商品没定色"。
+            #   → 这里直接兜底成 _color_en(color); prompt 行为完全不变
+            #     (它本来就是回落到 _color_en)。
+            color_en_override = _color_en(p.get("color") or "#F2F2F2")
         sidx = src_counter.get(label, 0)
         src_counter[label] = sidx + 1
         # ⚠️ tip 必须取**该商品自己子类目**的干货, 不能按批次位置取。

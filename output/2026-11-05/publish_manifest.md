@@ -25,9 +25,9 @@
 
 > 核对: 尾图上的这行字 = 文案里的事实, 对不上就别发
 
-1. **首图(强视觉冲击)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100282201632_cover.jpg
-2. **中图(使用场景)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100282201632_scene.jpg
-3. **尾图(挑货知识卡·无价格)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100282201632_price.jpg
+1. **首图(强视觉冲击)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100282201632_cover_1793866125139_1.jpg
+2. **中图(使用场景)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100282201632_scene_1793866125335_1.jpg
+3. **尾图(挑货知识卡·无价格)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100282201632_price_1793866125584_1.jpg
 
 **发布步骤**: 抖音App → 左下角「+」→ 选「图文」 → 按 cover→scene→price 顺序上传 3 张图 → 粘贴文案 → 勾选「作者声明:内容由AI生成」 → 🚫 **不加小黄车**、不放任何第三方联系方式/二维码 → 选 BGM(轻快钢琴/城市清晨) → 发布 → 发布后 30 分钟内回复前 5 条评论(激活二次推荐池) → 发布后 2 小时回来看完播率/互动率, 低于大盘就换钩子重发
 
@@ -47,9 +47,9 @@
 
 > 核对: 尾图上的这行字 = 文案里的事实, 对不上就别发
 
-1. **首图(强视觉冲击)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100200049384_cover.jpg
-2. **中图(使用场景)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100200049384_scene.jpg
-3. **尾图(挑货知识卡·无价格)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100200049384_price.jpg
+1. **首图(强视觉冲击)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100200049384_cover_1793866125735_1.jpg
+2. **中图(使用场景)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100200049384_scene_1793866125881_1.jpg
+3. **尾图(挑货知识卡·无价格)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100200049384_price_1793866126036_1.jpg
 
 **发布步骤**: 抖音App → 左下角「+」→ 选「图文」 → 按 cover→scene→price 顺序上传 3 张图 → 粘贴文案 → 勾选「作者声明:内容由AI生成」 → 🚫 **不加小黄车**、不放任何第三方联系方式/二维码 → 选 BGM(轻快钢琴/城市清晨) → 发布 → 发布后 30 分钟内回复前 5 条评论(激活二次推荐池) → 发布后 2 小时回来看完播率/互动率, 低于大盘就换钩子重发
 
@@ -69,9 +69,9 @@
 
 > 核对: 尾图上的这行字 = 文案里的事实, 对不上就别发
 
-1. **首图(强视觉冲击)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p10223693917245_cover.jpg
-2. **中图(使用场景)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p10223693917245_scene.jpg
-3. **尾图(挑货知识卡·无价格)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p10223693917245_price.jpg
+1. **首图(强视觉冲击)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p10223693917245_cover_1793866175303_1.jpg
+2. **中图(使用场景)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p10223693917245_scene_1793866126269_1.jpg
+3. **尾图(挑货知识卡·无价格)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p10223693917245_price_1793866126397_1.jpg
 
 **发布步骤**: 抖音App → 左下角「+」→ 选「图文」 → 按 cover→scene→price 顺序上传 3 张图 → 粘贴文案 → 勾选「作者声明:内容由AI生成」 → 🚫 **不加小黄车**、不放任何第三方联系方式/二维码 → 选 BGM(轻快钢琴/城市清晨) → 发布 → 发布后 30 分钟内回复前 5 条评论(激活二次推荐池) → 发布后 2 小时回来看完播率/互动率, 低于大盘就换钩子重发
 
@@ -91,9 +91,9 @@
 
 > 核对: 尾图上的这行字 = 文案里的事实, 对不上就别发
 
-1. **首图(强视觉冲击)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100042591218_cover.jpg
-2. **中图(使用场景)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100042591218_scene.jpg
-3. **尾图(挑货知识卡·无价格)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100042591218_price.jpg
+1. **首图(强视觉冲击)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100042591218_cover_1793866126549_1.jpg
+2. **中图(使用场景)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100042591218_scene_1793866126710_1.jpg
+3. **尾图(挑货知识卡·无价格)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100042591218_price_1793866126859_1.jpg
 
 **发布步骤**: 抖音App → 左下角「+」→ 选「图文」 → 按 cover→scene→price 顺序上传 3 张图 → 粘贴文案 → 勾选「作者声明:内容由AI生成」 → 🚫 **不加小黄车**、不放任何第三方联系方式/二维码 → 选 BGM(轻快钢琴/城市清晨) → 发布 → 发布后 30 分钟内回复前 5 条评论(激活二次推荐池) → 发布后 2 小时回来看完播率/互动率, 低于大盘就换钩子重发
 
@@ -113,8 +113,8 @@
 
 > 核对: 尾图上的这行字 = 文案里的事实, 对不上就别发
 
-1. **首图(强视觉冲击)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100327208050_cover.jpg
-2. **中图(使用场景)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100327208050_scene.jpg
-3. **尾图(挑货知识卡·无价格)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100327208050_price.jpg
+1. **首图(强视觉冲击)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100327208050_cover_1793866127096_1.jpg
+2. **中图(使用场景)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100327208050_scene_1793866127236_1.jpg
+3. **尾图(挑货知识卡·无价格)**: https://cloudimgs.iepose.cn/api/images/douyin_2026-11-05_p100327208050_price_1793866127553_1.jpg
 
 **发布步骤**: 抖音App → 左下角「+」→ 选「图文」 → 按 cover→scene→price 顺序上传 3 张图 → 粘贴文案 → 勾选「作者声明:内容由AI生成」 → 🚫 **不加小黄车**、不放任何第三方联系方式/二维码 → 选 BGM(轻快钢琴/城市清晨) → 发布 → 发布后 30 分钟内回复前 5 条评论(激活二次推荐池) → 发布后 2 小时回来看完播率/互动率, 低于大盘就换钩子重发

@@ -35,7 +35,8 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib_dy import (DY_COPY_MAX, DY_COPY_MIN, DY_STAGES, POOL_ROOT,  # noqa: E402
                      STAGE_INFO, STAGE_MONETIZE, STAGE_WARMUP,
-                     assert_feed, ensure_out_dir, out_dir, read_json,
+                     assert_feed, detect_material, detect_name_color,
+                     derive_product_en, ensure_out_dir, out_dir, read_json,
                      resolve_date, write_json)
 
 
@@ -378,6 +379,16 @@ def _color_en(hex_color: str) -> str:
     if mx == mn:
         return ("soft white" if light > 0.72
                 else "deep black" if light < 0.22 else "neutral grey")
+    # ⚠️ 2026-11-05 补: **近乎无彩色时色相是纯噪声**。
+    #   #B2B4B6(不锈钢银灰) sat 只有 0.022, 但按 hue 算会落进 blue →
+    #   输出 "muted blue", mmx 就画成蓝色箱子 = 图文不符。
+    #   → 饱和度极低时只按明度区分 黑白灰, 不碰色相。
+    if sat < 0.12:
+        if light > 0.78:
+            return "soft white"
+        if light < 0.22:
+            return "deep black"
+        return "silver grey" if light > 0.55 else "charcoal grey"
     if mx == r:
         hue = ((g - b) / (mx - mn)) % 6
     elif mx == g:
@@ -406,12 +417,22 @@ def _color_en(hex_color: str) -> str:
         base = "beige tan"
     elif sat < 0.45 and base == "yellow":
         base = "khaki beige"
+    # ⚠️ 2026-11-05 补(11-04 记录的根因 #2, 之前漏了红轴):
+    #   低饱和红轴没有兜底 → #463734(低饱和暗红) 落到 hue<15 → "red",
+    #   但 light<0.25 又被压成 "dark brown" → 语义丢失。
+    #   → 低饱和红一律走暖棕红, 别掉进"红=鲜艳红"的坑。
+    elif sat < 0.45 and base == "red":
+        base = "warm taupe brown"
     # 明度
     if light < 0.25:
         if sat < 0.18:
             base = "black"
-        elif base in ("orange", "red", "yellow"):
+        elif base in ("orange", "yellow"):
             base = "dark brown"
+        elif base == "red":
+            # ⚠️ 别再一律 "dark brown" —— 红/棕/黄明度低时语义不同,
+            #   塌成同一个词就分不出商品实际颜色了。
+            base = "deep burgundy"
         else:
             base = f"deep {base}"
     elif light > 0.78:
@@ -440,7 +461,9 @@ def build_prompts(p: dict, stage: str) -> dict:
         noun = str(p.get("product_word") or "home storage product").strip()
     color = str(p.get("color", "#F2F2F2")).strip()
     cat = _first_cat(p.get("category", ""))
-    color_en = _color_en(color)
+    # ⚠️ 优先用**商品名解析出的颜色语义**(如"米色"→beige, "玻璃"→clear
+    #    transparent glass), 比从 hex 反推准得多; 没有才回退 _color_en。
+    color_en = str(p.get("color_en") or "").strip() or _color_en(color)
 
     neg = ("absolutely no text, no letters, no characters, no numbers, no logo, "
            "no label, no writing, no symbols, no brand name, "
@@ -592,8 +615,20 @@ def main():
         label = p.get("source_label", "")
         tips = meta["tips_by_label"].get(label) or []
         keywords = meta["keywords_by_label"].get(label) or p.get("keywords") or []
-        product_en = (meta.get("product_en", {}).get(label)
-                      or p.get("product_en") or "")
+        # ⚠️ 2026-11-05 根因修复: product_en 原来按**榜单类目**取,
+        #    同一个"清洁工具簸箕"榜里混着扫把簸箕套装 / EVA地刮 / 硅胶刮水器,
+        #    一律写成 "broom and dustpan set" → 出图形态全错 = 图文不符。
+        #    → 优先从**真实商品名**解析形态+材质, 类目只当兜底。
+        label_en = (meta.get("product_en", {}).get(label)
+                    or p.get("product_en") or "")
+        product_en = derive_product_en(name, fallback=label_en)
+        # 商品名里写明了颜色 → 颜色语义直接用它(比 hex 反推准)
+        named_color = detect_name_color(name)
+        color_en_override = named_color.get("en") or ""
+        if not color_en_override:
+            # 材质自带典型色语义(如"玻璃"→clear transparent glass)
+            mat = detect_material(name)
+            color_en_override = mat.get("family_en") or ""
         sidx = src_counter.get(label, 0)
         src_counter[label] = sidx + 1
         # ⚠️ tip 必须取**该商品自己子类目**的干货, 不能按批次位置取。
@@ -618,6 +653,8 @@ def main():
             "reviews_text": p.get("reviews_text", ""),
             "spec": p.get("spec") or _spec_from_name(name),
             "keywords": keywords,
+            "product_en": product_en,
+            "color_en": color_en_override,
         }
         brand, word = _split_brand(name, keywords)
         item["brand"] = brand

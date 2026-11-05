@@ -120,6 +120,265 @@ WARMUP_FORBIDDEN = (
 )
 
 
+# ============================================================
+# 商品语义解析 —— 从**真实商品名**抠 材质 / 形态 / 颜色
+# ============================================================
+# ⚠️ 2026-11-05 实测踩到(根因; 11-02 / 11-04 已两次记录但未修):
+#   原来 product_en / color 都从**榜单页类目**推。结果商品形态全错:
+#     "佳帮手EVA魔术扫把刮水器地刮" 被当成 "broom and dustpan set"
+#     → 出图画成扫把+簸箕, 实物是 EVA 地刮 → 图文不符 = 假带货(硬规则 #4)。
+#   榜单页一个类目下混着完全不同的商品: 同一个"清洁工具簸箕"榜里有
+#   扫把簸箕套装, 也有 EVA 地刮 / 硅胶刮水器 / 平板拖把。
+#   → 形态/材质/颜色全部从**真实 JD 商品名**里抠, 不按类目猜。
+
+# (关键词, 英文材质修饰, 典型色hex, 英文色名, 色是否权威)
+# ⚠️ family_hex 不是拍脑袋编的颜色, 是**该材质的典型外观色**:
+#    玻璃=通透 / 不锈钢=银灰 / 硅胶=浅灰 / EVA=浅灰 / 塑料=白 / 高粱=草黄 / 原木=棕木。
+#    材质词来自**真实 JD 商品名**, 属于真实数据。
+# ⚠️ strong=True 表示"这个材质的典型色是确定的", 取色时**直接采信材质色**:
+#    营销合成图里像素取色只会取到包装盒/地板/背景墙, 而玻璃必通透、不锈钢必银灰。
+#    strong=False 表示"颜色不固定"(布艺箱有米色/灰/黑/藏青多种) → 交给像素投票。
+_MATERIAL_RULES = (
+    ("高硼硅", "borosilicate glass", "#C6D5D8", "clear transparent", True),
+    ("钢化玻璃", "tempered glass", "#C6D5D8", "clear transparent", True),
+    ("耐热玻璃", "heat-resistant glass", "#C6D5D8", "clear transparent", True),
+    ("玻璃", "glass", "#C6D5D8", "clear transparent", True),
+    ("不锈钢", "stainless steel", "#B2B4B6", "silver metallic", True),
+    ("铝合金", "aluminium", "#B8BABC", "silver metallic", True),
+    ("硅胶", "silicone", "#D4D6D8", "soft light grey", True),
+    ("eva", "EVA foam", "#D6D8DA", "soft light grey", True),
+    ("塑料", "plastic", "#DEDEDC", "clean white", True),
+    ("高粱", "sorghum", "#B5894B", "natural straw tan", True),
+    ("原木", "natural wood", "#A87C4E", "warm natural wood brown", True),
+    ("实木", "solid wood", "#A87C4E", "warm natural wood brown", True),
+    ("竹制", "bamboo", "#C7A878", "light natural bamboo tan", True),
+    ("牛津布", "oxford fabric", None, None, False),
+    ("无纺布", "non-woven fabric", None, None, False),
+    ("布艺", "fabric", None, None, False),
+)
+
+# (关键词, hex, 英文色名) —— 商品名里写明颜色时**直接采信**, 比任何取色算法都准
+# 顺序敏感: "淡雅米" 必须排在 "米" 前面, "深灰色" 必须排在 "灰色" 前面
+_COLOR_RULES = (
+    ("淡雅米", "#E8DFD0", "cream beige"),
+    ("米白", "#F0EAE0", "off-white"),
+    ("浅米", "#EFE6D8", "light beige"),
+    ("米黄", "#E8DCC0", "beige"),
+    ("米色", "#E6DCC8", "beige"),
+    ("浅灰", "#C8C8C8", "light grey"),
+    ("深灰", "#55565A", "dark grey"),
+    ("黑灰", "#3A3A3C", "dark charcoal grey"),
+    ("银白", "#D8DCE0", "silver white"),
+    ("银色", "#C0C4C8", "silver"),
+    ("透明", "#DCE6E8", "clear transparent"),
+    ("黄色", "#E8C020", "yellow"),
+    ("红色", "#C02828", "red"),
+    ("蓝色", "#2A4A7A", "blue"),
+    ("绿色", "#2E7A46", "green"),
+    ("粉色", "#E0A0B0", "pink"),
+    ("紫色", "#6A4A8A", "purple"),
+    ("棕色", "#7A5230", "brown"),
+    ("咖色", "#5A3E2A", "coffee brown"),
+    ("黑色", "#1E1E20", "black"),
+    ("白色", "#F2F2F0", "white"),
+    ("灰色", "#8A8A8A", "grey"),
+)
+
+
+def detect_material(name: str) -> dict:
+    """从商品名解析材质 → {modifier, family_hex, family_en, strong, keyword}。
+
+    family_hex = 该材质的典型色, 用作**取色先验**(不是硬编造):
+    strong=True 时直接采信该色, 否则只作为像素投票的参考。
+    """
+    s = str(name or "").lower()
+    for kw, mod, fam_hex, fam_en, strong in _MATERIAL_RULES:
+        if kw.lower() in s:
+            return {"modifier": mod, "family_hex": fam_hex, "family_en": fam_en,
+                    "strong": strong, "keyword": kw}
+    return {"modifier": "", "family_hex": None, "family_en": None,
+            "strong": False, "keyword": ""}
+
+
+def detect_name_color(name: str) -> dict:
+    """商品名里写明了颜色 → 直接采信(最高置信度)。
+
+    ⚠️ 只认**完整颜色词**, 不认单字"米/白/黑" —— 商品名里
+    "厘米"/"明白"之类会误伤。
+    """
+    s = str(name or "")
+    for kw, hexv, en in _COLOR_RULES:
+        if kw in s:
+            return {"hex": hexv, "en": en, "keyword": kw}
+    return {"hex": None, "en": None, "keyword": ""}
+
+
+def derive_product_en(name: str, fallback: str = "") -> str:
+    """从商品名解析**英文品类词**(给 mmx prompt 用, 不含品牌名)。
+
+    ⚠️ 品牌名绝不能进 prompt —— 模型会把品牌当文字画到商品包装上
+       (2026-10-29 实测: prompt 写"八海鸟收纳箱" → 包装上出现乱码 "Hahdniao")。
+    """
+    s = str(name or "")
+    has = lambda *ws: any(w in s for w in ws)
+
+    # ---- 清洁工具族 ----
+    if has("平板拖把") or (has("拖把") and has("拖把桶", "托把桶")):
+        base = "flat floor mop with matching bucket"
+    elif has("刮水器", "地刮", "刮地", "玻璃刮", "扫水神器"):
+        base = "floor squeegee"
+    elif has("拖把"):
+        base = "flat floor mop"
+    elif has("簸箕", "撮箕", "畚箕", "垃圾斗", "垃圾铲"):
+        base = ("broom and dustpan set" if has("扫把", "扫帚", "笤帚")
+                else "dustpan and floor grabber set")
+    elif has("扫把", "扫帚", "笤帚"):
+        base = "broom"
+    # ---- 收纳箱族 ----
+    elif has("车载", "后备箱"):
+        base = "car trunk organizer box"
+    elif has("露营", "户外", "出游", "旅行", "暑假"):
+        base = "foldable outdoor travel storage box"
+    elif has("玩具"):
+        base = "toy storage box"
+    elif has("书本", "书籍"):
+        base = "moving storage box"
+    elif has("保鲜盒", "饭盒", "便当盒", "保鲜碗"):
+        base = "food storage container set"
+    elif has("收纳箱", "储物箱", "整理箱", "收纳盒", "百纳箱", "整理筐", "储物筐"):
+        base = "storage box"
+    else:
+        return fallback or "home storage product"
+
+    # ---- 形态修饰 ----
+    mods = []
+    if has("翻盖"):
+        mods.append("flip-lid")
+    if has("带轮", "滑轮"):
+        mods.append("on wheels")
+    if has("带盖"):
+        mods.append("with lid")
+    if has("分格", "分隔", "隔断"):
+        mods.append("with internal dividers")
+    if has("侧开门"):
+        mods.append("with side opening")
+    if has("铝槽", "可伸缩"):
+        mods.append("with aluminium channel")
+    if has("大容量", "特大号"):
+        mods.append("large capacity")
+
+    mat = detect_material(s)["modifier"]
+    parts = ([mat] if mat else []) + mods[:2] + [base]
+    return " ".join(parts)
+
+
+def _rgb_of(hex_color: str):
+    h = str(hex_color or "").lstrip("#")
+    if len(h) != 6:
+        return None
+    try:
+        return (int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16))
+    except ValueError:
+        return None
+
+
+def _hue_sat(rgb):
+    r, g, b = rgb
+    mx, mn = max(rgb), min(rgb)
+    sat = (mx - mn) / mx if mx else 0.0
+    if mx == mn:
+        return 0.0, sat
+    if mx == r:
+        h = ((g - b) / (mx - mn)) % 6
+    elif mx == g:
+        h = (b - r) / (mx - mn) + 2
+    else:
+        h = (r - g) / (mx - mn) + 4
+    return h * 60, sat
+
+
+def _is_promo_color(rgb) -> bool:
+    """京东促销色(价格角标/促销条): 纯红 / 高饱和橙。"""
+    h, s = _hue_sat(rgb)
+    if (h < 20 or h >= 340) and s > 0.45:
+        return True
+    if 20 <= h < 45 and s > 0.75:
+        return True
+    return False
+
+
+def analyze_product_color(im, family_hex: str = None, tol: int = 110,
+                          grid: int = 3):
+    """从**商品图**里取商品主色(纯 PIL, 不依赖 numpy)。
+
+    2026-11-05 重写。老实现是"中心 60% 裁切 + 取像素最多的合格色",
+    在京东**营销合成图**上会取到: 促销角标红 / 地板棕 / 背景米色,
+    5 组实测 4 组图文不符。
+
+    新流程 —— **网格投票**:
+      1) 把图切成 grid×grid 小格, 每格取众数色(排除促销红/橙、近白背景)
+      2) 各格的众数色再投票, 越靠中心的格权重越高
+         (商品主体在中间, 促销条/价格角标在边缘)
+      3) 有材质先验(family_hex) → 在投票结果里挑离先验最近的
+
+    为什么不用"整图众数色": 整图众数色会被包装盒/地板/背景墙主导。
+    为什么不用"边缘色排除": 黑色商品放在深色车厢里, 边缘环=黑,
+    排除边缘色会把商品本体也排除掉。
+
+    返回 #RRGGBB 或 None。
+    """
+    try:
+        from PIL import Image
+    except ImportError as e:
+        raise RuntimeError(f"缺少 Pillow, 无法取商品主色: {e}")
+
+    im = im.convert("RGB")
+    w, h = im.size
+    tw, th = max(1, w // grid), max(1, h // grid)
+    votes = {}
+    for ty in range(grid):
+        for tx in range(grid):
+            tile = im.crop((tx * tw, ty * th, (tx + 1) * tw, (ty + 1) * th))
+            c = _mode_color(tile)
+            if c is None:
+                continue
+            ccx, ccy = (tx + 0.5) / grid, (ty + 0.5) / grid
+            dist = ((ccx - 0.5) ** 2 + (ccy - 0.5) ** 2) ** 0.5
+            wgt = 1.0 + 1.2 * (1 - min(1.0, dist / 0.7))
+            votes[c] = votes.get(c, 0) + wgt
+    if not votes:
+        fam = _rgb_of(family_hex)
+        return "#%02X%02X%02X" % fam if fam else None
+
+    fam = _rgb_of(family_hex)
+    if fam:
+        def d(c):
+            return sum((a - b) ** 2 for a, b in zip(c, fam)) ** 0.5
+        near = [(d(c), c) for c in votes if d(c) <= tol]
+        if near:
+            return "#%02X%02X%02X" % min(near)[1]
+        return "#%02X%02X%02X" % fam
+
+    return "#%02X%02X%02X" % max(votes.items(), key=lambda kv: kv[1])[0]
+
+
+def _mode_color(im):
+    """一块图区域里的众数色(排除促销色与近白背景)。"""
+    cnt = {}
+    for p in im.getdata():
+        mx, mn = max(p), min(p)
+        if mx > 235 and mn > 225:      # 近白 = 背景
+            continue
+        if mx < 28:                   # 近黑 = 阴影
+            continue
+        if _is_promo_color(p):         # 京东促销角标
+            continue
+        cnt[p] = cnt.get(p, 0) + 1
+    if not cnt:
+        return None
+    return max(cnt.items(), key=lambda kv: kv[1])[0]
+
+
 def resolve_date(arg: str = None) -> str:
     """日期解析: 显式参数 > XHS_DATE 环境变量 > 今天。
     所有脚本统一走这里, 避免各自 date +%Y-%m-%d 走偏。"""

@@ -55,7 +55,8 @@ import tempfile
 from datetime import date
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from lib_dy import POOL_ROOT, read_json, write_json  # noqa: E402
+from lib_dy import (POOL_ROOT, analyze_product_color,  # noqa: E402
+                     detect_material, detect_name_color, read_json, write_json)
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
@@ -89,7 +90,21 @@ def fmt_reviews(raw: str) -> str:
     return f"{int(num)}条"
 
 
-def dominant_color(image_url: str) -> str:
+def _full_res_url(image_url: str) -> str:
+    """把榜单页的 80x80 **缩略图** URL 换成大图。
+
+    ⚠️ 2026-11-05 实测踩到: 榜单页 img src 是 `n7/s80x80_jfs/...`,
+       只有 80x80 —— 这么小的图做中心裁切量化, 得到的"主色"基本是噪声
+       (5 组实测 4 组图文不符)。京东同一张图支持 `s800x800_` 大图,
+       同一个 jfs 路径换尺寸即可, 不需要别的接口。
+    """
+    u = str(image_url or "")
+    if "/s80x80_" in u:
+        return u.replace("/s80x80_", "/s800x800_")
+    return u
+
+
+def dominant_color(image_url: str, name: str = "") -> str:
     """从**真实主图**取商品主色。
 
     ⚠️ 2026-10-26 上游踩过: 卡片写黑、图是白 = 图文不符 = 假带货。
@@ -101,6 +116,16 @@ def dominant_color(image_url: str) -> str:
        AttributeError, 又被 except 吞掉 → 44 个商品颜色**全部**静默回落成
        默认值, 而日志里一行报错都没有。颜色错 = 图文不符 = 假带货。
        → 所以这里失败时直接 raise, 不做静默兜底。
+
+    ⚠️ 2026-11-05 重写(根因修复, 11-02 / 11-04 已两次记录):
+       老逻辑 = "中心 60% 裁切 + 取像素最多的合格色"。
+       但京东榜单主图是**营销合成图**(商品 + 场景 + 价格角标 + 促销条),
+       中心裁切必然命中场景/角标:
+         白色扫把 → 命中深灰窗帘 / 深棕木地板
+         透明玻璃盒 → 命中米色场景
+         红色促销角标 → 命中红色
+       → 现在改成: 大图 + 背景环剔除 + 促销色剔除 + **材质先验**。
+       材质先验来自**真实商品名**(如"不锈钢" → 银灰), 不是拍脑袋编的。
     """
     try:
         from PIL import Image
@@ -110,37 +135,32 @@ def dominant_color(image_url: str) -> str:
     tmp = os.path.join(tempfile.gettempdir(), f"dy_pool_{os.getpid()}.jpg")
     try:
         r = subprocess.run(["curl", "--noproxy", "*", "-m", "20", "-s", "-o", tmp,
-                            image_url], capture_output=True)
+                            _full_res_url(image_url)], capture_output=True)
         if r.returncode != 0 or not os.path.exists(tmp):
             raise RuntimeError(f"主图下载失败(curl exit {r.returncode}): {image_url}")
         if os.path.getsize(tmp) < 1000:
             raise RuntimeError(f"主图过小, 疑似下载失败: {image_url}")
         im = Image.open(tmp).convert("RGB")
-        w, h = im.size
-        # 只取中心 60% —— 商品主体基本都在中间, 四周是白底
-        im = im.crop((int(w * 0.2), int(h * 0.2), int(w * 0.8), int(h * 0.8)))
-        im = im.resize((64, 64), Image.NEAREST)
-        # ⚠️ Pillow >= 10 常量在 Image.Quantize, 老版本在 Image.quantize —— 两个都试
-        method = getattr(getattr(Image, "Quantize", Image), "MEDIANCUT", 0)
-        q = im.quantize(colors=6, method=method)
-        pal = q.getpalette()
-        counts = sorted(q.getcolors(), reverse=True)
-        best, best_score = None, -1.0
-        for count, idx in counts:
-            rgb = tuple(pal[idx * 3: idx * 3 + 3])
-            r_, g_, b_ = rgb
-            mx, mn = max(rgb), min(rgb)
-            if mx > 235 and mn > 225:      # 近白 = 背景, 跳过
-                continue
-            if mx < 28:                  # 近黑 = 阴影/暗部, 跳过
-                continue
-            sat = (mx - mn) / mx
-            score = count * (0.35 + sat)
-            if score > best_score:
-                best_score, best = score, rgb
-        if not best:
-            raise RuntimeError(f"主图里找不到可用颜色(全近白/近黑): {image_url}")
-        return "#%02X%02X%02X" % best
+
+        # ---- 优先级 1: 商品名里写明了颜色 → 直接采信(最准) ----
+        named = detect_name_color(name)
+        if named.get("hex"):
+            return named["hex"]
+
+        # ---- 优先级 2: 材质典型色(玻璃=通透 / 不锈钢=银灰 / 硅胶=浅灰…) ----
+        # ⚠️ 营销合成图里像素取色会取到包装盒/地板/背景。
+        #   但"玻璃/不锈钢/硅胶"这类材质的**典型色是确定的**,
+        #   而材质词来自真实商品名 → 直接采信材质色, 比像素准。
+        mat = detect_material(name)
+        fam_hex = mat.get("family_hex")
+        if fam_hex and mat.get("strong"):
+            return fam_hex
+
+        # ---- 优先级 3: 大图 + 网格投票取色(带材质先验) ----
+        color = analyze_product_color(im, family_hex=fam_hex)
+        if not color:
+            raise RuntimeError(f"主图里找不到可用颜色: {image_url}")
+        return color
     finally:
         if os.path.exists(tmp):
             os.remove(tmp)
@@ -206,11 +226,64 @@ def parse_page(url: str, label: str, category: str) -> list:
 MIN_POOL_SIZE = 20
 
 
+def recolor_existing(slug: str) -> int:
+    """只重算**已有池子**的 color, 不重新抓榜单页。
+
+    ⚠️ 为什么要有这个模式 (2026-11-05):
+       取色算法修好后, 池子里存的老 color 是错的(缩略图 + 中心裁切取的噪声)。
+       但**不能为此重抓榜单页** ——
+         - 榜单页内容会按关键词轮换, 重抓会把 44 个商品**全换掉**,
+           榜单名次/评论数也跟着变, 30 天养号期的商品序列全乱;
+         - AGENTS.md 明确写了: 重抓失败会把残缺池子写进磁盘, 第二天直接崩。
+       → 只重算 color 这一个**派生字段**, name/sku/rank/reviews 一律不动。
+
+    返回 0 = 成功; 1 = 失败(旧池子保持不变)。
+    """
+    path = os.path.join(POOL_ROOT, f"{slug}.json")
+    if not os.path.exists(path):
+        print(f"❌ 找不到池子 {path}", file=sys.stderr)
+        return 1
+    pool = read_json(path)
+    products = pool.get("products") or []
+    print(f"🎨 重算 {len(products)} 个商品的 color (不动 name/sku/rank/reviews) ...")
+
+    fail = []
+    for i, p in enumerate(products, 1):
+        try:
+            old = p.get("color")
+            new = dominant_color(p.get("image", ""), p.get("name", ""))
+            p["color"] = new
+            mark = "  (未变)" if old == new else f"  ← 原 {old}"
+            print(f"   [{i:2d}] {new}  {p.get('name', '')[:36]}{mark}")
+        except Exception as e:
+            fail.append((p.get("name", ""), str(e)))
+            print(f"   [{i:2d}] ❌ 取色失败: {e}")
+
+    # ⚠️ 同样的保底阈值: 取色失败面太大就**放弃本次重算**, 保留旧池子
+    if len(products) - len(fail) < MIN_POOL_SIZE:
+        print(f"\n❌ 有效商品仅 {len(products) - len(fail)} 个 < 阈值 {MIN_POOL_SIZE} "
+              f"—— 放弃本次重算, 旧池子保持不变", file=sys.stderr)
+        return 1
+    write_json(path, pool)
+    print(f"\n💾 已更新 {path} 的 color ({len(products)} 个商品)")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description="养号期垂直商品池构建器")
     ap.add_argument("--source", default=None, help="只抓指定源(名字匹配 sources.json)")
     ap.add_argument("--config", default=None, help="源配置 json (默认 pool/sources.json)")
+    ap.add_argument("--recolor", action="store_true",
+                    help="只重算已有池子的 color(不重抓榜单页, 不动 rank/name)")
+    ap.add_argument("--slug", default=None, help="--recolor 用的池子 slug")
     args = ap.parse_args()
+
+    if args.recolor:
+        cfg_path = args.config or os.path.join(POOL_ROOT, "sources.json")
+        slug = args.slug
+        if not slug and os.path.exists(cfg_path):
+            slug = read_json(cfg_path).get("slug") or "pool"
+        return recolor_existing(slug or "pool")
 
     cfg_path = args.config or os.path.join(POOL_ROOT, "sources.json")
     if not os.path.exists(cfg_path):
@@ -258,7 +331,7 @@ def main():
     color_fail = []
     for i, p in enumerate(uniq, 1):
         try:
-            p["color"] = dominant_color(p["image"])
+            p["color"] = dominant_color(p["image"], p.get("name", ""))
             print(f"   [{i:2d}] {p['color']}  {p['name'][:40]}")
         except Exception as e:
             # ⚠️ 不静默兜底: 取色失败就是图文不符的种子, 必须留在日志里

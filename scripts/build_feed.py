@@ -33,7 +33,7 @@ import sys
 from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from lib_dy import (DY_COPY_MAX, DY_COPY_MIN, DY_STAGES, POOL_ROOT,  # noqa: E402
+from lib_dy import (DY_COPY_MAX, DY_COPY_MIN, DY_STAGES, OUT_ROOT, POOL_ROOT,  # noqa: E402
                      STAGE_INFO, STAGE_MONETIZE, STAGE_WARMUP,
                      assert_feed, detect_material, detect_name_color,
                      derive_product_en, ensure_out_dir, out_dir, read_json,
@@ -277,33 +277,55 @@ def build_copy(p: dict) -> str:
     return copy
 
 
-# 养号期文案的 4 种开头 —— 抖音图文"前三行定生死"
+# 养号期文案的 8 种开头 —— 抖音图文"前三行定生死"
 # ⚠️ 养号期**绝不能**出现"到手价/党看过来/现在下单"这类营销句式,
 #    那是系统判定营销号的核心特征。新号要的是"好奇 + 干货 + 互动"。
+# ⚠️ 2026-11-08 从 4 条扩到 8 条: 原来只有 4 条, 每天 5 个商品用 idx%4 取,
+#    第 1 个和第 5 个必然撞同一个开头(实测 11-08 两条都是"说个可能有点反常识的事:"),
+#    同一条图文里出现一模一样的起手式 = 观感上像批量生成。
 WARMUP_OPENERS = (
     "说个可能有点反常识的事：",
     "90% 的人第一步就做错了：",
     "我后悔没早点知道这个：",
     "别再瞎买了，真的：",
+    "有个细节，选之前真该看一眼：",
+    "踩过坑才知道的关键点：",
+    "先说结论，省得你白花冤枉钱：",
+    "买之前我都会先看这一项：",
 )
 
 # 养号期结尾的互动钩子 —— 评论权重比点赞高, 埋槽点提高评论率
+# ⚠️ 2026-11-08 同样从 4 条扩到 8 条, 理由同上。
 WARMUP_HOOKS = (
     "你踩过这个坑吗？评论区说说。",
     "同款还有别的选择吗？想看的话评论区扣 1。",
     "还有更省的吗？评论区交流下。",
     "你会怎么选？评论区聊聊。",
+    "你家里用的是哪种？评论区报个型号。",
+    "这条能帮到你就点个赞，不想收藏也看看。",
+    "还有别的坑吗？评论区补充一下。",
+    "想看对比的话评论区扣个 2。",
 )
 
 
-def build_warmup_copy(p: dict, idx: int, tip: str = "") -> str:
+def build_warmup_copy(p: dict, idx: int, tip: str = "", day_offset: int = 0,
+                      rank_fresh: bool = True) -> str:
     """养号期文案: 好奇钩子 + 干货 + 真实榜单事实 + 互动钩子。**不含价格**。
 
     ⚠️ 事实只用三样, 全部来自榜单页:
        榜单名次 / 评论条数 / 商品名里的规格。评论内容一概不写 —— 抓不到。
+
+    ⚠️ day_offset: 按日期错开开头/结尾的取用位置。
+       原来固定 idx%4 → 同一个位置的商品**永远**用同一句开头,
+       连续几天看过去就是同一个账号在复制粘贴。
+       加上日期偏移后, 隔天同一位置会换句式, 但当天 5 条内部仍然互不相同。
+
+    ⚠️ rank_fresh: 名次过期就不写名次(见 _rank_is_fresh)。
+       文案正文里的名次和尾图 fact_line 的名次必须**同时**受控 ——
+       两处只要有一处漏掉, 就会出现"尾图不写名次但正文写榜第7名"的矛盾。
     """
-    opener = WARMUP_OPENERS[idx % len(WARMUP_OPENERS)]
-    hook = WARMUP_HOOKS[idx % len(WARMUP_HOOKS)]
+    opener = WARMUP_OPENERS[(day_offset + idx) % len(WARMUP_OPENERS)]
+    hook = WARMUP_HOOKS[(day_offset + idx) % len(WARMUP_HOOKS)]
     name = str(p.get("name") or p.get("title") or "").strip()
     cat = _first_cat(p.get("category", ""))
     brand, word = _split_brand(name, p.get("keywords") or [])
@@ -321,7 +343,7 @@ def build_warmup_copy(p: dict, idx: int, tip: str = "") -> str:
         fact = f"比如{brand}{word}"
     elif brand:
         fact = f"比如{brand}"
-    if rank and label:
+    if rank and label and rank_fresh:
         fact += f"，在京东「{label}」排行榜排第{rank}"
     if spec:
         fact += f"，规格是{spec}"
@@ -531,6 +553,200 @@ def _load_pool(slug: str) -> tuple:
     }
 
 
+# ============================================================
+# 选品约束 —— 2026-11-08 加: 治"每天内容重复"
+# ============================================================
+# 2026-11-08 实测诊断出的三层重复:
+#   1) **同款商品**: 池里 "吱凡日本收纳箱" 出现 3 次(完全同名不同 id),
+#      "京东京造扫把簸箕套装" 3 次, "漫德莱扫把簸箕套装" 2 次 —— 同一天可能全上。
+#   2) **子类目扎堆**: 池里只有 5 个子类目, 其中「收纳折叠整理箱+布储物箱」20 个、
+#      「扫把套装组合+清洁工具簸箕」19 个 → 89% 是同两样东西。
+#      原来直接切片取前 5 个, 天天都是"3 个收纳 + 2 个扫把", 观感是复制粘贴。
+#   3) **跨天重复**: 44 个池 / 每天 5 个 = 8.8 天一轮, 30 天内每个商品都会
+#      重复 2-4 次(实测 11-01 与 11-04 都用了悦卡收纳箱, 11-06 与 11-08 都用了吱凡)。
+#
+# → 改成**环形扫描 + 约束贪心**: 不再"切片取前 5", 而是把整个池子当候选,
+#    按 (子类目配额 / 品牌配额 / 形态配额 / 历史已发) 过滤, 凑满 5 个为止。
+#    起点仍由日期轮转决定(不靠外部状态文件, 重跑同一天结果一致)。
+
+
+# 榜单名次的新鲜期: 超过这个天数没在榜上, 文案里就不写名次了。
+# ⚠️ 3 周 = 21 天: 养号期一个月的跨度, 掉榜超过这个时间的商品名次已经不成立。
+RANK_FRESH_DAYS = 21
+
+
+def _rank_is_fresh(last_seen: str, today: str) -> bool:
+    """该商品的榜单名次是否还新鲜(近期仍在榜上)。
+
+    ⚠️ last_seen 为空 = 从没记录过(旧池子没有这个字段) → 视为不新鲜,
+       不写名次 —— 宁可少一个钩子, 也不能写个可能已经过期的名次。
+    """
+    if not last_seen:
+        return False
+    try:
+        ls = datetime.strptime(str(last_seen), "%Y-%m-%d").date()
+        td = datetime.strptime(str(today), "%Y-%m-%d").date()
+    except Exception:
+        return False
+    return (td - ls).days <= RANK_FRESH_DAYS
+
+
+def _norm_name(name: str) -> str:
+    """商品名归一化 —— 用于识别"完全同款不同链接"。
+
+    去掉数字、英文、括号内容和所有分隔符, 只留中文字符序列。
+    例: "吱凡日本衣服收纳箱家用布艺衣柜收纳盒衣物整理箱分层神器折叠储物盒"
+        → "吱凡日本衣服收纳箱家用布艺衣柜收纳盒衣物整理箱分层神器折叠储物盒"
+        (三个不同 id 归一化后相同 → 判为同款, 只留一个)
+    """
+    s = str(name or "")
+    s = re.sub(r"[【】\[\]（）()《》]+", " ", s)
+    s = re.sub(r"[0-9０-９]+", " ", s)
+    s = re.sub(r"(?i)[A-Za-z]+", " ", s)
+    s = re.sub(r"[\s,，、。·\-—+|/]+", "", s)
+    return s
+
+
+def _history_used_ids(exclude_date: str = "") -> set:
+    """扫 output/*/feed.json, 收集**已经发过**的商品 id。
+
+    ⚠️ 只当"优先跳过"的依据, 绝不当硬约束 —— 池子会被用完,
+       用完还得继续发(养号期 30 天不能停), 所以选不满 5 个时自动放宽。
+    """
+    used = set()
+    if not os.path.isdir(OUT_ROOT):
+        return used
+    for name in sorted(os.listdir(OUT_ROOT)):
+        if exclude_date and name == exclude_date:
+            continue
+        path = os.path.join(OUT_ROOT, name, "feed.json")
+        if not os.path.exists(path):
+            continue
+        try:
+            data = read_json(path)
+        except Exception:
+            continue
+        if not isinstance(data, list):
+            continue
+        for it in data:
+            if isinstance(it, dict) and it.get("id"):
+                used.add(str(it["id"]))
+    return used
+
+
+def _select_products(picked: list, meta: dict, exclude_ids: set = None,
+                     n: int = 5, max_per_label: int = 2,
+                     max_per_brand: int = 1, max_per_form: int = 2,
+                     use_quota: bool = True):
+    """从候选池里挑 n 个商品, 尽量避开重复。
+
+    约束(逐级放宽, 保证一定能凑满 n 个):
+      严格轮: 跳过历史已发 + 同子类目配额 + 同品牌配额 + 同形态配额
+      放宽轮: 允许用历史已发(池子不够了), 仍守配额
+      全放宽: 只守"完全同款硬去重"
+
+    ⚠️ 选的时候**按子类目轮转取**, 不是按池子顺序取 ——
+       否则同一子类目的商品会连着排(收纳/收纳/收纳/扫把/扫把), 观感依然重复。
+
+    ⚠️ use_quota: 只有**养号期垂直池**才需要这些配额。
+       带货期的商品来自精选联盟接口, 没有 source_label(全是空串),
+       类目配额会变成"最多选 2 个" —— 直接把带货期打废。
+       → 带货期走 use_quota=False, 只守硬去重。
+    """
+    exclude_ids = set(exclude_ids or ())
+    keywords_by_label = meta.get("keywords_by_label") or {}
+
+    # ---- 硬去重: 归一化后同名的只留一个 ----
+    uniq, seen_norm = [], set()
+    for p in picked:
+        key = _norm_name(p.get("name", ""))
+        if not key or key in seen_norm:
+            continue
+        seen_norm.add(key)
+        uniq.append(p)
+
+    # ---- 按子类目分组, 组内保持池子顺序 ----
+    groups, group_order = {}, []
+    for p in uniq:
+        label = p.get("source_label", "")
+        if label not in groups:
+            groups[label] = []
+            group_order.append(label)
+        groups[label].append(p)
+
+    def _meta_of(p):
+        label = p.get("source_label", "")
+        kws = keywords_by_label.get(label) or p.get("keywords") or []
+        brand, word = _split_brand(str(p.get("name") or ""), kws)
+        # ⚠️ fallback 必须是**英文**形态词, 不能直接用中文 label ——
+        #    中文 label 当形态会让"顺嘉利毛巾架置物架"这种字符串进 form 配额表,
+        #    配额语义完全失效(而且形态名会漏进别的地方)。
+        fb = (meta.get("product_en") or {}).get(label) or ""
+        form = derive_product_en(str(p.get("name") or ""), fallback=fb)
+        return label, brand, word, form
+
+    chosen, chosen_ids = [], set()
+    seen_norm2 = set()
+    label_cnt, brand_cnt, form_cnt = {}, {}, {}
+    notes = []
+
+    for relax in (0, 1, 2):
+        # 每个子类目组内从上次取到的位置继续
+        ptr = {g: 0 for g in group_order}
+        picked_here = 0
+        while picked_here < n and any(ptr[g] < len(groups[g]) for g in group_order):
+            progressed = False
+            for g in group_order:          # ← 子类目轮转: 保证结构交错
+                if picked_here >= n:
+                    break
+                if ptr[g] >= len(groups[g]):
+                    continue
+                p = groups[g][ptr[g]]
+                ptr[g] += 1
+                pid = str(p.get("id", ""))
+                if pid in chosen_ids:
+                    continue
+                key = _norm_name(p.get("name", ""))
+                if not key or key in seen_norm2:
+                    continue
+                label, brand, word, form = _meta_of(p)
+                if not use_quota:
+                    # 带货期: 只守硬去重, 不套养号期的配额
+                    pass
+                elif relax == 0:
+                    if pid in exclude_ids:
+                        notes.append(f"跳过 {pid}（历史已发）")
+                        continue
+                    if label and label_cnt.get(label, 0) >= max_per_label:
+                        notes.append(f"跳过 {pid}（{label} 配额 {max_per_label} 已满）")
+                        continue
+                    if brand and brand_cnt.get(f"{label}|{brand}", 0) >= max_per_brand:
+                        notes.append(f"跳过 {pid}（{label}/{brand} 配额 {max_per_brand} 已满）")
+                        continue
+                    if form and form_cnt.get(form, 0) >= max_per_form:
+                        notes.append(f"跳过 {pid}（形态 {form} 配额 {max_per_form} 已满）")
+                        continue
+                elif relax == 1:
+                    if label and label_cnt.get(label, 0) >= max_per_label + 1:
+                        notes.append(f"跳过 {pid}（{label} 超额）")
+                        continue
+                chosen.append(p)
+                chosen_ids.add(pid)
+                seen_norm2.add(key)
+                label_cnt[label] = label_cnt.get(label, 0) + 1
+                bk = f"{label}|{brand}"
+                brand_cnt[bk] = brand_cnt.get(bk, 0) + 1
+                form_cnt[form] = form_cnt.get(form, 0) + 1
+                picked_here += 1
+                progressed = True
+            if not progressed:
+                break
+        if len(chosen) >= n:
+            break
+
+    return chosen[:n], notes
+
+
 def _pool_offset(arg: str, fetched_at: str, total: int) -> int:
     """商品池起始位置。
 
@@ -539,6 +755,8 @@ def _pool_offset(arg: str, fetched_at: str, total: int) -> int:
        也不会天天重复推前 5 个。
        ⚠️ 池子只有 40+ 个商品, 而 30 天养号要发 150 条 → 必须**定期重抓池子**:
           京东榜单页内容按关键词轮换, 重跑 dy_pool.py 就能拿到新商品。
+       ⚠️ 2026-11-08 起改由 _select_products() 做跨天去重, offset 只决定**扫描起点**,
+          不再直接决定"取哪 5 个"。
     """
     if arg not in (None, "", "auto"):
         try:
@@ -595,10 +813,10 @@ def main():
             return 2
         off = _pool_offset(args.pool_offset, meta.get("fetched_at", ""), len(picked))
         if off:
-            print(f"🔄 商品池轮转: 跳过前 {off} 个 (当日新商品)")
+            print(f"🔄 商品池轮转: 扫描起点 {off} (不直接决定取哪 5 个)")
             picked = picked[off:] + picked[:off]
         print(f"🗂 垂直池: {args.pool} · {meta['vertical']} · "
-              f"{len(picked)} 个商品 (取前 5)")
+              f"{len(picked)} 个商品候选")
     else:
         src = args.input or os.path.join(od, "picked.json")
         if not os.path.exists(src):
@@ -612,6 +830,36 @@ def main():
     if not picked:
         print("❌ 没取到任何商品", file=sys.stderr)
         return 2
+
+    # ---- 选品约束: 去同款 + 子类目配额 + 跨天不重复 ----
+    # ⚠️ 只有**养号期垂直池**才套这些约束:
+    #    带货期商品来自精选联盟接口(没有 source_label, 每次都是当季好货),
+    #    套养号期的子类目配额会直接打废它(所有商品 label 都是空串)。
+    warmup = (stage == STAGE_WARMUP)
+    used_ids = _history_used_ids(exclude_date=d) if warmup else set()
+    if used_ids:
+        print(f"🧾 历史已发商品: {len(used_ids)} 个 (优先跳过)")
+    selected, notes = _select_products(picked, meta, exclude_ids=used_ids, n=5,
+                                       use_quota=warmup)
+    if notes:
+        shown = notes[:8]
+        for nt in shown:
+            print(f"   · {nt}")
+        if len(notes) > len(shown):
+            print(f"   · …另外 {len(notes) - len(shown)} 条跳过原因省略")
+    if len(selected) < 5:
+        print(f"⚠️ 只选出 {len(selected)} 个商品 (池子不够/约束太紧)", file=sys.stderr)
+        return 2
+    labels = [p.get("source_label", "") for p in selected]
+    print(f"🎯 选中 {len(selected)} 个 · 子类目分布: "
+          f"{ {l: labels.count(l) for l in set(labels)} }")
+    picked = selected
+
+    # ---- 文案取句的日期偏移: 隔天同一位置换句式, 当天内不重复 ----
+    try:
+        day_offset = int(datetime.strptime(d, "%Y-%m-%d").strftime("%j"))
+    except Exception:
+        day_offset = 0
 
     feed = []
     src_counter = {}      # 每个子类目已用几个 → tip 在**自己子类目**内轮转
@@ -646,7 +894,9 @@ def main():
         src_counter[label] = sidx + 1
         # ⚠️ tip 必须取**该商品自己子类目**的干货, 不能按批次位置取。
         #    否则"保鲜盒怎么叠放"会配到一只扫把上, 读者一秒出戏。
-        tip = tips[sidx % len(tips)] if tips else ""
+        # ⚠️ 2026-11-08: 加日期偏移 —— 原来恒取 tips[0], 同一个子类目每天
+        #    第一条永远是同一句干货, 连续看就是复读。加上偏移后隔天会换。
+        tip = tips[(day_offset + sidx) % len(tips)] if tips else ""
 
         item = {
             "id": p.get("id", i),
@@ -663,6 +913,7 @@ def main():
             # 榜单事实(养号期文案用)
             "rank": p.get("rank"),
             "source_label": label,
+            "last_seen": p.get("last_seen") or "",
             "reviews_text": p.get("reviews_text", ""),
             "spec": p.get("spec") or _spec_from_name(name),
             "keywords": keywords,
@@ -681,7 +932,11 @@ def main():
         # 养号期尾图要用的两行素材: 干货句 + 商品事实行
         item["tip"] = tip
         fact_bits = []
-        if item["rank"] and label:
+        # ⚠️ 2026-11-08: 榜单名次只在该商品**近期还在榜上**时才写。
+        #    池子改成累积模式后, 掉榜的旧商品会一直留在池里(last_seen 不更新),
+        #    名次已经过期, 继续写"榜第7名"就是假事实 —— 平台核查起来是硬伤。
+        #    → 过期的只写规格和评价, 事实照样有, 但不碰名次。
+        if item["rank"] and label and _rank_is_fresh(item.get("last_seen"), d):
             fact_bits.append(f"京东「{label}」榜第{item['rank']}名")
         if item["spec"]:
             fact_bits.append(f"规格{item['spec']}")
@@ -718,7 +973,9 @@ def main():
 
         # ---- 文案 ----
         if stage == STAGE_WARMUP:
-            item["copy"] = p.get("copy") or build_warmup_copy(item, i - 1, tip)
+            item["copy"] = p.get("copy") or build_warmup_copy(
+                item, i - 1, tip, day_offset,
+                rank_fresh=_rank_is_fresh(item.get("last_seen"), d))
         else:
             item["copy"] = p.get("copy") or build_copy(item)
 

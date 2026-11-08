@@ -1,9 +1,9 @@
 {
   "vertical": "家居收纳清洁",
   "category": "家居日用 · 收纳清洁",
-  "fetched_at": "2026-11-02",
-  "count": 44,
-  "color_failed": 1,
+  "fetched_at": "2026-11-08",
+  "count": 156,
+  "color_failed": 0,
   "products": [
     {
       "id": "100164783975",
@@ -23,13 +23,14 @@
           "https://item.jd.com/100164783975.html"
         ]
       },
-      "color": "#D2CEC5"
+      "color": "#D2CEC5",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100036336847",
       "name": "京东京造衣物收纳箱布艺衣服收纳盒整理箱衣柜储物箱百纳箱 66L2只装",
       "sku": "100036336847",
-      "rank": 1,
+      "rank": 3,
       "reviews_raw": "100000人评论",
       "reviews_text": "10万条",
       "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/526186/33/14495/451620/6ac70b2cF4f627d7f/008340040038f568.png",
@@ -43,11 +44,12 @@
           "https://item.jd.com/100036336847.html"
         ]
       },
-      "color": "#EDE6DF"
+      "color": "#EDE6DF",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100273287861",
-      "name": "大卫扫把可旋转扫水器魔术扫把浴室刮水器可伸缩一体杆刮地板神器F13",
+      "name": "大卫扫把可旋转扫水器魔术扫把浴室刮水器扫帚杆刮地板神器F13",
       "sku": "100273287861",
       "rank": 1,
       "reviews_raw": "10000人评论",
@@ -63,7 +65,8 @@
           "https://item.jd.com/100273287861.html"
         ]
       },
-      "color": "#F8E701"
+      "color": "#F8E701",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100330127464",
@@ -83,13 +86,14 @@
           "https://item.jd.com/100330127464.html"
         ]
       },
-      "color": "#E6E6E8"
+      "color": "#E6E6E8",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100264350608",
       "name": "京东京造高硼硅耐热玻璃保鲜盒微波炉饭盒便当盒家用饭盒【六件套】",
       "sku": "100264350608",
-      "rank": 1,
+      "rank": 2,
       "reviews_raw": "20000人评论",
       "reviews_text": "2万条",
       "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/507617/16/4662/2690955/6a85b7dbFa4bfe5f9/008349b49b39b26c.png",
@@ -103,7 +107,302 @@
           "https://item.jd.com/100264350608.html"
         ]
       },
-      "color": "#C6D5D8"
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100415324262",
+      "name": "乐亲（Lechin）喂养台收纳柜宝宝儿童玩具置物架婴儿用品落地储物柜整理箱 Pro款",
+      "sku": "100415324262",
+      "rank": 1,
+      "reviews_raw": "1000人评论",
+      "reviews_text": "1000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/522194/27/4798/69319/6aa3c597F1f6932b6/00833203202daa1e.jpg",
+      "source_label": "玩具箱收纳",
+      "source_title": "玩具箱收纳排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620907a497315e9e072.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100415324262.html"
+        ]
+      },
+      "color": "#EAE9E5",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100023705851",
+      "name": "京东京造衣柜收纳箱柜子储物柜卧室家用儿童简易 64面宽4层",
+      "sku": "100023705851",
+      "rank": 1,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/577583/11/302/133503/6aec2e00F11a83c18/00834c84c87ac688.jpg",
+      "source_label": "衣物储物收纳箱",
+      "source_title": "衣物储物收纳箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16202521ea75081f1019.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100023705851.html"
+        ]
+      },
+      "color": "#E2E1DF",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "10222285551421",
+      "name": "BANANAHOME加厚衣服被子收纳箱布艺衣物百纳整理折叠箱衣柜大容量家用 66L（50*40*33cm）精纺质感 标准尺寸",
+      "sku": "10222285551421",
+      "rank": 3,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/498958/30/15233/97016/6a8d6799F0ced34a4/0083320320b83cdd.jpg",
+      "source_label": "布衣收纳箱",
+      "source_title": "布衣收纳箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620174957b36b8b340f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/10222285551421.html"
+        ]
+      },
+      "color": "#F1EBDB",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100240778783",
+      "name": "悦卡汽车后备箱收纳箱折叠车载收纳盒整理箱高端双层斜面款-黑金大号",
+      "sku": "100240778783",
+      "rank": 2,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/540475/20/12549/45162/6ad6dcbdFcbd686ac/0083320320160fb1.jpg",
+      "source_label": "汽车收纳箱储物箱",
+      "source_title": "汽车收纳箱储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_67284a1b39a4193aa949.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100240778783.html"
+        ]
+      },
+      "color": "#464040",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100362686636",
+      "name": "索邦扫把簸箕套装家用不粘头发梳齿防缠发扫帚两件套大扫除神器笤帚",
+      "sku": "100362686636",
+      "rank": 1,
+      "reviews_raw": "500000人评论",
+      "reviews_text": "50万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/557722/30/1391/103984/6adff3e3F0c02cae5/0083320320ede316.png",
+      "source_label": "清洁工具套装",
+      "source_title": "清洁工具套装排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1590190253e39cea86da2.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100362686636.html"
+        ]
+      },
+      "color": "#032EB1",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100145805946",
+      "name": "索邦40cm魔术扫把软胶水刮水扫把刮地板刮水神器浴室卫生间扫头发扫地",
+      "sku": "100145805946",
+      "rank": 3,
+      "reviews_raw": "500000人评论",
+      "reviews_text": "50万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/379321/39/17558/256402/695b8801Ff70fe622/9134db952797273c.jpg",
+      "source_label": "笤帚扫把",
+      "source_title": "笤帚扫把排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_15901ed011dcd874a1228.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100145805946.html"
+        ]
+      },
+      "color": "#042FB1",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "10169633386294",
+      "name": "家用扫把簸箕加厚撮箕单个软毛扫把笤帚扫地扫帚加密梳齿簸箕神器 【加密梳齿】单个簸箕",
+      "sku": "10169633386294",
+      "rank": 1,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/541368/7/12199/642707/6ad71a77Fc103b24b/0935320320107c17.png",
+      "source_label": "簸箕畚箕",
+      "source_title": "簸箕畚箕排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_159012f08a3aba4c1948f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/10169633386294.html"
+        ]
+      },
+      "color": "#D5D7CC",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100174345197",
+      "name": "Little seal日本魔术扫把刮水拖地两用硅胶卫生间浴室大号地板刮拖把扫水神器",
+      "sku": "100174345197",
+      "rank": 9,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/488710/19/15958/146170/6a7eccfaFe3ea2bb0/008332032090b7bb.jpg",
+      "source_label": "家用扫帚",
+      "source_title": "家用扫帚品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/15901001f3097cd65e65e.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100174345197.html"
+        ]
+      },
+      "color": "#D4D6D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100022364725",
+      "name": "京东京造一次性保鲜罩套 保鲜膜套袋【食品级】弹力束口大小碗通用300只",
+      "sku": "100022364725",
+      "rank": 2,
+      "reviews_raw": "1000000人评论",
+      "reviews_text": "100万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/500933/18/8371/2685666/6a8411d3Fed1619a5/00834c04c0426529.png",
+      "source_label": "保鲜碗",
+      "source_title": "保鲜碗品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61960105a0225712b85a.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100022364725.html"
+        ]
+      },
+      "color": "#EDE2D9",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100390537388",
+      "name": "GLASSLOCK韩国盖朗 不锈钢保鲜盒5件套316L可微波收纳盒多规格饭盒",
+      "sku": "100390537388",
+      "rank": 1,
+      "reviews_raw": "5000人评论",
+      "reviews_text": "5000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/522096/23/11079/148217/6ab1dde4Fcc0440b4/0083320320a50e14.jpg",
+      "source_label": "大容量保鲜盒",
+      "source_title": "升保鲜盒品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/619622554ac9e2703199.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100390537388.html"
+        ]
+      },
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100276787796",
+      "name": "京东京造琥珀色高硼硅耐热可微波分格保鲜盒学生上班族便当盒三分格1040mL",
+      "sku": "100276787796",
+      "rank": 1,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/513350/4/2281/177065/6a8d1b77F6b999f2d/0083320320080efd.jpg",
+      "source_label": "玻璃收纳盒",
+      "source_title": "玻璃收纳盒排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_6196fc83143a7ff0bbd4.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100276787796.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100323446783",
+      "name": "康宁餐具保鲜盒密封盒饭盒便当碗耐高温无涂层食品级 【600ml无分隔】",
+      "sku": "100323446783",
+      "rank": 4,
+      "reviews_raw": "100人评论",
+      "reviews_text": "100条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/543156/15/14246/177018/6adabc50Fbfd85d68/0083320320be497b.jpg",
+      "source_label": "保鲜盒大容积",
+      "source_title": "保鲜盒大容量品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61967868295aabab5b47.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100323446783.html"
+        ]
+      },
+      "color": "#EEE7E1",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100152679886",
+      "name": "四季沐歌（MICOE）浴室六件套免打孔卫生置物免钉胶毛巾浴巾挂钩马桶刷纸巾盒墙角架",
+      "sku": "100152679886",
+      "rank": 1,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/518879/37/2289/121326/6a991540F80148e3a/0083320320d9e256.jpg",
+      "source_label": "毛巾架置物架套装",
+      "source_title": "顺嘉利毛巾架/置物架排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620c3f7e63c2bd1f9bd.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100152679886.html"
+        ]
+      },
+      "color": "#9C958F",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100231564572",
+      "name": "苏泊尔（SUPOR）保鲜盒玻璃饭盒上班便当盒学生餐盒1100ml奶酪白可微波可进洗碗机",
+      "sku": "100231564572",
+      "rank": 3,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/379513/35/21310/165935/695c7f0eFc01469b9/10828eee91ed1283.jpg",
+      "source_label": "玻璃保鲜箱",
+      "source_title": "玻璃保鲜箱品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/6196a89bee777f28d32b.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100231564572.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100053486864",
@@ -123,7 +422,8 @@
           "https://item.jd.com/100053486864.html"
         ]
       },
-      "color": "#C5B99F"
+      "color": "#C5B99F",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100343594940",
@@ -143,13 +443,14 @@
           "https://item.jd.com/100343594940.html"
         ]
       },
-      "color": "#E9E2DC"
+      "color": "#E9E2DC",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100208835137",
       "name": "独特扫把扫帚簸箕两件套装组合家用新款笤帚扫地神器打扫卫生工具扫把",
       "sku": "100208835137",
-      "rank": 2,
+      "rank": 3,
       "reviews_raw": "20000人评论",
       "reviews_text": "2万条",
       "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/457757/4/1622/129783/6a2b9f7fF2503cb57/008332032038bfe8.jpg",
@@ -163,7 +464,8 @@
           "https://item.jd.com/100208835137.html"
         ]
       },
-      "color": "#A89F9A"
+      "color": "#A89F9A",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100228812765",
@@ -183,16 +485,17 @@
           "https://item.jd.com/100228812765.html"
         ]
       },
-      "color": "#B2B4B6"
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "138535",
       "name": "乐扣乐扣（LOCK&LOCK）塑料密封保鲜盒套装厨房冷冻保鲜储物收纳盒6件套",
       "sku": "138535",
-      "rank": 2,
+      "rank": 3,
       "reviews_raw": "200000人评论",
       "reviews_text": "20万条",
-      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/405739/21/1591/113742/69b914cdF0eaf16d2/0083320320a864a0.jpg",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/576175/14/637/82892/6aebe6b9Fd345d942/0083320320e2052f.jpg",
       "source_label": "保鲜盒6件套",
       "source_title": "保鲜盒6件套排行榜 - 京东",
       "category": "家居日用 · 收纳清洁",
@@ -203,13 +506,308 @@
           "https://item.jd.com/138535.html"
         ]
       },
-      "color": "#DEDEDC"
+      "color": "#DEDEDC",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100392708278",
+      "name": "京东京造衣物收纳箱大号整理箱塑料玩具收纳车载后备箱储物箱透明75L 3只",
+      "sku": "100392708278",
+      "rank": 2,
+      "reviews_raw": "2000人评论",
+      "reviews_text": "2000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/534822/3/1624/376454/6ab3a52cF2e5c453a/0083400400a91c46.png",
+      "source_label": "玩具箱收纳",
+      "source_title": "玩具箱收纳排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620907a497315e9e072.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100392708278.html"
+        ]
+      },
+      "color": "#DCE6E8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100023705853",
+      "name": "京东京造衣柜收纳箱柜子储物柜卧室家用儿童简易 49面宽4层",
+      "sku": "100023705853",
+      "rank": 4,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/463298/21/7250/110711/6a3ca3edFc6eebbb4/0083320320040ef5.jpg",
+      "source_label": "衣物储物收纳箱",
+      "source_title": "衣物储物收纳箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16202521ea75081f1019.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100023705853.html"
+        ]
+      },
+      "color": "#DBD2C9",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "10205575906831",
+      "name": "晟旎尚品收纳筐衣柜收纳盒整理分层神器衣服收纳箱储物箱子整理箱 加厚【内置钢架可水洗】 47*28*20cm",
+      "sku": "10205575906831",
+      "rank": 4,
+      "reviews_raw": "50000人评论",
+      "reviews_text": "5万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/442014/24/2878/203964/6a16a381F455f4a21/00835a05a08de014.jpg",
+      "source_label": "布衣收纳箱",
+      "source_title": "布衣收纳箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620174957b36b8b340f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/10205575906831.html"
+        ]
+      },
+      "color": "#C6BDAE",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100011154927",
+      "name": "得力（deli）汽车后备箱收纳箱折叠收纳箱车载储纳箱置物箱家用整理储物箱60L",
+      "sku": "100011154927",
+      "rank": 4,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/362559/13/3814/88548/6915e548F0c7e5b9f/f8696fc0d133f1bb.jpg",
+      "source_label": "汽车收纳箱储物箱",
+      "source_title": "汽车收纳箱储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_67284a1b39a4193aa949.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100011154927.html"
+        ]
+      },
+      "color": "#7C8089",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "5911415",
+      "name": "五月花扫把簸箕套装不粘头笤帚带梳齿扫把簸箕两件套扫帚大扫除",
+      "sku": "5911415",
+      "rank": 2,
+      "reviews_raw": "3000000人评论",
+      "reviews_text": "300万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/536481/36/12265/135440/6acda1d4F6dfcb131/00833203201a8547.jpg",
+      "source_label": "清洁工具套装",
+      "source_title": "清洁工具套装排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1590190253e39cea86da2.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/5911415.html"
+        ]
+      },
+      "color": "#EBEBEB",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100133297183",
+      "name": "姚河竹扫把大号老式马路扫帚庭院户外扫把工厂车间专用笤帚一体五把装",
+      "sku": "100133297183",
+      "rank": 7,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/249072/22/28668/182533/67564a5aFcbdb6d57/9e479adcc25b6baa.jpg",
+      "source_label": "笤帚扫把",
+      "source_title": "笤帚扫把排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_15901ed011dcd874a1228.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100133297183.html"
+        ]
+      },
+      "color": "#425655",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100055755370",
+      "name": "太太乐扫把簸箕套装 家用旋转防风梳齿型笤帚扫地扫把两件套",
+      "sku": "100055755370",
+      "rank": 4,
+      "reviews_raw": "1000000人评论",
+      "reviews_text": "100万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/286589/6/17578/103502/686cddb2Fec834938/3c158c13313aeea3.jpg",
+      "source_label": "簸箕畚箕",
+      "source_title": "簸箕畚箕排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_159012f08a3aba4c1948f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100055755370.html"
+        ]
+      },
+      "color": "#2745F5",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "8895123",
+      "name": "雅高扫把簸箕套装不粘头笤帚带梳齿家用仿猪鬃毛软毛笤帚扫帚",
+      "sku": "8895123",
+      "rank": 10,
+      "reviews_raw": "1000000人评论",
+      "reviews_text": "100万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/403322/23/6803/89510/69b3ab13Feb473f65/0083320320789e06.jpg",
+      "source_label": "家用扫帚",
+      "source_title": "家用扫帚品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/15901001f3097cd65e65e.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/8895123.html"
+        ]
+      },
+      "color": "#E2D5C4",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100110779766",
+      "name": "希乐扣玻璃饭盒上班族带饭可微波炉加热碗密封便当盒保鲜盒 长三隔带包",
+      "sku": "100110779766",
+      "rank": 3,
+      "reviews_raw": "50000人评论",
+      "reviews_text": "5万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/443623/36/5358/154769/6a1a7e41F74807df5/0083320320a6994c.jpg",
+      "source_label": "保鲜碗",
+      "source_title": "保鲜碗品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61960105a0225712b85a.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100110779766.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100189564722",
+      "name": "三四钢316L不锈钢保鲜盒食品级冰箱水果盒冷冻分装1000ml3个装W373512",
+      "sku": "100189564722",
+      "rank": 2,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/429955/14/19607/105655/6a081867Fab8de817/00833203206256ad.jpg",
+      "source_label": "大容量保鲜盒",
+      "source_title": "升保鲜盒品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/619622554ac9e2703199.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100189564722.html"
+        ]
+      },
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100249846257",
+      "name": "京东京造 全玻璃饭盒 保鲜盒微波炉可加热冰箱收纳盒便当盒 无分格1100ml",
+      "sku": "100249846257",
+      "rank": 3,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/415124/29/18278/168861/69dcd52fF2b93a67f/0083320320f5a9c5.jpg",
+      "source_label": "玻璃收纳盒",
+      "source_title": "玻璃收纳盒排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_6196fc83143a7ff0bbd4.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100249846257.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100384061224",
+      "name": "三四钢316L不锈钢保鲜盒食品级冰箱冷冻分装3000ml单个装 373515",
+      "sku": "100384061224",
+      "rank": 7,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/447760/2/15412/89552/6a2ccb59F5de9469a/00833203200f5093.jpg",
+      "source_label": "保鲜盒大容积",
+      "source_title": "保鲜盒大容量品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61967868295aabab5b47.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100384061224.html"
+        ]
+      },
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100125581251",
+      "name": "四季沐歌（MICOE）浴室六件套免打孔卫生间置物架毛巾浴巾挂钩马桶纸巾盒墙角架奶白",
+      "sku": "100125581251",
+      "rank": 2,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/530878/34/13990/70575/6ac5b8e8F25c340ae/0083320320270096.jpg",
+      "source_label": "毛巾架置物架套装",
+      "source_title": "顺嘉利毛巾架/置物架排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620c3f7e63c2bd1f9bd.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100125581251.html"
+        ]
+      },
+      "color": "#C8B7A3",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100212549169",
+      "name": "小熊（Bear）高硼硅玻璃保鲜饭盒可微波炉加热专用餐盒格洗碗机可用 JC012-P04",
+      "sku": "100212549169",
+      "rank": 4,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/554530/24/9755/170383/6aec068eFb52ddce9/0083320320674b42.jpg",
+      "source_label": "玻璃保鲜箱",
+      "source_title": "玻璃保鲜箱品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/6196a89bee777f28d32b.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100212549169.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100193317504",
       "name": "悦卡汽车后备箱收纳箱折叠收纳箱车载收纳盒侧开门隔断分格整理箱85L",
       "sku": "100193317504",
-      "rank": 3,
+      "rank": 6,
       "reviews_raw": "10000人评论",
       "reviews_text": "1万条",
       "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/544526/30/8459/130848/6ad6dcbeF5f469d78/008332032007033d.jpg",
@@ -223,7 +821,8 @@
           "https://item.jd.com/100193317504.html"
         ]
       },
-      "color": "#16171C"
+      "color": "#16171C",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100148256080",
@@ -243,15 +842,16 @@
           "https://item.jd.com/100148256080.html"
         ]
       },
-      "color": "#E9E4DE"
+      "color": "#E9E4DE",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100338998728",
       "name": "瑞丽达扫把簸箕套装扫地扫帚三件套家用扫帚笤帚可折叠加厚三合一垃圾铲",
       "sku": "100338998728",
-      "rank": 3,
-      "reviews_raw": "5000人评论",
-      "reviews_text": "5000条",
+      "rank": 4,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
       "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/454562/18/12536/2933106/6a6ae9aeF20d90750/008356b56b98c8d7.png",
       "source_label": "清洁工具簸箕",
       "source_title": "清洁工具簸箕品牌排行榜 - 十大品牌 - 京东",
@@ -263,7 +863,8 @@
           "https://item.jd.com/100338998728.html"
         ]
       },
-      "color": "#FEFFDF"
+      "color": "#FEFFDF",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100054244782",
@@ -283,13 +884,14 @@
           "https://item.jd.com/100054244782.html"
         ]
       },
-      "color": "#C4C4C4"
+      "color": "#C4C4C4",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "10025897606594",
       "name": "GLASSLOCK钢化玻璃保鲜盒耐热玻璃碗微波炉烤箱专用密封上班族饭盒套装 6件套 A款",
       "sku": "10025897606594",
-      "rank": 3,
+      "rank": 4,
       "reviews_raw": "200人评论",
       "reviews_text": "200条",
       "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/535121/37/9086/171311/6accc3b4F76899d4e/0083320320220dca.jpg",
@@ -303,7 +905,281 @@
           "https://item.jd.com/10025897606594.html"
         ]
       },
-      "color": "#C6D5D8"
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100226909345",
+      "name": "京东京造 【巨能装】收纳箱 可折叠翻盖带轮玩具箱大容量 64*67*40 cm",
+      "sku": "100226909345",
+      "rank": 3,
+      "reviews_raw": "5000人评论",
+      "reviews_text": "5000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/558359/22/4053/2936268/6ae4550dFd3de6db8/00834a64a6fe8965.png",
+      "source_label": "玩具箱收纳",
+      "source_title": "玩具箱收纳排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620907a497315e9e072.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100226909345.html"
+        ]
+      },
+      "color": "#DDD4CF",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100099239436",
+      "name": "京东京造 衣柜收纳箱柜子储物柜卧室家用儿童简易【共用顶盖】64面宽5层",
+      "sku": "100099239436",
+      "rank": 6,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/489537/21/13454/681450/6a759baaFd13b0e91/00835a05a0bb636d.png",
+      "source_label": "衣物储物收纳箱",
+      "source_title": "衣物储物收纳箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16202521ea75081f1019.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100099239436.html"
+        ]
+      },
+      "color": "#9C714A",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "10066759837054",
+      "name": "太力 收纳箱衣服棉被布艺整理箱牛津布玩具储物箱搬家箱折叠 【环保牛津布收纳箱】66L1个装",
+      "sku": "10066759837054",
+      "rank": 5,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/353920/36/9836/80407/6913feabF0a10854f/89bc9e6275570278.jpg",
+      "source_label": "布衣收纳箱",
+      "source_title": "布衣收纳箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620174957b36b8b340f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/10066759837054.html"
+        ]
+      },
+      "color": "#DBD7D4",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100045849786",
+      "name": "京东京造汽车后备箱收纳箱车载收纳盒储物箱尾箱整理盒 可折叠 皮革款 60L",
+      "sku": "100045849786",
+      "rank": 5,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/554118/3/8224/232572/6ae93f43F0aa6e4d9/00384e64e65d11ed.png",
+      "source_label": "汽车收纳箱储物箱",
+      "source_title": "汽车收纳箱储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_67284a1b39a4193aa949.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100045849786.html"
+        ]
+      },
+      "color": "#2B2B2B",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100094921785",
+      "name": "大卫可旋转扫水器魔术扫把浴室刮水可伸缩一体杆刮地板神器F12",
+      "sku": "100094921785",
+      "rank": 4,
+      "reviews_raw": "500000人评论",
+      "reviews_text": "50万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/401708/23/312/64828/69a7ffe4F379428cc/00833203201225a5.jpg",
+      "source_label": "清洁工具套装",
+      "source_title": "清洁工具套装排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1590190253e39cea86da2.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100094921785.html"
+        ]
+      },
+      "color": "#B09A82",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100238200914",
+      "name": "佳帮手魔术扫把刮地板刮水神器扫刮擦升级版扫把地刮神器50厘米凸点刮头",
+      "sku": "100238200914",
+      "rank": 9,
+      "reviews_raw": "50000人评论",
+      "reviews_text": "5万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/486375/27/13724/222113/6a75d694F407613af/00834e64e6e6165e.jpg",
+      "source_label": "笤帚扫把",
+      "source_title": "笤帚扫把排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_15901ed011dcd874a1228.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100238200914.html"
+        ]
+      },
+      "color": "#F8F0DD",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100016509578",
+      "name": "佳帮手家用扫把簸箕套装扫地扫帚两件套折叠旋转笤帚防风梳齿型畚箕",
+      "sku": "100016509578",
+      "rank": 5,
+      "reviews_raw": "1000000人评论",
+      "reviews_text": "100万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/521752/30/10642/63162/6aaf9469F96226264/0083320320b81f07.jpg",
+      "source_label": "簸箕畚箕",
+      "source_title": "簸箕畚箕排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_159012f08a3aba4c1948f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100016509578.html"
+        ]
+      },
+      "color": "#D2CEC3",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100270565635",
+      "name": "康宁餐具EKCO琥珀色玻璃加高保鲜盒2000ml",
+      "sku": "100270565635",
+      "rank": 4,
+      "reviews_raw": "2000人评论",
+      "reviews_text": "2000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/434396/36/15457/158209/6a0d104cF09f4e981/0083320320a92a51.jpg",
+      "source_label": "保鲜碗",
+      "source_title": "保鲜碗品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61960105a0225712b85a.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100270565635.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100098980370",
+      "name": "佳帮手冰箱保鲜盒食品级抗菌收纳盒专用密封水果蔬菜冷冻盒1000ml3只装",
+      "sku": "100098980370",
+      "rank": 4,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/535626/18/13015/139221/6ae0478dFb70e6cfa/00833203201be790.png",
+      "source_label": "大容量保鲜盒",
+      "source_title": "升保鲜盒品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/619622554ac9e2703199.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100098980370.html"
+        ]
+      },
+      "color": "#DADEDF",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100187269134",
+      "name": "小熊（Bear）食品级咖啡豆密封瓶咖啡粉便携储物罐1100ml  CX-JW031-P02",
+      "sku": "100187269134",
+      "rank": 4,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/576782/35/373/166028/6aec0681F59876797/0083320320bae8a3.jpg",
+      "source_label": "玻璃收纳盒",
+      "source_title": "玻璃收纳盒排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_6196fc83143a7ff0bbd4.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100187269134.html"
+        ]
+      },
+      "color": "#B4B0A7",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "237922",
+      "name": "GLASSLOCK进口钢化玻璃保鲜盒上班族带饭微波炉加热便当盒大容量饭盒1100ml",
+      "sku": "237922",
+      "rank": 8,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/383705/20/3467/175726/694653bdF4f702bf3/575483c6e80f94c0.jpg",
+      "source_label": "保鲜盒大容积",
+      "source_title": "保鲜盒大容量品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61967868295aabab5b47.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/237922.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100384172578",
+      "name": "四季沐歌（MICOE）毛巾架卫生间置物架304不锈钢浴室置物折叠浴巾架免打孔挂件套装",
+      "sku": "100384172578",
+      "rank": 3,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/479350/33/2933/136414/6a51e62aF627a3e71/00833203208cfc68.jpg",
+      "source_label": "毛巾架置物架套装",
+      "source_title": "顺嘉利毛巾架/置物架排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620c3f7e63c2bd1f9bd.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100384172578.html"
+        ]
+      },
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100137126340",
+      "name": "希乐扣玻璃饭盒上班族带饭 微波炉可加热餐盒保鲜盒 带餐包",
+      "sku": "100137126340",
+      "rank": 5,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/382857/36/5755/169476/694a2ec1F6db344a2/d59f3b47d051d40b.jpg",
+      "source_label": "玻璃保鲜箱",
+      "source_title": "玻璃保鲜箱品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/6196a89bee777f28d32b.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100137126340.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100282201632",
@@ -312,7 +1188,7 @@
       "rank": 4,
       "reviews_raw": "20000人评论",
       "reviews_text": "2万条",
-      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/484140/19/13571/126361/6a7308d8F06f09f25/0083320320edca1a.jpg",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/574852/18/2453/197807/6aed9ea7Fd3fb3bee/0083320320c13658.jpg",
       "source_label": "收纳折叠整理箱",
       "source_title": "收纳折叠整理箱排行榜 - 京东",
       "category": "家居日用 · 收纳清洁",
@@ -323,7 +1199,8 @@
           "https://item.jd.com/100282201632.html"
         ]
       },
-      "color": "#F1E8E1"
+      "color": "#F1E8E1",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100200049384",
@@ -343,7 +1220,8 @@
           "https://item.jd.com/100200049384.html"
         ]
       },
-      "color": "#404143"
+      "color": "#404143",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "10223693917245",
@@ -363,7 +1241,8 @@
           "https://item.jd.com/10223693917245.html"
         ]
       },
-      "color": "#D6D8DA"
+      "color": "#D6D8DA",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100042591218",
@@ -383,15 +1262,16 @@
           "https://item.jd.com/100042591218.html"
         ]
       },
-      "color": "#B2B4B6"
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100327208050",
       "name": "GLASSLOCK饭盒进口钢化玻璃微波炉烤箱耐高温便当盒冰箱收纳盒密封保鲜盒",
       "sku": "100327208050",
-      "rank": 4,
-      "reviews_raw": "20000人评论",
-      "reviews_text": "2万条",
+      "rank": 5,
+      "reviews_raw": "2000人评论",
+      "reviews_text": "2000条",
       "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/398628/23/5713/57806/69a14202Ffbb49330/0083320320c023ef.jpg",
       "source_label": "保鲜盒6件套",
       "source_title": "保鲜盒6件套排行榜 - 京东",
@@ -403,13 +1283,266 @@
           "https://item.jd.com/100327208050.html"
         ]
       },
-      "color": "#C6D5D8"
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100006851680",
+      "name": "禧天龙抽屉式收纳柜床头柜置物柜玩具储物柜夹缝柜五斗柜收纳箱 五层",
+      "sku": "100006851680",
+      "rank": 4,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/454738/12/5624/112805/6a2bd316F57f154a0/00833203200e951f.jpg",
+      "source_label": "玩具箱收纳",
+      "source_title": "玩具箱收纳排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620907a497315e9e072.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100006851680.html"
+        ]
+      },
+      "color": "#1D1D15",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100244520356",
+      "name": "佳帮手袜子收纳盒内衣内裤收纳神器贴身衣物分格收纳箱抽屉衣柜整理盒",
+      "sku": "100244520356",
+      "rank": 7,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/529267/20/8409/96732/6ab7ca55Faa7d3a10/00833203204928a8.jpg",
+      "source_label": "衣物储物收纳箱",
+      "source_title": "衣物储物收纳箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16202521ea75081f1019.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100244520356.html"
+        ]
+      },
+      "color": "#987C67",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "10221231506053",
+      "name": "太力 收纳箱衣服棉被布艺整理箱牛津布玩具储物箱搬家箱折叠 【环保牛津布收纳箱】100L1个装",
+      "sku": "10221231506053",
+      "rank": 8,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/353920/36/9836/80407/6913feabF0a10854f/89bc9e6275570278.jpg",
+      "source_label": "布衣收纳箱",
+      "source_title": "布衣收纳箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620174957b36b8b340f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/10221231506053.html"
+        ]
+      },
+      "color": "#DBD7D4",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100028659190",
+      "name": "车丽友 汽车后备箱收纳箱车载储物箱车内置物安全自驾野营户外整理箱",
+      "sku": "100028659190",
+      "rank": 7,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/194254/9/46556/129316/66593078F7ce6c70e/d052f76fb406674f.jpg",
+      "source_label": "汽车收纳箱储物箱",
+      "source_title": "汽车收纳箱储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_67284a1b39a4193aa949.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100028659190.html"
+        ]
+      },
+      "color": "#464445",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100133629464",
+      "name": "佳帮手扫帚两件套扫地扫帚套装家政专用扫把簸箕套装扫地神器不易漏灰",
+      "sku": "100133629464",
+      "rank": 5,
+      "reviews_raw": "50000人评论",
+      "reviews_text": "5万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/392487/30/4167/376483/697984f4F7174702d/00835dc5dce11d81.jpg",
+      "source_label": "清洁工具套装",
+      "source_title": "清洁工具套装排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1590190253e39cea86da2.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100133629464.html"
+        ]
+      },
+      "color": "#392B22",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100063017780",
+      "name": "佳帮手扫把簸箕套装扫地扫帚两件套家用软毛笤帚梳齿型防风畚箕",
+      "sku": "100063017780",
+      "rank": 6,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/482060/23/10473/88420/6a671905F7393fdc4/00833203203a65ea.jpg",
+      "source_label": "簸箕畚箕",
+      "source_title": "簸箕畚箕排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_159012f08a3aba4c1948f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100063017780.html"
+        ]
+      },
+      "color": "#D7D8DC",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100040439575",
+      "name": "佳帮手大容量饺子盒多功能食品接触级防粘底冰箱冷冻保鲜水饺馄饨盒4层",
+      "sku": "100040439575",
+      "rank": 5,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/345051/13/25706/157270/6912d9f8F1e2a0ebf/340f7fb25f84bebd.jpg",
+      "source_label": "保鲜碗",
+      "source_title": "保鲜碗品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61960105a0225712b85a.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100040439575.html"
+        ]
+      },
+      "color": "#C2B5AC",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "8171434",
+      "name": "乐扣乐扣耐热玻璃保鲜盒大容量分格饭盒微波炉便当盒餐盒密封碗1L三分隔",
+      "sku": "8171434",
+      "rank": 5,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/43381/23/17487/631634/62d4c07cE81277563/a2db95d997d5f5c4.jpg",
+      "source_label": "大容量保鲜盒",
+      "source_title": "升保鲜盒品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/619622554ac9e2703199.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/8171434.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100024421555",
+      "name": "希乐扣大容量玻璃保鲜盒微波炉密封罐猪油罐泡菜泡椒凤爪腌菜收纳盒2.6L",
+      "sku": "100024421555",
+      "rank": 2,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/481187/24/12581/101846/6a685bd7F15968e04/0083320320d8b4ac.jpg",
+      "source_label": "玻璃收纳盒",
+      "source_title": "玻璃收纳盒排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_6196fc83143a7ff0bbd4.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100024421555.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100108780725",
+      "name": "京东京造高硼硅耐热玻璃保鲜盒便当盒饭盒冰箱保鲜食品接触级深长1800ML",
+      "sku": "100108780725",
+      "rank": 9,
+      "reviews_raw": "50000人评论",
+      "reviews_text": "5万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/520287/34/16661/98207/6abb10aeFf47e34a0/008332032028434f.jpg",
+      "source_label": "保鲜盒大容积",
+      "source_title": "保鲜盒大容量品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61967868295aabab5b47.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100108780725.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100155099026",
+      "name": "四季沐歌（MICOE）浴室置物架卫生间六件套免打孔免钉胶毛巾浴巾挂钩纸巾盒墙角架",
+      "sku": "100155099026",
+      "rank": 4,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/542565/24/1754/96159/6ac5b909Fc8f04e7d/008332032048acc8.jpg",
+      "source_label": "毛巾架置物架套装",
+      "source_title": "顺嘉利毛巾架/置物架排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620c3f7e63c2bd1f9bd.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100155099026.html"
+        ]
+      },
+      "color": "#CAC6BB",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100293397940",
+      "name": "GLASSLOCK保鲜盒进口饭盒耐高温上班族学生饭盒冷冻盒密封储物带盖收纳盒",
+      "sku": "100293397940",
+      "rank": 7,
+      "reviews_raw": "5000人评论",
+      "reviews_text": "5000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/343987/5/16984/101845/68fc779fFb4e2b1ed/28636958add24ca6.jpg",
+      "source_label": "玻璃保鲜箱",
+      "source_title": "玻璃保鲜箱品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/6196a89bee777f28d32b.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100293397940.html"
+        ]
+      },
+      "color": "#D3DEE4",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100222339670",
       "name": "维简户外露营收纳箱 后备箱暑假期出游旅行可折叠储物箱整理箱大容量",
       "sku": "100222339670",
-      "rank": 5,
+      "rank": 3,
       "reviews_raw": "10000人评论",
       "reviews_text": "1万条",
       "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/544859/2/12111/216107/6adac99bF7acadc8b/0083320320c80f99.jpg",
@@ -423,7 +1556,8 @@
           "https://item.jd.com/100222339670.html"
         ]
       },
-      "color": "#857F71"
+      "color": "#857F71",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100279402096",
@@ -443,15 +1577,16 @@
           "https://item.jd.com/100279402096.html"
         ]
       },
-      "color": "#CDBBAF"
+      "color": "#CDBBAF",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "10200903887031",
       "name": "SUPILERS刮水器魔术扫把刮水拖把浴室地板落地玻璃清洁刮水神器多用途清洁 硅胶刮水器【35cm刮头】可伸缩杆",
       "sku": "10200903887031",
-      "rank": 5,
-      "reviews_raw": "2000人评论",
-      "reviews_text": "2000条",
+      "rank": 6,
+      "reviews_raw": "5000人评论",
+      "reviews_text": "5000条",
       "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/356769/19/10817/105585/692080f6F0437c80b/a3379f3392dd7084.jpg",
       "source_label": "清洁工具簸箕",
       "source_title": "清洁工具簸箕品牌排行榜 - 十大品牌 - 京东",
@@ -463,7 +1598,8 @@
           "https://item.jd.com/10200903887031.html"
         ]
       },
-      "color": "#C6D5D8"
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100012600868",
@@ -483,13 +1619,14 @@
           "https://item.jd.com/100012600868.html"
         ]
       },
-      "color": "#686F79"
+      "color": "#686F79",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "10151864952389",
       "name": "乐扣乐扣耐热玻璃保鲜盒大容量微波炉饭盒密封碗零食水果盒冰箱储物盒 六件套【礼盒装】",
       "sku": "10151864952389",
-      "rank": 5,
+      "rank": 6,
       "reviews_raw": "20000人评论",
       "reviews_text": "2万条",
       "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/274068/18/28169/109667/680f2f0eFc038f8ef/69913781be1b339b.jpg",
@@ -503,13 +1640,245 @@
           "https://item.jd.com/10151864952389.html"
         ]
       },
-      "color": "#C6D5D8"
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100249717651",
+      "name": "京东京造衣物收纳箱大号整理箱塑料玩具收纳车载后备箱储物箱65L 灰色",
+      "sku": "100249717651",
+      "rank": 5,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/552430/13/9828/140113/6ae9d698Fe252b5d4/00833303309b5819.png",
+      "source_label": "玩具箱收纳",
+      "source_title": "玩具箱收纳排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620907a497315e9e072.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100249717651.html"
+        ]
+      },
+      "color": "#8A8A8A",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100066329348",
+      "name": "禧天龙免安装可折叠收纳柜磁吸储物柜床头柜收纳箱带万向轮 四层74面宽",
+      "sku": "100066329348",
+      "rank": 10,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/278845/32/22037/101203/6801c8b7F522d8ded/ba9b19f7fb7d606b.jpg",
+      "source_label": "衣物储物收纳箱",
+      "source_title": "衣物储物收纳箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16202521ea75081f1019.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100066329348.html"
+        ]
+      },
+      "color": "#F0ECE1",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "10168121856759",
+      "name": "京东物流 牛津布可折叠布艺衣服被子玩具收纳箱宿舍家用大容量 双窗 米色 66L（50*40*33cm）",
+      "sku": "10168121856759",
+      "rank": 9,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t20261022/210234/38/43378/345264/68f8ae94Fc83e5734/5d30d6c43972e80b.png",
+      "source_label": "布衣收纳箱",
+      "source_title": "布衣收纳箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620174957b36b8b340f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/10168121856759.html"
+        ]
+      },
+      "color": "#E6DCC8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100058426464",
+      "name": "探险者（TAN XIAN ZHE）露营收纳箱户外折叠车载后备箱野营汽车整理箱木盖储物箱子",
+      "sku": "100058426464",
+      "rank": 8,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/346618/18/11348/145307/68e86ea1F793ea9e1/067794b6d8b25714.jpg",
+      "source_label": "汽车收纳箱储物箱",
+      "source_title": "汽车收纳箱储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_67284a1b39a4193aa949.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100058426464.html"
+        ]
+      },
+      "color": "#F6EA48",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100064976042",
+      "name": "大卫扫把簸箕套装伸缩梳齿套扫加大扫笤大梳齿软毛不粘头发F10",
+      "sku": "100064976042",
+      "rank": 6,
+      "reviews_raw": "500000人评论",
+      "reviews_text": "50万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/556817/6/5290/180942/6ae5aeaaFe79d06cf/00835a05a04ed74e.jpg",
+      "source_label": "清洁工具套装",
+      "source_title": "清洁工具套装排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1590190253e39cea86da2.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100064976042.html"
+        ]
+      },
+      "color": "#BEBEC8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100023991524",
+      "name": "大卫扫把簸箕套装巨能装加密大梳齿软毛磨尖工艺扫地笤帚畚箕F2",
+      "sku": "100023991524",
+      "rank": 7,
+      "reviews_raw": "500000人评论",
+      "reviews_text": "50万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/401050/13/3065/139826/69a7ffe3F55a27216/0083320320593d30.jpg",
+      "source_label": "簸箕畚箕",
+      "source_title": "簸箕畚箕排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_159012f08a3aba4c1948f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100023991524.html"
+        ]
+      },
+      "color": "#EAEBE5",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100269651730",
+      "name": "泰福高（TAFUCO）饺子盒冰箱分装收纳盒可冷藏小龙虾盘316L不锈钢3.2L保鲜盒T5289",
+      "sku": "100269651730",
+      "rank": 6,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/562413/39/5997/177798/6aebf046F20b26cf2/008332032084e80c.jpg",
+      "source_label": "保鲜碗",
+      "source_title": "保鲜碗品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61960105a0225712b85a.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100269651730.html"
+        ]
+      },
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100054002024",
+      "name": "炊大皇 多功能饺子盒3层1盖加大收纳盒冰箱保鲜盒食品级冷冻水饺馄饨盒",
+      "sku": "100054002024",
+      "rank": 6,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/556159/3/10778/192264/6aeff065Fe8fc1aa2/00833203205c376e.jpg",
+      "source_label": "大容量保鲜盒",
+      "source_title": "升保鲜盒品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/619622554ac9e2703199.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100054002024.html"
+        ]
+      },
+      "color": "#F3D922",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100287477804",
+      "name": "厨方案调料盒容器调味罐组合套装厨房用品盐罐调料瓶全套玻璃收纳5件套",
+      "sku": "100287477804",
+      "rank": 5,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/517447/10/9981/142140/6aa4e88eF76f965b7/0083320320800f2e.png",
+      "source_label": "玻璃收纳盒",
+      "source_title": "玻璃收纳盒排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_6196fc83143a7ff0bbd4.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100287477804.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100152679860",
+      "name": "四季沐歌（MICOE）卫生间毛巾架拖鞋架单杆免打孔浴室挂件浴巾架置物架厕所卫浴壁挂",
+      "sku": "100152679860",
+      "rank": 5,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/540059/22/4511/51509/6ac5b900F3b0654b8/0083320320f11f73.jpg",
+      "source_label": "毛巾架置物架套装",
+      "source_title": "顺嘉利毛巾架/置物架排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620c3f7e63c2bd1f9bd.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100152679860.html"
+        ]
+      },
+      "color": "#CAC1B8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100053275622",
+      "name": "创得耐热玻璃保鲜盒微波炉饭盒冰箱收纳泡椒泡菜腌菜密封罐 3000ml",
+      "sku": "100053275622",
+      "rank": 8,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/140837/4/34055/114374/647449f4F49990b56/06c78471e3e69808.jpg",
+      "source_label": "玻璃保鲜箱",
+      "source_title": "玻璃保鲜箱品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/6196a89bee777f28d32b.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100053275622.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100015603844",
       "name": "悦卡后备箱收纳箱车载储物箱置物箱汽车可折叠户外露营收纳箱75L黑灰",
       "sku": "100015603844",
-      "rank": 6,
+      "rank": 8,
       "reviews_raw": "200000人评论",
       "reviews_text": "20万条",
       "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/548648/24/3458/63061/6ad6dcbeFb5eec885/0083320320788025.jpg",
@@ -523,7 +1892,8 @@
           "https://item.jd.com/100015603844.html"
         ]
       },
-      "color": "#3A3A3C"
+      "color": "#3A3A3C",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "10096609502707",
@@ -543,7 +1913,8 @@
           "https://item.jd.com/10096609502707.html"
         ]
       },
-      "color": "#E8DFD0"
+      "color": "#E8DFD0",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "10215856248218",
@@ -563,7 +1934,8 @@
           "https://item.jd.com/10215856248218.html"
         ]
       },
-      "color": "#866030"
+      "color": "#866030",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100332535740",
@@ -583,7 +1955,218 @@
           "https://item.jd.com/100332535740.html"
         ]
       },
-      "color": "#B2B4B6"
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "768912",
+      "name": "乐扣乐扣（LOCK&LOCK）耐热玻璃保鲜盒微波炉饭盒便当盒学生水果餐盒6件套洗碗机可用",
+      "sku": "768912",
+      "rank": 1,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/575862/24/1712/106630/6aed8e64F5c547028/008332032055772c.jpg",
+      "source_label": "保鲜盒6件套",
+      "source_title": "保鲜盒6件套排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_6196596257ab673b80dc.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/768912.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100333216890",
+      "name": "京东京造衣物收纳箱大号整理箱塑料玩具收纳车载后备箱储物箱透明20L",
+      "sku": "100333216890",
+      "rank": 6,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/517703/25/11554/63650/6aaa3a75F1f0ed037/0083320320245e7d.jpg",
+      "source_label": "玩具箱收纳",
+      "source_title": "玩具箱收纳排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620907a497315e9e072.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100333216890.html"
+        ]
+      },
+      "color": "#DCE6E8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100020444740",
+      "name": "3W Auto-life汽车用品后备箱可折叠收纳箱车载储物箱子整理箱灰白色中号定制",
+      "sku": "100020444740",
+      "rank": 9,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/158515/35/16483/98837/606e77daE409762fe/b3075c04afe1e41c.jpg",
+      "source_label": "汽车收纳箱储物箱",
+      "source_title": "汽车收纳箱储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_67284a1b39a4193aa949.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100020444740.html"
+        ]
+      },
+      "color": "#F2F2F0",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100155351064",
+      "name": "佳帮手30cm大扫把簸箕套装家用扫地扫帚两件套旋转笤帚梳齿型畚箕",
+      "sku": "100155351064",
+      "rank": 7,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/569488/23/4552/132550/6aed9b1aFc75a1cd0/0083320320cd4599.jpg",
+      "source_label": "清洁工具套装",
+      "source_title": "清洁工具套装排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1590190253e39cea86da2.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100155351064.html"
+        ]
+      },
+      "color": "#343434",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100043008929",
+      "name": "佳帮手折叠扫把簸箕套装扫地扫帚两件套家用旋转笤帚防风梳齿型畚箕",
+      "sku": "100043008929",
+      "rank": 8,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/526174/40/9166/99665/6ab2587eF1e78964c/0083320320cf2129.jpg",
+      "source_label": "簸箕畚箕",
+      "source_title": "簸箕畚箕排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_159012f08a3aba4c1948f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100043008929.html"
+        ]
+      },
+      "color": "#907F75",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100059347478",
+      "name": "维艾（Newair）保鲜盒316不锈钢食品级饭盒冰箱盒子密封碗家用水果盒便当盒",
+      "sku": "100059347478",
+      "rank": 7,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/130212/5/36706/166914/64bf4566F6cf0c6aa/d96350f23902faa4.jpg",
+      "source_label": "保鲜碗",
+      "source_title": "保鲜碗品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61960105a0225712b85a.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100059347478.html"
+        ]
+      },
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100160068163",
+      "name": "家の物语日本冰箱收纳盒食品级专用保鲜盒大容量泡菜密封盒冷冻水果蔬菜盒",
+      "sku": "100160068163",
+      "rank": 7,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/294531/15/22220/367507/68a579bcF4cc8702a/a04bb5de331074d5.jpg",
+      "source_label": "大容量保鲜盒",
+      "source_title": "升保鲜盒品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/619622554ac9e2703199.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100160068163.html"
+        ]
+      },
+      "color": "#86AA30",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100004502342",
+      "name": "拜杰玻璃密封罐储物瓶泡酒容器玻璃瓶子蜂蜜瓶罐头瓶泡菜坛子1500ml*2",
+      "sku": "100004502342",
+      "rank": 6,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/304712/35/27240/112400/689c2670Fc32b051a/5687ca615e5e98fb.jpg",
+      "source_label": "玻璃收纳盒",
+      "source_title": "玻璃收纳盒排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_6196fc83143a7ff0bbd4.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100004502342.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100241058114",
+      "name": "京东京造加厚304不锈钢毛巾架免打孔卫生间浴巾架浴室置物架毛巾挂架折叠",
+      "sku": "100241058114",
+      "rank": 6,
+      "reviews_raw": "5000人评论",
+      "reviews_text": "5000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/346227/30/26438/135900/6915bb01F7dbeeb92/3caebc84b2bd6ece.png",
+      "source_label": "毛巾架置物架套装",
+      "source_title": "顺嘉利毛巾架/置物架排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620c3f7e63c2bd1f9bd.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100241058114.html"
+        ]
+      },
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100233500757",
+      "name": "FGA富光玻璃饭盒便当盒上班族保鲜盒微波炉专用碗带盖分隔套装收纳盒",
+      "sku": "100233500757",
+      "rank": 9,
+      "reviews_raw": "5000人评论",
+      "reviews_text": "5000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/555471/10/10240/216558/6aeeb911F481f98fb/008332032050f2f1.jpg",
+      "source_label": "玻璃保鲜箱",
+      "source_title": "玻璃保鲜箱品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/6196a89bee777f28d32b.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100233500757.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100211502757",
@@ -603,7 +2186,8 @@
           "https://item.jd.com/100211502757.html"
         ]
       },
-      "color": "#DCE6E8"
+      "color": "#DCE6E8",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100193951735",
@@ -623,7 +2207,8 @@
           "https://item.jd.com/100193951735.html"
         ]
       },
-      "color": "#17181C"
+      "color": "#17181C",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "10147666056509",
@@ -643,7 +2228,8 @@
           "https://item.jd.com/10147666056509.html"
         ]
       },
-      "color": "#B2B4B6"
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "16920043559",
@@ -663,16 +2249,206 @@
           "https://item.jd.com/16920043559.html"
         ]
       },
-      "color": "#D9DADC"
+      "color": "#D9DADC",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100249718667",
+      "name": "京东京造塑料衣服收纳箱大号被子玩具整理箱车载储物箱36L 透明",
+      "sku": "100249718667",
+      "rank": 7,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/459456/15/12851/70658/6a5d88b2F5438ef9d/0083320320393f44.jpg",
+      "source_label": "玩具箱收纳",
+      "source_title": "玩具箱收纳排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620907a497315e9e072.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100249718667.html"
+        ]
+      },
+      "color": "#DCE6E8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100020816152",
+      "name": "得力（deli）大号折叠车载后备箱收纳箱70L多功能尾箱整理箱储物箱家用衣服",
+      "sku": "100020816152",
+      "rank": 10,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/294407/9/16643/62714/6915e52dF2abd5fce/1f24c11a657c3f06.jpg",
+      "source_label": "汽车收纳箱储物箱",
+      "source_title": "汽车收纳箱储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_67284a1b39a4193aa949.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100020816152.html"
+        ]
+      },
+      "color": "#EBE3E0",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100146472820",
+      "name": "美丽雅扫把簸箕套装扫地扫帚两件套家用撮箕不粘头发软毛神器笤帚垃圾铲",
+      "sku": "100146472820",
+      "rank": 8,
+      "reviews_raw": "500000人评论",
+      "reviews_text": "50万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/530563/10/3447/129660/6aaf57f7Ffea479dd/0083320320afe03e.jpg",
+      "source_label": "清洁工具套装",
+      "source_title": "清洁工具套装排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1590190253e39cea86da2.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100146472820.html"
+        ]
+      },
+      "color": "#C2C2C2",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100123126945",
+      "name": "索邦扫把簸箕套装家用扫地扫帚两件套带梳齿磨尖软毛工艺笤帚畚箕T27A",
+      "sku": "100123126945",
+      "rank": 9,
+      "reviews_raw": "500000人评论",
+      "reviews_text": "50万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/365212/16/8172/106288/692c0588Fd926cbfb/e3695ab9d16a6c99.jpg",
+      "source_label": "簸箕畚箕",
+      "source_title": "簸箕畚箕排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_159012f08a3aba4c1948f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100123126945.html"
+        ]
+      },
+      "color": "#565864",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100166643570",
+      "name": "炊大皇一次性饭盒 餐盒便当打包碗盒食品级保鲜盒可微波长方形700ml20只",
+      "sku": "100166643570",
+      "rank": 8,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/571509/16/4263/193110/6aefef90F5a819120/0083320320a93975.jpg",
+      "source_label": "保鲜碗",
+      "source_title": "保鲜碗品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61960105a0225712b85a.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100166643570.html"
+        ]
+      },
+      "color": "#F2EBD9",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100008825655",
+      "name": "禧天龙冰箱保鲜盒食品级冰箱收纳盒塑料密封盒蔬菜水果冷冻盒 7.3L 3个",
+      "sku": "100008825655",
+      "rank": 10,
+      "reviews_raw": "500000人评论",
+      "reviews_text": "50万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/518703/11/11375/218637/6aaa4438Fbcecdbc6/00835a05a077e726.jpg",
+      "source_label": "大容量保鲜盒",
+      "source_title": "升保鲜盒品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/619622554ac9e2703199.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100008825655.html"
+        ]
+      },
+      "color": "#DEDEDC",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100358984562",
+      "name": "康宁餐具EKCO琥珀色玻璃大长三分隔保鲜盒1040ml洗碗机可用",
+      "sku": "100358984562",
+      "rank": 10,
+      "reviews_raw": "5000人评论",
+      "reviews_text": "5000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/432159/30/21517/133309/6a0d0da3Ff8d5967f/00833203205d8a5d.jpg",
+      "source_label": "玻璃收纳盒",
+      "source_title": "玻璃收纳盒排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_6196fc83143a7ff0bbd4.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100358984562.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100194253249",
+      "name": "四季沐歌（MICOE）浴室置物架太空铝免打孔卫生置物免钉胶毛巾浴巾架墙角架两件套",
+      "sku": "100194253249",
+      "rank": 7,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/538734/11/6790/107976/6ac5b919Fa656e812/00833203201d8720.jpg",
+      "source_label": "毛巾架置物架套装",
+      "source_title": "顺嘉利毛巾架/置物架排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620c3f7e63c2bd1f9bd.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100194253249.html"
+        ]
+      },
+      "color": "#C2B9B0",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100280784964",
+      "name": "卡罗特玻璃饭盒可微波炉上班族便当盒高硼硅玻璃带盖保鲜盒无分隔640ml",
+      "sku": "100280784964",
+      "rank": 10,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/350062/31/3521/194573/68c7c5cbF991e0e01/06f78433f62d9524.jpg",
+      "source_label": "玻璃保鲜箱",
+      "source_title": "玻璃保鲜箱品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/6196a89bee777f28d32b.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100280784964.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100365462718",
       "name": "八海鸟收纳箱100L搬家大容量宿舍布艺衣服衣物被子衣柜储物箱可折叠",
       "sku": "100365462718",
-      "rank": 8,
+      "rank": 7,
       "reviews_raw": "2000人评论",
       "reviews_text": "2000条",
-      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/507086/36/3871/110004/6a859691F8b7e03c3/0083320320f673d1.jpg",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/571660/29/2754/119766/6aed9dbaF65ca0e6a/0083320320c0838a.jpg",
       "source_label": "收纳折叠整理箱",
       "source_title": "收纳折叠整理箱排行榜 - 京东",
       "category": "家居日用 · 收纳清洁",
@@ -683,7 +2459,8 @@
           "https://item.jd.com/100365462718.html"
         ]
       },
-      "color": "#F0E6DD"
+      "color": "#F0E6DD",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100210057063",
@@ -703,13 +2480,14 @@
           "https://item.jd.com/100210057063.html"
         ]
       },
-      "color": "#D3B89A"
+      "color": "#D3B89A",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100254967923",
       "name": "美丽雅魔术扫把刮水器拖把拖地两用卫生间浴室洗手台面玻璃地刮板神器",
       "sku": "100254967923",
-      "rank": 8,
+      "rank": 9,
       "reviews_raw": "5000人评论",
       "reviews_text": "5000条",
       "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/474015/16/13987/126254/6a5081cdFacd8d3c9/0083320320889115.jpg",
@@ -723,7 +2501,8 @@
           "https://item.jd.com/100254967923.html"
         ]
       },
-      "color": "#C6D5D8"
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100296844444",
@@ -743,7 +2522,134 @@
           "https://item.jd.com/100296844444.html"
         ]
       },
-      "color": "#B5894B"
+      "color": "#B5894B",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100032471817",
+      "name": "MUJI聚丙烯收纳箱/抽屉式/深 储物箱玩具整理箱 塑料透明可叠加储物箱",
+      "sku": "100032471817",
+      "rank": 8,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/222731/38/27498/10978/6482fa45Ffe70955c/700e4a91288724ac.jpg",
+      "source_label": "玩具箱收纳",
+      "source_title": "玩具箱收纳排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620907a497315e9e072.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100032471817.html"
+        ]
+      },
+      "color": "#DCE6E8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100045469163",
+      "name": "百家好世 扫把簸箕套装组合撮箕家用套装软毛梳齿笤帚不粘头发扫地刮水",
+      "sku": "100045469163",
+      "rank": 9,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/499615/36/1744/126057/6a729feaF89d6fa6c/008332032077aa08.jpg",
+      "source_label": "清洁工具套装",
+      "source_title": "清洁工具套装排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1590190253e39cea86da2.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100045469163.html"
+        ]
+      },
+      "color": "#E2E2E2",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100212201261",
+      "name": "索邦折叠扫把簸箕套装家用扫帚两件套旋转扫把折叠伸缩梳齿畚箕扫地",
+      "sku": "100212201261",
+      "rank": 10,
+      "reviews_raw": "500000人评论",
+      "reviews_text": "50万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/433881/22/8248/2408978/6a042facF45631797/00835dc5dcf10c78.png",
+      "source_label": "簸箕畚箕",
+      "source_title": "簸箕畚箕排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_159012f08a3aba4c1948f.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100212201261.html"
+        ]
+      },
+      "color": "#042EB2",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100268443409",
+      "name": "双枪保鲜盒316L不锈钢食品级餐盒户外野炊便当盒生腌密封盒3件套",
+      "sku": "100268443409",
+      "rank": 9,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/470824/27/13243/158056/6a4f0ba2F8015b2f6/0083320320b8eada.jpg",
+      "source_label": "保鲜碗",
+      "source_title": "保鲜碗品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61960105a0225712b85a.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100268443409.html"
+        ]
+      },
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "5171218",
+      "name": "乐扣乐扣 玻璃保鲜盒微波炉饭盒碗密封便当餐盒储物盒收纳盒子750ML",
+      "sku": "5171218",
+      "rank": 7,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/142408/28/30270/125748/63511debEfbcd3903/ee5f37a9504112ca.jpg",
+      "source_label": "玻璃收纳盒",
+      "source_title": "玻璃收纳盒排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_6196fc83143a7ff0bbd4.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/5171218.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100194253245",
+      "name": "四季沐歌（MICOE）浴室置物架太空铝免打孔卫生置物免钉胶毛巾杆毛巾架墙角架三件套",
+      "sku": "100194253245",
+      "rank": 8,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/533991/22/9375/105664/6ac5b918Fb962cfbf/008332032026dc56.jpg",
+      "source_label": "毛巾架置物架套装",
+      "source_title": "顺嘉利毛巾架/置物架排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620c3f7e63c2bd1f9bd.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100194253245.html"
+        ]
+      },
+      "color": "#C2B9B0",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100024255861",
@@ -763,7 +2669,8 @@
           "https://item.jd.com/100024255861.html"
         ]
       },
-      "color": "#E8C020"
+      "color": "#E8C020",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "100233757145",
@@ -783,67 +2690,8 @@
           "https://item.jd.com/100233757145.html"
         ]
       },
-      "color": "#E6DCC8"
-    },
-    {
-      "id": "25413854936",
-      "name": "美丽雅（MARYYA）扫把簸箕套装扫地 笤帚不锈钢杆扫地卫生间扫帚 一扫净洁组合套扫（加密扫把头）",
-      "sku": "25413854936",
-      "rank": 9,
-      "reviews_raw": "2000人评论",
-      "reviews_text": "2000条",
-      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/567505/35/3480/161801/6ae619baF1b843abc/0083320320fc646f.jpg",
-      "source_label": "扫把套装组合",
-      "source_title": "扫把套装组合排行榜 - 京东",
-      "category": "家居日用 · 收纳清洁",
-      "links": {
-        "primary": "https://www.jd.com/phb/key_15901694e17af323d15ac.html",
-        "source": "京东榜单页",
-        "extra": [
-          "https://item.jd.com/25413854936.html"
-        ]
-      },
-      "color": "#B2B4B6"
-    },
-    {
-      "id": "100215309521",
-      "name": "自然屋衣服收纳箱家用大容量布艺整理箱可折叠储物箱百纳箱 深灰色-66L",
-      "sku": "100215309521",
-      "rank": 10,
-      "reviews_raw": "20000人评论",
-      "reviews_text": "2万条",
-      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/356180/36/4076/626020/690c891eF33e5ed7c/e84221b5b12df366.jpg",
-      "source_label": "收纳折叠整理箱",
-      "source_title": "收纳折叠整理箱排行榜 - 京东",
-      "category": "家居日用 · 收纳清洁",
-      "links": {
-        "primary": "https://www.jd.com/phb/key_1620212ced4ff47c972d.html",
-        "source": "京东榜单页",
-        "extra": [
-          "https://item.jd.com/100215309521.html"
-        ]
-      },
-      "color": "#55565A"
-    },
-    {
-      "id": "100279402082",
-      "name": "吱凡日本衣服收纳箱家用布艺衣柜收纳盒衣物整理箱分层神器折叠储物盒",
-      "sku": "100279402082",
-      "rank": 10,
-      "reviews_raw": "5000人评论",
-      "reviews_text": "5000条",
-      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/547225/4/180/2708090/6acc49d1Fece5fd51/00835a05a061ed6b.png",
-      "source_label": "布储物箱",
-      "source_title": "布储物箱排行榜 - 京东",
-      "category": "家居日用 · 收纳清洁",
-      "links": {
-        "primary": "https://www.jd.com/phb/key_16204e3c801a50a89c3d.html",
-        "source": "京东榜单页",
-        "extra": [
-          "https://item.jd.com/100279402082.html"
-        ]
-      },
-      "color": "#D1B698"
+      "color": "#E6DCC8",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "10189664387565",
@@ -863,7 +2711,197 @@
           "https://item.jd.com/10189664387565.html"
         ]
       },
-      "color": "#D4D6D8"
+      "color": "#D4D6D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "25413854936",
+      "name": "美丽雅（MARYYA）扫把簸箕套装扫地 笤帚不锈钢杆扫地卫生间扫帚 一扫净洁组合套扫（加密扫把头）",
+      "sku": "25413854936",
+      "rank": 9,
+      "reviews_raw": "2000人评论",
+      "reviews_text": "2000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/576839/3/1987/167101/6aef53f7F861e63c7/00833203208f8963.jpg",
+      "source_label": "扫把套装组合",
+      "source_title": "扫把套装组合排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_15901694e17af323d15ac.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/25413854936.html"
+        ]
+      },
+      "color": "#B2B4B6",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100247334038",
+      "name": "禧天龙免安装玩具收纳柜磁吸大容量储物柜床头柜衣物收纳箱  五层70面宽",
+      "sku": "100247334038",
+      "rank": 9,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/304844/14/15052/129449/6864a2cdF79ff8c6a/a080488d92702297.png",
+      "source_label": "玩具箱收纳",
+      "source_title": "玩具箱收纳排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620907a497315e9e072.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100247334038.html"
+        ]
+      },
+      "color": "#E7E6E4",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100245717419",
+      "name": "美尔雅扫把簸箕套装扫帚两件套家用扫地神器笤帚垃圾铲刮水折叠扫把",
+      "sku": "100245717419",
+      "rank": 10,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/478632/18/4244/120541/6a51b612F8fb568cc/00833213219600b1.jpg",
+      "source_label": "清洁工具套装",
+      "source_title": "清洁工具套装排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1590190253e39cea86da2.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100245717419.html"
+        ]
+      },
+      "color": "#4A3728",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100196611625",
+      "name": "龙士达食品级保鲜盒微波炉专用加热密封水果便当碗上班族带饭盒 370ml*4",
+      "sku": "100196611625",
+      "rank": 10,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/307206/4/23251/78296/6894160aF0e137831/33df9026e46d0f68.jpg",
+      "source_label": "保鲜碗",
+      "source_title": "保鲜碗品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/61960105a0225712b85a.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100196611625.html"
+        ]
+      },
+      "color": "#E3E1EE",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100368437098",
+      "name": "禧天龙调料盒香料收纳盒食品级调料罐家用厨房花椒八角分格5层密封罐",
+      "sku": "100368437098",
+      "rank": 8,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/459006/15/12769/460281/6a3b8e52Fb397e3bf/0083800800e98437.jpg",
+      "source_label": "玻璃收纳盒",
+      "source_title": "玻璃收纳盒排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_6196fc83143a7ff0bbd4.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100368437098.html"
+        ]
+      },
+      "color": "#FAF2DF",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100120731777",
+      "name": "四季沐歌（MICOE）浴室卫置物架卫生间六件套免打孔置物吸盘毛巾浴巾挂钩纸巾盒角架",
+      "sku": "100120731777",
+      "rank": 9,
+      "reviews_raw": "50000人评论",
+      "reviews_text": "5万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/529004/21/13824/108563/6ac5b8dfFeab448e1/008332032081c70e.jpg",
+      "source_label": "毛巾架置物架套装",
+      "source_title": "顺嘉利毛巾架/置物架排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620c3f7e63c2bd1f9bd.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100120731777.html"
+        ]
+      },
+      "color": "#D2CECF",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100215309521",
+      "name": "自然屋衣服收纳箱家用大容量布艺整理箱可折叠储物箱百纳箱 深灰色-66L",
+      "sku": "100215309521",
+      "rank": 9,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/356180/36/4076/626020/690c891eF33e5ed7c/e84221b5b12df366.jpg",
+      "source_label": "收纳折叠整理箱",
+      "source_title": "收纳折叠整理箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620212ced4ff47c972d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100215309521.html"
+        ]
+      },
+      "color": "#55565A",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100279402082",
+      "name": "吱凡日本衣服收纳箱家用布艺衣柜收纳盒衣物整理箱分层神器折叠储物盒",
+      "sku": "100279402082",
+      "rank": 10,
+      "reviews_raw": "5000人评论",
+      "reviews_text": "5000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/547225/4/180/2708090/6acc49d1Fece5fd51/00835a05a061ed6b.png",
+      "source_label": "布储物箱",
+      "source_title": "布储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16204e3c801a50a89c3d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100279402082.html"
+        ]
+      },
+      "color": "#D1B698",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "2198838",
+      "name": "3M思高  扫把簸箕套装 家用软毛开纤 扫帚畚箕两件套 一体杆 非拼接",
+      "sku": "2198838",
+      "rank": 2,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/414130/37/738/111107/69cdd190Fd53050ee/0083320320f09503.jpg",
+      "source_label": "清洁工具簸箕",
+      "source_title": "清洁工具簸箕品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/1590118f7f46972c01696.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/2198838.html"
+        ]
+      },
+      "color": "#B1DB5F",
+      "last_seen": "2026-11-08"
     },
     {
       "id": "10096304634555",
@@ -883,7 +2921,365 @@
           "https://item.jd.com/10096304634555.html"
         ]
       },
-      "color": "#F2F2F0"
+      "color": "#F2F2F0",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100032471861",
+      "name": "MUJI聚丙烯杂物箱/抽屉式/深 收纳箱玩具整理箱 塑料收纳储物",
+      "sku": "100032471861",
+      "rank": 10,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/217272/26/32969/10364/6491d72fF4b64e175/9f124308171f5e53.jpg",
+      "source_label": "玩具箱收纳",
+      "source_title": "玩具箱收纳排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620907a497315e9e072.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100032471861.html"
+        ]
+      },
+      "color": "#DEDEDC",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100069465096",
+      "name": "乐扣乐扣（LOCK&LOCK）玻璃饭盒洗碗机可用保鲜密封冰箱便当饭盒收纳盒4件套(不锈钢盖)",
+      "sku": "100069465096",
+      "rank": 9,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/561862/14/5341/88267/6aebe6b9F069d6449/0083320320015176.jpg",
+      "source_label": "玻璃收纳盒",
+      "source_title": "玻璃收纳盒排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_6196fc83143a7ff0bbd4.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100069465096.html"
+        ]
+      },
+      "color": "#C6D5D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100149845480",
+      "name": "光多拉吸盘毛巾架可伸缩免打孔毛巾杆浴室置物架卫生间浴巾架挂架",
+      "sku": "100149845480",
+      "rank": 10,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/375428/20/20176/110268/694b85faF9fb3eb00/091301d1fee33ecf.jpg",
+      "source_label": "毛巾架置物架套装",
+      "source_title": "顺嘉利毛巾架/置物架排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620c3f7e63c2bd1f9bd.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100149845480.html"
+        ]
+      },
+      "color": "#AB9D92",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100233236529",
+      "name": "花栖之谷布艺收纳箱衣服收纳盒内衣柜收纳分层神器整理储物收纳筐 2只装",
+      "sku": "100233236529",
+      "rank": 5,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/498184/40/14199/172312/6a853d58F6f32db10/0083320320e16c76.jpg",
+      "source_label": "收纳折叠整理箱",
+      "source_title": "收纳折叠整理箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620212ced4ff47c972d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100233236529.html"
+        ]
+      },
+      "color": "#D2C5B2",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100043009517",
+      "name": "佳帮手收纳箱布艺衣服衣物被子衣柜整理储物箱百纳箱收纳盒子 66L2只装",
+      "sku": "100043009517",
+      "rank": 1,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/569858/25/2369/113281/6ae99541F14947a04/0083320320eed988.jpg",
+      "source_label": "布储物箱",
+      "source_title": "布储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16204e3c801a50a89c3d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100043009517.html"
+        ]
+      },
+      "color": "#EBDECE",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100276638199",
+      "name": "威航川扫把簸箕套装 防风梳齿型家用扫地扫帚笤帚两件套",
+      "sku": "100276638199",
+      "rank": 5,
+      "reviews_raw": "5000人评论",
+      "reviews_text": "5000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/522842/6/7545/140340/6aab7e6dF5198261a/00834b04b03da0bf.png",
+      "source_label": "清洁工具簸箕",
+      "source_title": "清洁工具簸箕品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/1590118f7f46972c01696.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100276638199.html"
+        ]
+      },
+      "color": "#95AA67",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100336402228",
+      "name": "八海鸟收纳箱100L搬家大容量宿舍布艺衣服衣物被子衣柜储物箱百纳箱盒子",
+      "sku": "100336402228",
+      "rank": 10,
+      "reviews_raw": "2000人评论",
+      "reviews_text": "2000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/571641/25/4502/123313/6aed9db9F7cd28d27/00833203208190ff.jpg",
+      "source_label": "收纳折叠整理箱",
+      "source_title": "收纳折叠整理箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_1620212ced4ff47c972d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100336402228.html"
+        ]
+      },
+      "color": "#EEE5D4",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100043009481",
+      "name": "佳帮手布艺收纳箱 衣服棉被整理箱衣物储物箱百纳箱 米色 100L2只装",
+      "sku": "100043009481",
+      "rank": 2,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/556027/36/7519/111694/6ae9954cF573c328e/00833203201172e8.jpg",
+      "source_label": "布储物箱",
+      "source_title": "布储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16204e3c801a50a89c3d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100043009481.html"
+        ]
+      },
+      "color": "#E6DCC8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100125978282",
+      "name": "TYROLER魔术扫把45cm新款2026家用单个扫帚刮水拖地两用硅胶浴室厕所",
+      "sku": "100125978282",
+      "rank": 7,
+      "reviews_raw": "2000人评论",
+      "reviews_text": "2000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/240299/27/14359/72125/668e1af5F75bfb4c8/e53d4d35825e3335.jpg",
+      "source_label": "清洁工具簸箕",
+      "source_title": "清洁工具簸箕品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/1590118f7f46972c01696.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100125978282.html"
+        ]
+      },
+      "color": "#D4D6D8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100115288086",
+      "name": "登比布艺收纳箱衣服棉被整理箱玩具衣物储物箱百纳箱 米色66L2只装",
+      "sku": "100115288086",
+      "rank": 4,
+      "reviews_raw": "200000人评论",
+      "reviews_text": "20万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/537098/14/8751/2651738/6ae1ccb5F5b251683/00834e64e6894814.png",
+      "source_label": "布储物箱",
+      "source_title": "布储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16204e3c801a50a89c3d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100115288086.html"
+        ]
+      },
+      "color": "#E6DCC8",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100325330014",
+      "name": "大卫拖把专家大卫扫把簸箕套装",
+      "sku": "100325330014",
+      "rank": 8,
+      "reviews_raw": "5000人评论",
+      "reviews_text": "5000条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/389960/13/11532/9131/697c8057Ff227f8ae/025e320320d28904.png",
+      "source_label": "清洁工具簸箕",
+      "source_title": "清洁工具簸箕品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/1590118f7f46972c01696.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100325330014.html"
+        ]
+      },
+      "color": "#828085",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100196660256",
+      "name": "太力牛津布艺收纳箱 衣物衣服收纳箱整理箱 升级无甲醛无异味 66L1个",
+      "sku": "100196660256",
+      "rank": 5,
+      "reviews_raw": "20000人评论",
+      "reviews_text": "2万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/395527/9/10732/78957/699d598dF328b12fa/0083320320d8275f.jpg",
+      "source_label": "布储物箱",
+      "source_title": "布储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16204e3c801a50a89c3d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100196660256.html"
+        ]
+      },
+      "color": "#E0D9CF",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100152638950",
+      "name": "家欣 扫把簸箕套装",
+      "sku": "100152638950",
+      "rank": 10,
+      "reviews_raw": "10000人评论",
+      "reviews_text": "1万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/180551/36/51097/11148/67205518F8d3fcbe3/3b9f39d25166326d.jpg",
+      "source_label": "清洁工具簸箕",
+      "source_title": "清洁工具簸箕品牌排行榜 - 十大品牌 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/1590118f7f46972c01696.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100152638950.html"
+        ]
+      },
+      "color": "#666465",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100062350042",
+      "name": "百草园牛津布艺收纳箱衣服棉被整理箱衣柜储物箱盒百纳箱66L米白1个装",
+      "sku": "100062350042",
+      "rank": 6,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/526291/14/9720/630511/6ab0e88bF5060a8a1/00835a05a0f0a432.jpg",
+      "source_label": "布储物箱",
+      "source_title": "布储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16204e3c801a50a89c3d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100062350042.html"
+        ]
+      },
+      "color": "#F0EAE0",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100028424278",
+      "name": "京东京造汽车后备箱收纳箱车载收纳盒储物箱尾箱可折叠整理箱牛津布60L",
+      "sku": "100028424278",
+      "rank": 8,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/538238/28/11955/366028/6ae93e8cF753c2083/00384e64e6a8ef7e.jpg",
+      "source_label": "布储物箱",
+      "source_title": "布储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16204e3c801a50a89c3d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100028424278.html"
+        ]
+      },
+      "color": "#1C1C1C",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100302268598",
+      "name": "京东京造布艺衣物收纳箱特大号结实耐用加厚牛津布卡其色100L*2个装",
+      "sku": "100302268598",
+      "rank": 9,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/544455/5/579/405503/6ac70b2dFaaccc1e9/00834004004180f7.png",
+      "source_label": "布储物箱",
+      "source_title": "布储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16204e3c801a50a89c3d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100302268598.html"
+        ]
+      },
+      "color": "#EDE7E1",
+      "last_seen": "2026-11-08"
+    },
+    {
+      "id": "100110165016",
+      "name": "佳帮手衣物收纳箱布艺衣服整理箱收纳筐衣柜收纳盒分层神器 25L2只装",
+      "sku": "100110165016",
+      "rank": 10,
+      "reviews_raw": "100000人评论",
+      "reviews_text": "10万条",
+      "image": "https://img14.360buyimg.com/n7/s80x80_jfs/t1/532935/35/4628/176129/6ab7cfe9F8fba07e4/00833203208ed6e2.jpg",
+      "source_label": "布储物箱",
+      "source_title": "布储物箱排行榜 - 京东",
+      "category": "家居日用 · 收纳清洁",
+      "links": {
+        "primary": "https://www.jd.com/phb/key_16204e3c801a50a89c3d.html",
+        "source": "京东榜单页",
+        "extra": [
+          "https://item.jd.com/100110165016.html"
+        ]
+      },
+      "color": "#B4A389",
+      "last_seen": "2026-11-08"
     }
   ]
 }

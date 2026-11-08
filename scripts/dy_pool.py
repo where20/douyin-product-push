@@ -52,7 +52,7 @@ import re
 import subprocess
 import sys
 import tempfile
-from datetime import date
+from datetime import date, datetime, timedelta
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib_dy import (POOL_ROOT, analyze_product_color,  # noqa: E402
@@ -225,6 +225,11 @@ def parse_page(url: str, label: str, category: str) -> list:
 #       —— 坏池子会让第二天的流水线在 build_feed 阶段崩掉。
 MIN_POOL_SIZE = 20
 
+# 池子商品的最长"在榜有效期"(天)。超过这个天数没在榜单页上出现过 → 剔除。
+# ⚠️ 2026-11-08 加: 池子改成累积模式后只增不减, 不做老化清理的话
+#    一年后池子里会堆满几百个早就掉榜的僵尸商品, 而且它们的名次早已失效。
+POOL_MAX_AGE_DAYS = 60
+
 
 def recolor_existing(slug: str) -> int:
     """只重算**已有池子**的 color, 不重新抓榜单页。
@@ -275,6 +280,8 @@ def main():
     ap.add_argument("--config", default=None, help="源配置 json (默认 pool/sources.json)")
     ap.add_argument("--recolor", action="store_true",
                     help="只重算已有池子的 color(不重抓榜单页, 不动 rank/name)")
+    ap.add_argument("--replace", action="store_true",
+                    help="整池替换(默认是**累积合并**: 旧商品保留, 新商品追加)")
     ap.add_argument("--slug", default=None, help="--recolor 用的池子 slug")
     args = ap.parse_args()
 
@@ -352,17 +359,114 @@ def main():
 
     if dropped:
         print(f"\n⚠️ 剔除取色失败商品 {dropped} 个 (颜色缺失=图文不符)")
-    if len(good) < MIN_POOL_SIZE:
-        print(f"\n❌ 有效商品仅 {len(good)} 个 < 阈值 {MIN_POOL_SIZE} —— 放弃本次重抓",
+    # ⚠️ 2026-11-08 修正: 阈值判定要看**合并后**的池子规模, 不是本次抓到的数量。
+    #    累积模式下"本次只抓到 10 个"是**正常**的(榜单页轮换, 每次只换一部分),
+    #    按本次数量判会误杀 —— 单源试跑就直接触发"放弃重抓", 累积永远做不起来。
+    #    → 旧池存在时: 要求合并后总数 ≥ 阈值;
+    #      新建池时: 才要求本次抓取数 ≥ 阈值(没有旧池兜底, 数据太少没法用)。
+    merging = (not args.replace) and os.path.exists(out_path)
+    old_count = 0
+    if merging:
+        try:
+            old_count = len((read_json(out_path).get("products") or []))
+        except Exception:
+            old_count = 0
+    eff_count = len(good) + old_count if merging else len(good)
+    if eff_count < MIN_POOL_SIZE:
+        print(f"\n❌ 有效商品仅 {eff_count} 个 < 阈值 {MIN_POOL_SIZE} —— 放弃本次重抓",
               file=sys.stderr)
         print(f"   旧池子保持不变: {out_path}", file=sys.stderr)
         return 1
     uniq = good
 
+    slug = cfg.get("slug") or "pool"
+    os.makedirs(POOL_ROOT, exist_ok=True)
+    out_path = os.path.join(POOL_ROOT, f"{slug}.json")
+    today = date.today().strftime("%Y-%m-%d")
+
+    # ⚠️ 2026-11-08 改为**累积合并**(默认), 不再整池替换。
+    #    原因: 30 天养号要发 150 条, 池子必须够大才能不重复。
+    #    榜单页内容会按关键词轮换 → 每次重抓都能捡到一批新商品
+    #    (2026-11-08 实测: 5 个源重抓一次, 46 条里有 16 条是池子没有的新品)。
+    #    整池替换的话, 新品来了旧的就被冲掉, 池子永远停在 40 来个。
+    #    累积合并 = 池子只增不减, 同时已存在商品的 rank/reviews 用**最新一次**
+    #    抓到的值刷新(榜上名次是会变的, 用旧的反而不准)。
+    if not args.replace and os.path.exists(out_path):
+        old_pool = read_json(out_path)
+        old_products = old_pool.get("products") or []
+        by_sku = {p.get("sku"): p for p in old_products if p.get("sku")}
+        added = updated = kept = 0
+        aged = []
+        # ⚠️ 旧池商品没有 last_seen 字段 → 用**旧池的快照日期**补上,
+        #    不能当成"永远最老"。否则每次重抓都会把这批商品判成老化商品清掉,
+        #    池子凭空缩水(2026-11-08 实测: 15 个老商品被误剔)。
+        old_seen = old_pool.get("fetched_at") or today
+        for p in old_products:
+            if p.get("sku") and not p.get("last_seen"):
+                p["last_seen"] = old_seen
+        for p in uniq:
+            pid = p.get("sku")
+            old = by_sku.get(pid)
+            if old:
+                # 已在榜上的商品: 用新数据刷新 rank/reviews/links, 但保留旧 color
+                # (color 是取色算出来的, 旧值已验证有效, 没必要重下图片)
+                if old.get("color"):
+                    p["color"] = old["color"]
+                old.update(p)
+                old["last_seen"] = today
+                updated += 1
+            else:
+                p["last_seen"] = today
+                by_sku[pid] = p
+                added += 1
+        merged = list(by_sku.values())
+        # 旧池里这次没抓到的商品: 保留, last_seen 维持原值(它已掉榜)
+        kept = len(merged) - added - updated
+        print(f"\n🔄 累积合并: 新增 {added} 个 · 刷新 {updated} 个 · 保留(已掉榜) {kept} 个")
+        uniq = merged
+    else:
+        for p in uniq:
+            p["last_seen"] = today
+
+    # ⚠️ 老化清理: 累积模式下池子只增不减, 长期掉榜的老商品会越积越多。
+    #    这些商品的名次早就失效了(文案里已经不写名次), 留着只是占位。
+    #    → 超过 POOL_MAX_AGE_DAYS 没在榜上出现的直接剔除。
+    #    ⚠️ 旧池商品没有 last_seen 字段 → 视为最老, 会被清掉;
+    #       这正是想要的(它们是 11-02 那批, 名次早就不是最新的了)。
+    if merging and old_count:
+        cutoff = (date.today() - timedelta(days=POOL_MAX_AGE_DAYS))
+        cutoff_s = cutoff.strftime("%Y-%m-%d")
+        before = len(uniq)
+        alive = []
+        for p in uniq:
+            ls = p.get("last_seen") or ""
+            if ls and ls >= cutoff_s:
+                alive.append(p)
+            else:
+                aged.append(p.get("name", "")[:30])
+        if aged:
+            print(f"🧹 剔除老化商品 {len(aged)} 个 (超过 {POOL_MAX_AGE_DAYS} 天没在榜上)")
+            for nm in aged[:6]:
+                print(f"   · {nm}")
+            if len(aged) > 6:
+                print(f"   · …另外 {len(aged) - 6} 个省略")
+        uniq = alive
+
+    # 按源轮转排列(累积后也要重新排, 否则新增商品全堆在末尾)
+    by_src2 = {}
+    for p in uniq:
+        by_src2.setdefault(p.get("source_label", ""), []).append(p)
+    interleaved2 = []
+    while any(by_src2.values()):
+        for label in list(by_src2):
+            if by_src2[label]:
+                interleaved2.append(by_src2[label].pop(0))
+    uniq = interleaved2
+
     out = {
         "vertical": vertical,
         "category": category,
-        "fetched_at": date.today().strftime("%Y-%m-%d"),
+        "fetched_at": today,
         "count": len(uniq),
         "color_failed": dropped,
         "products": uniq,

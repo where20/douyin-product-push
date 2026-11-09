@@ -97,7 +97,9 @@ do_push() {
   local -a opts=()
   [ -n "${proxy}" ] && opts+=(-c "http.proxy=${proxy}" -c "https.proxy=${proxy}")
   [ -n "${ip}" ] && opts+=(-c "http.curloptResolve=github.com:443:${ip}")
-  git "${opts[@]}" push "${REMOTE}" "${BRANCH}" 2>&1 | tee /tmp/xhs_push.log
+  # ⚠️ macOS 自带 bash 3.2: 空数组在 set -u 下用 "${opts[@]}" 会报
+  #    "unbound variable"。用 ${opts[@]+...} 兼容写法, 空数组时整个词消失。
+  git ${opts[@]+"${opts[@]}"} push "${REMOTE}" "${BRANCH}" 2>&1 | tee /tmp/xhs_push.log
 }
 
 if [ -n "${PROXY}" ]; then
@@ -109,6 +111,14 @@ else
 fi
 
 # 直连/代理都失败 → 换 IP 段位再试
+# ⚠️ 但先看是不是**本来就没东西可推**(远端已同步) —— 这种情况不用白等一轮探测
+LOCAL_SHA="$(git rev-parse HEAD 2>/dev/null || echo '')"
+REMOTE_SHA="$(git rev-parse "refs/remotes/${REMOTE}/${BRANCH}" 2>/dev/null || echo '')"
+if [ -n "${LOCAL_SHA}" ] && [ "${LOCAL_SHA}" = "${REMOTE_SHA}" ]; then
+  echo "✅ 远端已是最新 (HEAD ${LOCAL_SHA:0:7} == ${REMOTE}/${BRANCH}) —— 无需推送"
+  exit 0
+fi
+
 if ! grep -qE "${BRANCH} -> ${BRANCH}|^[0-9a-f]{7}\.\.[0-9a-f]{7}" /tmp/xhs_push.log; then
   IP="$(pick_ip || true)"
   if [ -n "${IP}" ]; then
@@ -124,5 +134,13 @@ if grep -qE "${BRANCH} -> ${BRANCH}|^[0-9a-f]{7}\.\.[0-9a-f]{7}" /tmp/xhs_push.l
   echo "✅ push 确认成功(见上方 SHA 区间行)"
   exit 0
 fi
+
+# --- 兜底判据: "Everything up-to-date" 是**歧义**的, 不能单独当成功 ---
+# ⚠️ 坏 pathspec 时 commit/push 会"看起来成功"却啥也没推, 输出同样是
+#    "Everything up-to-date" —— 所以不能拿它当成功信号。
+#    → 改看**本地 HEAD 是否等于远端跟踪引用**:
+#      push 成功 → 跟踪引用自动更新到 HEAD → 相等
+#      push 失败 → 跟踪引用停在旧值     → 不等 → 正确判失败
 echo "❌ 未见 '${BRANCH} -> ${BRANCH}' 或 SHA 区间行 —— 判定为未推送成功, 请排查" >&2
+echo "   本地 HEAD: ${LOCAL_SHA:-取不到} / 远端 ${REMOTE}/${BRANCH}: ${REMOTE_SHA:-取不到}" >&2
 exit 1

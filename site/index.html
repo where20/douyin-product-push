@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>抖音图文带货 · 每日发布清单</title>
+<meta name="description" content="抖音图文带货支线自动化产出: 每日 5 组 3:4 竖版图文 + 文案 + 发布清单, 养号期不挂车不带价格。">
+<meta name="robots" content="index, follow">
+<style>
+  :root {
+    --bg: #0C0E13;
+    --bg-soft: #141821;
+    --card: #171C26;
+    --card-2: #1E2431;
+    --line: #2A3040;
+    --txt: #E8ECF3;
+    --txt-dim: #98A2B3;
+    --txt-faint: #6B7484;
+    --accent: #FF2E4D;
+    --accent-soft: rgba(255, 46, 77, 0.14);
+    --ok: #3DD68C;
+    --warn: #F5A524;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--txt);
+    line-height: 1.6;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ===== 顶栏 ===== */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(12, 14, 19, 0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .logo {
+    width: 30px; height: 30px; border-radius: 9px; flex: 0 0 auto;
+    background: linear-gradient(135deg, #FF2E4D, #7B2FF7);
+    display: grid; place-items: center;
+    font-weight: 800; font-size: 15px; color: #fff;
+  }
+  .topbar .t { font-weight: 700; font-size: 15px; letter-spacing: .2px; }
+  .topbar .s { font-size: 12px; color: var(--txt-faint); }
+
+  /* ===== Hero ===== */
+  .hero { padding: 34px 16px 8px; max-width: 760px; margin: 0 auto; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--accent-soft); border: 1px solid rgba(255, 46, 77, .34);
+    color: #FF7A8E; font-size: 12px; font-weight: 600;
+    padding: 4px 11px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .hero h1 { font-size: 26px; font-weight: 800; letter-spacing: -.3px; }
+  .hero p.lead { color: var(--txt-dim); font-size: 14px; margin-top: 8px; }
+  .stats { display: flex; gap: 8px; margin: 18px 0 6px; }
+  .stat {
+    flex: 1; background: var(--bg-soft); border: 1px solid var(--line);
+    border-radius: 12px; padding: 10px 8px; text-align: center;
+  }
+  .stat b { display: block; font-size: 19px; font-weight: 800; }
+  .stat span { font-size: 11px; color: var(--txt-faint); }
+
+  /* ===== 养号期提示条 ===== */
+  .notice {
+    margin: 16px auto; max-width: 728px; padding: 13px 15px; border-radius: 12px;
+    background: rgba(245, 165, 36, .09); border: 1px solid rgba(245, 165, 36, .3);
+    font-size: 13px; color: #F3CE8E;
+  }
+  .notice b { color: var(--warn); }
+
+  /* ===== 日期切换 ===== */
+  .dates-wrap { position: sticky; top: 55px; z-index: 40; background: var(--bg); padding: 12px 0 10px; }
+  .dates {
+    display: flex; gap: 8px; overflow-x: auto; padding: 0 16px 2px;
+    max-width: 760px; margin: 0 auto;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .dates::-webkit-scrollbar { display: none; }
+  .pill {
+    flex: 0 0 auto; background: var(--bg-soft); border: 1px solid var(--line);
+    color: var(--txt-dim); font-size: 13px; font-weight: 600;
+    padding: 7px 14px; border-radius: 20px; cursor: pointer;
+    transition: all .16s ease;
+  }
+  .pill:hover { color: var(--txt); border-color: #3A4254; }
+  .pill.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* ===== 卡片 ===== */
+  main { padding: 4px 16px 40px; max-width: 760px; margin: 0 auto; }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; margin-bottom: 16px; overflow: hidden;
+  }
+  .card-hd { padding: 14px 16px 12px; border-bottom: 1px solid var(--line); }
+  .card-hd .row1 { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .idx {
+    font-size: 11px; font-weight: 800; color: var(--accent);
+    background: var(--accent-soft); border-radius: 6px; padding: 2px 7px;
+  }
+  .card-hd h2 { font-size: 16px; font-weight: 700; }
+  .card-hd .cat { font-size: 12px; color: var(--txt-faint); margin-top: 5px; }
+  .fact {
+    display: inline-block; margin-top: 9px; font-size: 12px; font-weight: 600;
+    background: var(--card-2); border: 1px solid var(--line); color: #C6D0E0;
+    padding: 4px 10px; border-radius: 8px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: 1px; }
+
+  .shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 12px 12px 4px; }
+  .shot { position: relative; border-radius: 10px; overflow: hidden; background: var(--card-2); }
+  .shot img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; }
+  .shot .tag {
+    position: absolute; left: 5px; top: 5px; font-size: 10px; font-weight: 700;
+    background: rgba(0, 0, 0, .62); color: #fff; padding: 2px 6px; border-radius: 5px;
+    backdrop-filter: blur(4px);
+  }
+  .shot .role { position: absolute; right: 5px; bottom: 5px; font-size: 10px; background: rgba(0,0,0,.62); color: #C9D3E2; padding: 2px 6px; border-radius: 5px; }
+
+  .copy-box { padding: 12px 16px 0; }
+  .copy-box .label { font-size: 11px; color: var(--txt-faint); font-weight: 700; letter-spacing: .5px; margin-bottom: 6px; }
+  .copy-text {
+    background: var(--bg-soft); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px; font-size: 14px; color: #DCE3EE; white-space: pre-wrap; word-break: break-word;
+  }
+  .tail-note {
+    margin-top: 8px; font-size: 12px; color: #9AA6B8;
+    background: var(--bg-soft); border-left: 2px solid var(--warn);
+    border-radius: 0 8px 8px 0; padding: 8px 11px;
+  }
+  .tail-note b { color: var(--warn); }
+
+  .card-ft { padding: 12px 16px 14px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .btn {
+    border: 1px solid var(--line); background: var(--card-2); color: var(--txt);
+    font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 9px;
+    cursor: pointer; transition: all .15s ease; font-family: inherit;
+  }
+  .btn:hover { border-color: #414B60; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.primary:hover { filter: brightness(1.08); }
+  .btn.ok { background: rgba(61, 214, 140, .14); border-color: rgba(61,214,140,.42); color: var(--ok); }
+  .link-mini { font-size: 12px; color: var(--txt-faint); }
+
+  .steps { padding: 0 16px 14px; margin: 0; list-style: none; counter-reset: st; }
+  .steps li {
+    counter-increment: st; position: relative; padding: 6px 0 6px 30px;
+    font-size: 13px; color: #C3CDDD; border-bottom: 1px dashed rgba(42,48,64,.6);
+  }
+  .steps li:last-child { border-bottom: 0; }
+  .steps li::before {
+    content: counter(st); position: absolute; left: 0; top: 7px;
+    width: 19px; height: 19px; border-radius: 6px; text-align: center;
+    font-size: 11px; font-weight: 700; line-height: 19px;
+    background: var(--card-2); border: 1px solid var(--line); color: var(--txt-dim);
+  }
+  .steps .warn { color: var(--warn); font-weight: 700; }
+  .times { padding: 0 16px 14px; font-size: 12px; color: var(--txt-faint); }
+  .times b { color: var(--txt-dim); }
+
+  footer { border-top: 1px solid var(--line); padding: 22px 16px 34px; text-align: center; }
+  footer p { font-size: 12px; color: var(--txt-faint); margin: 3px 0; }
+  footer .warnline { color: #F3CE8E; }
+
+  .empty { text-align: center; padding: 60px 20px; color: var(--txt-faint); font-size: 14px; }
+  @media (max-width: 400px) { .hero h1 { font-size: 22px; } .stat b { font-size: 17px; } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">抖</div>
+  <div>
+    <div class="t">抖音图文 · 发布清单</div>
+    <div class="s" id="genAt">加载中…</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="badge" id="stageBadge">🌱 养号期 warmup</div>
+  <h1>每日 5 组图文，直接照着发</h1>
+  <p class="lead">3:4 竖版三图 + 文案 + 榜单事实 + 发布步骤，全部来自真实京东榜单数据，无编造。</p>
+  <div class="stats">
+    <div class="stat"><b id="sDays">–</b><span>历史档数</span></div>
+    <div class="stat"><b id="sPosts">–</b><span>图文组数</span></div>
+    <div class="stat"><b id="sImages">–</b><span>成品图</span></div>
+  </div>
+</header>
+
+<div class="notice">
+  <b>🚫 养号期铁律</b>：不挂小黄车 · 不带价格/下单/橱窗/包邮 · 不放任何第三方联系方式。
+  新号前 20 条挂车会被系统判成营销号，自然流量打折；前 7 天出现第三方联系方式直接降权。
+</div>
+
+<div class="dates-wrap">
+  <div class="dates" id="dates"></div>
+</div>
+
+<main id="main"><div class="empty">加载中…</div></main>
+
+<footer>
+  <p>内容由自动化流水线每日生成 · 图片由 MiniMax mmx 生成 · 发布时需勾选「作者声明：内容由 AI 生成」</p>
+  <p class="warnline">榜单事实来自京东公开榜单页，商品链接仅作溯源，不作价格承诺</p>
+</footer>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+let HISTORY = null;
+
+async function getJSON(url) {
+  const r = await fetch(url + "?t=" + Date.now(), { cache: "no-store" });
+  if (!r.ok) throw new Error(url + " → HTTP " + r.status);
+  return r.json();
+}
+
+function renderDates() {
+  const wrap = $("#dates");
+  wrap.innerHTML = "";
+  HISTORY.dates.forEach((d) => {
+    const b = document.createElement("button");
+    b.className = "pill";
+    b.textContent = d.date.slice(5) + " · " + d.count + "组";
+    b.dataset.date = d.date;
+    b.onclick = () => selectDate(d.date);
+    wrap.appendChild(b);
+  });
+}
+
+async function selectDate(date) {
+  document.querySelectorAll(".pill").forEach(p => p.classList.toggle("on", p.dataset.date === date));
+  const main = $("#main");
+  main.innerHTML = '<div class="empty">加载中…</div>';
+  try {
+    const day = await getJSON("data/" + date + ".json");
+    renderDay(day);
+    const el = document.querySelector('.pill[data-date="' + date + '"]');
+    if (el) el.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+    history.replaceState(null, "", "?d=" + date);
+  } catch (e) {
+    main.innerHTML = '<div class="empty">这一档加载失败：' + esc(e.message) + '</div>';
+  }
+}
+
+function renderDay(day) {
+  const main = $("#main");
+  if (!day.posts || !day.posts.length) {
+    main.innerHTML = '<div class="empty">这一档没有内容</div>';
+    return;
+  }
+  main.innerHTML = day.posts.map((p, i) => {
+    const shots = (p.images || []).map((src, k) => {
+      const role = (p.image_roles || [])[k] || "";
+      const label = { cover: "首图", scene: "中图", price: "尾图" }[role] || role;
+      return `<div class="shot">
+        <img src="${esc(src)}" alt="${esc(p.display_name)} ${label}" loading="lazy" onerror="this.style.opacity=.2">
+        <span class="tag">${esc(label)}</span>
+        <span class="role">${k + 1}/3</span>
+      </div>`;
+    }).join("");
+
+    const steps = (p.steps || []).map(s => {
+      const isWarn = /不加小黄车|不放任何第三方/.test(s);
+      const t = esc(s).replace(/🚫/, '<span class="warn">🚫</span>');
+      return `<li class="${isWarn ? "warn" : ""}">${t}</li>`;
+    }).join("");
+
+    const extra = (p.links && p.links.extra || []).map(u => `<a class="link-mini" href="${esc(u)}" target="_blank" rel="noopener">SKU 溯源 ↗</a>`).join(" ");
+
+    return `<article class="card">
+      <div class="card-hd">
+        <div class="row1">
+          <span class="idx">#${i + 1}</span>
+          <h2>${esc(p.display_name)}</h2>
+        </div>
+        <div class="cat">${esc(p.category)}</div>
+        ${p.fact_line ? `<div class="fact">${p.color ? `<span class="dot" style="background:${esc(p.color)}"></span>` : ""}${esc(p.fact_line)}</div>` : ""}
+      </div>
+
+      <div class="shots">${shots}</div>
+
+      <div class="copy-box">
+        <div class="label">文案（直接复制）</div>
+        <div class="copy-text" id="c-${esc(p.id)}">${esc(p.copy)}</div>
+        ${p.tail_copy ? `<div class="tail-note"><b>核对：</b>尾图上这行字必须等于「${esc(p.tail_copy)}」，对不上别发。</div>` : ""}
+      </div>
+
+      <ul class="steps">${steps}</ul>
+      ${(p.suggested_times || []).length ? `<div class="times"><b>建议发布时段：</b>${p.suggested_times.map(esc).join(" / ")}　·　<b>发布后</b> 30 分钟内回前 5 条评论</div>` : ""}
+
+      <div class="card-ft">
+        <button class="btn primary" data-copy="${esc(p.id)}">复制文案</button>
+        ${p.links && p.links.primary ? `<a class="btn" href="${esc(p.links.primary)}" target="_blank" rel="noopener">榜单页 ↗</a>` : ""}
+        ${extra}
+        ${p.need_ai_declaration ? `<span class="link-mini">✓ 需勾选「AI 生成」声明</span>` : ""}
+        ${p.can_cart ? `<span class="link-mini" style="color:var(--ok)">✓ 可挂车</span>` : `<span class="link-mini">🚫 不挂车</span>`}
+      </div>
+    </article>`;
+  }).join("");
+
+  main.querySelectorAll("[data-copy]").forEach(btn => {
+    btn.onclick = async () => {
+      const id = btn.dataset.copy;
+      const text = document.getElementById("c-" + id).innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = "已复制 ✓";
+        btn.classList.add("ok");
+        setTimeout(() => { btn.textContent = "复制文案"; btn.classList.remove("ok"); }, 1600);
+      } catch (e) {
+        const ta = document.createElement("textarea");
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        document.execCommand("copy"); ta.remove();
+        btn.textContent = "已复制 ✓"; btn.classList.add("ok");
+        setTimeout(() => { btn.textContent = "复制文案"; btn.classList.remove("ok"); }, 1600);
+      }
+    };
+  });
+}
+
+(async function init() {
+  try {
+    HISTORY = await getJSON("data/history.json");
+  } catch (e) {
+    $("#main").innerHTML = '<div class="empty">站点数据加载失败：' + esc(e.message) + '</div>';
+    return;
+  }
+  $("#genAt").textContent = "生成于 " + HISTORY.generated_at + " · " + HISTORY.total_days + " 档";
+  $("#stageBadge").textContent = HISTORY.stage === "monetize" ? "💰 带货期 monetize" : "🌱 养号期 warmup";
+  $("#sDays").textContent = HISTORY.total_days;
+  $("#sPosts").textContent = HISTORY.total_posts;
+  $("#sImages").textContent = HISTORY.total_images;
+  renderDates();
+  const want = new URLSearchParams(location.search).get("d");
+  const target = HISTORY.dates.some(d => d.date === want) ? want : HISTORY.latest;
+  await selectDate(target);
+})();
+</script>
+</body>
+</html>

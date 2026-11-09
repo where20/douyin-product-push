@@ -27,6 +27,7 @@ douyin-product-push/
 │   ├── publish_pack.py   图床上传 + 生成发布清单 (json/md)
 │   ├── verify_links.py   全量 URL 核验闸门 (软失败/硬失败分级)
 │   ├── feishu_push.py    推飞书卡片 (--dry-run 可只自检不真发)
+│   ├── build_site.py     落地页数据生成 (output/*/publish_manifest.json → site/data/*.json)
 │   └── run_daily.sh      一键流水线 (cron 入口, 含幂等判定与失败分级)
 ├── pool/
 │   ├── sources.json      垂直定义: 23 个榜单页 URL + 类目关键词 + 干货方法论
@@ -37,6 +38,11 @@ douyin-product-push/
 │   ├── dy_p{N}_{role}.jpg 15 张成品图
 │   ├── uploaded_urls.json 图床真实 URL
 │   └── publish_manifest.{json,md}  发布清单
+├── site/
+│   ├── index.html        落地页 (移动优先暗色 UI + 日期切换器 + 文案一键复制)
+│   └── data/
+│       ├── history.json  日期索引 (新→旧)
+│       └── {date}.json   每天一档的图文明细
 ├── GROWTH.md             30 天养号路线图 (人工操作手册)
 └── memory/{date}.md      执行日志
 ```
@@ -338,6 +344,32 @@ cron ID（管理用，`mavis cron` 工具按 ID 查/改/停）：
 
 所以这套东西的价值是：**把 90% 的重复劳动自动化，只留最后一次点击**。
 等拿到资质 + 账号后，可以再补 `video.create` / 图文发布 API 那一层。
+
+## 落地页（2026-11-09 新增，静态站）
+
+手机上看发布清单用：**https://7topz32hhfou1.space.mcode.cn**（mavis drive 节点 `461441702687851`）
+
+- `site/index.html` — 移动优先暗色 UI，日期切换器（12 档可切）、三图预览、
+  文案一键复制、榜单事实核对提示、发布步骤。**没有构建步骤**，改完直接生效。
+- `site/data/{date}.json` — 每天一档，由 `scripts/build_site.py` 从
+  `output/*/publish_manifest.json` + `feed.json` 生成（文案 / 事实 / 图床 URL / 主色）。
+- **图片不落站点**：直接引用图床真实 URL（`cloudimgs.iepose.cn`），
+  站点体积只有 ~164K，180 张图由每日 `verify_links` 保证存活。
+
+```bash
+python3 scripts/build_site.py            # 全量重建 site/data
+python3 scripts/build_site.py --check    # 只体检不写文件
+```
+
+**注意**：`build_site.py` 会校验「养号期不得出现价格」和「每组必须 3 图 + 文案非空」，
+体检不过返回 exit 2。改 manifest 结构后要重跑。
+
+**刷新机制**：站点是 mavis drive 静态托管，**重新部署才会更新**，
+不会像 xhs 的 GitHub Pages 那样跟着 git push 自动更新。
+要每天自动刷新得加一个「每日重跑 build_site + 重新部署」的 cron 任务。
+
+**为什么不给抖音支线配自定义域名**：xhs 用 `xhs.220616.xyz`（CNAME），
+抖音这边用户选了 mavis drive 公网 URL，不走 GitHub Pages。
 
 ## 人工操作手册
 

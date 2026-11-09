@@ -52,6 +52,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 from datetime import date, datetime, timedelta
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -63,14 +64,40 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 
 BLOCK_SPLIT = '<div class="product-img">'
 
+# ⚠️ 2026-11-09 实测: 京东榜单页需要**会话 cookie**。
+#    第一次请求种下 th/session, 后续请求必须带上, 否则拿到的是通用错误页
+#    (8481 字节, 标题只有"京东", 0 个商品)。原来每次 curl 都是无状态的,
+#    所以多源抓取时后面的源经常整片失败 —— 池子长不大就是这么来的。
+_COOKIE_JAR = os.path.join(tempfile.gettempdir(), "dy_pool_cookies.txt")
+
+# ⚠️ 京东对连续快请求会整段返回 8481 字节通用错误页, 歇 1-2 分钟自动恢复。
+#    → 源之间限速 + 识别错误页 + 退避重试, 别把失败当"这个源没有商品"。
+_SOURCE_GAP = 1.5
+_RETRY_SLEEP = 60
+
 
 def curl(url: str, timeout: int = 25) -> str:
-    """抓 URL。⚠️ 强制 --noproxy '*': 本机代理端口时活时死, 且部分域名被 DNS 劫持。"""
-    r = subprocess.run(
-        ["curl", "--noproxy", "*", "-m", str(timeout), "-s", "-L", "-A", UA,
-         "-H", "Referer: https://www.jd.com/", url],
-        capture_output=True)
-    return r.stdout.decode("utf-8", "ignore")
+    """抓 URL。⚠️ 强制 --noproxy '*': 本机代理端口时活时死, 且部分域名被 DNS 劫持。
+
+    ⚠️ 带 cookie jar: 榜单页要会话, 否则第二个源开始就全是空页。
+    ⚠️ 遇到通用错误页(被限流)要退避重试, 不能当成"这个源没商品"。
+    """
+    html = ""
+    for attempt in range(3):
+        r = subprocess.run(
+            ["curl", "--noproxy", "*", "-m", str(timeout), "-s", "-L", "-A", UA,
+             "-c", _COOKIE_JAR, "-b", _COOKIE_JAR,
+             "-H", "Referer: https://www.jd.com/", url],
+            capture_output=True)
+        html = r.stdout.decode("utf-8", "ignore")
+        if not html:
+            return html
+        # 有商品块 → 正常; 页面够大 → 不是错误页(可能是"优评"这类非榜单栏目)
+        if BLOCK_SPLIT in html or len(html) > 20000:
+            return html
+        print(f"   ⚠️ 被限流(通用错误页 {len(html)}B) → 退避 {_RETRY_SLEEP}s 重试")
+        time.sleep(_RETRY_SLEEP)
+    return html
 
 
 def fmt_reviews(raw: str) -> str:
@@ -174,6 +201,12 @@ def parse_page(url: str, label: str, category: str) -> list:
         return []
     title_m = re.search(r"<title>([^<]*)</title>", html)
     title = title_m.group(1) if title_m else ""
+    # ⚠️ 2026-11-09: "京东优评"栏目页长得很像榜单页(也有 alt 商品名),
+    #    但**没有 item.jd.com 商品块**, 解析出来是 0 个商品。
+    #    → 显式识别并报失败, 别让它在累积合并里静默变成"这个源今天没货"。
+    if "优评" in title:
+        print(f"   ❌ 该 URL 指向【京东优评】栏目, 不是榜单页: {url}")
+        return []
     products = []
     for block in html.split(BLOCK_SPLIT)[1:]:
         m = re.search(r'<img\s+src="([^"]+)"\s+alt="([^"]*)"', block)
@@ -311,6 +344,8 @@ def main():
     products = []
     for s in sources:
         products.extend(parse_page(s["url"], s.get("label", ""), category))
+        # ⚠️ 源之间限速 —— 连续快请求会被京东整段限流(通用错误页)
+        time.sleep(_SOURCE_GAP)
 
     # 去重(同一个 sku 可能出现在多个榜单页)
     seen, uniq = set(), []

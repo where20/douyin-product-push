@@ -35,11 +35,12 @@ echo "▶ 抖音图文流水线  日期=$DATE  阶段=$STAGE  池=$POOL"
 echo "════════════════════════════════════════════"
 
 STEP_FAILED=""
+STEP_REPEAT=""
 QUOTA_EXHAUSTED=0
 
 # ---------- 1. 建 feed (选品 + 文案) ----------
 echo ""
-echo "【1/6】build_feed"
+echo "【1/7】build_feed"
 if ! python3 scripts/build_feed.py "$DATE" --stage "$STAGE" --pool "$POOL"; then
     echo "❌ build_feed 失败 —— 硬失败, 终止"
     exit 1
@@ -47,7 +48,7 @@ fi
 
 # ---------- 2. 出图 (15 张 = 5 商品 x 3 角色) ----------
 echo ""
-echo "【2/6】gen_dy_images"
+echo "【2/7】gen_dy_images"
 python3 scripts/gen_dy_images.py "$DATE"
 rc=$?
 if [ "$rc" = "3" ]; then
@@ -59,7 +60,7 @@ fi
 
 # ---------- 3. 上传图床 + 生成发布清单 ----------
 echo ""
-echo "【3/6】publish_pack"
+echo "【3/7】publish_pack"
 # 判定能不能复用已有上传记录: key 集合要跟当前 feed 的 id 集合一致
 REUSE=0
 if [ -f "output/$DATE/uploaded_urls.json" ]; then
@@ -95,7 +96,7 @@ fi
 
 # ---------- 4. URL 核验 (发布闸门) ----------
 echo ""
-echo "【4/6】verify_links"
+echo "【4/7】verify_links"
 python3 scripts/verify_links.py "$DATE"
 rc=$?
 if [ "$rc" != "0" ]; then
@@ -103,17 +104,35 @@ if [ "$rc" != "0" ]; then
     STEP_FAILED="verify_links"
 fi
 
-# ---------- 5. 推飞书 (软失败, 不影响产物) ----------
+# ---------- 5. 内容重复体检 (软失败: 只暴露问题, 不挡发布) ----------
 echo ""
-echo "【5/6】feishu_push"
+echo "【5/7】check_repeat (内容重复体检)"
+# ⚠️ 为什么是软失败:
+#    体检不通过 = 内容在复读, 但**内容本身仍然能发**。
+#    挡掉的话 = 当天没有内容 = 30 天养号日历断档, 代价更大。
+#    → 这里只打印 + 写进日志, 由人/agent 看报告决定要不要修。
+#    (脚本本身发现问题会 exit 2, 但流水线只当"警告"处理, 不挡发布)
+REPEAT_RC=0
+python3 scripts/check_repeat.py || REPEAT_RC=$?
+if [ "$REPEAT_RC" != "0" ]; then
+    echo "⚠️ 内容重复体检未过 —— 不挡发布, 但内容在复读, 去看上面的清单"
+    STEP_REPEAT="重复"
+else
+    STEP_REPEAT=""
+fi
+
+# ---------- 6. 推飞书 (软失败, 不影响产物) ----------
+echo ""
+echo "【6/7】feishu_push"
 python3 scripts/feishu_push.py "$DATE" || echo "⚠️ 飞书推送失败, 不影响已生成的产物"
 
-# ---------- 6. 写日志 + 提交推送 ----------
+# ---------- 7. 写日志 + 提交推送 ----------
 echo ""
-echo "【6/6】写日志 + git"
+echo "【7/7】写日志 + git"
 
 export DY_RUN_DATE="$DATE" DY_RUN_STAGE="$STAGE" DY_RUN_POOL="$POOL" \
-       DY_RUN_QUOTA="$QUOTA_EXHAUSTED" DY_RUN_STEPFAIL="$STEP_FAILED"
+       DY_RUN_QUOTA="$QUOTA_EXHAUSTED" DY_RUN_STEPFAIL="$STEP_FAILED" \
+       DY_RUN_REPEAT="$STEP_REPEAT"
 python3 - <<'PY'
 import json, os
 from datetime import datetime
@@ -123,6 +142,7 @@ stage = os.environ.get("DY_RUN_STAGE", "")
 pool = os.environ.get("DY_RUN_POOL", "")
 quota = os.environ.get("DY_RUN_QUOTA") == "1"
 stepfail = os.environ.get("DY_RUN_STEPFAIL", "")
+repeat = os.environ.get("DY_RUN_REPEAT", "")
 
 base = os.path.join("output", d)
 posts = []
@@ -139,6 +159,8 @@ if quota:
 if stepfail:
     status = "failed"
     notes.append(f"闸门未过: {stepfail} —— 不要发布")
+if repeat:
+    notes.append(f"内容重复体检未过: {repeat} —— 内容仍可发, 但在复读, 要查 build_feed/池子")
 
 lines = [
     f"# 抖音图文带货执行日志 · {d}",

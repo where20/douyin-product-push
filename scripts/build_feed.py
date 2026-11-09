@@ -27,6 +27,7 @@
 """
 import argparse
 import json
+import math
 import os
 import re
 import sys
@@ -306,6 +307,29 @@ WARMUP_HOOKS = (
     "还有别的坑吗？评论区补充一下。",
     "想看对比的话评论区扣个 2。",
 )
+
+
+def _fill_tip(tip: str, word: str = "", brand: str = "") -> str:
+    """把干货句里的占位符替换成**这个商品自己的**词。
+
+    ⚠️ 为什么要参数化 (2026-11-09):
+       文案首句 = opener + 干货句。干货句原本按子类目写死, 于是同一子类目
+       第 4 次被选中时, tip 循环回第 1 条 → 首句跟一周前那句一模一样
+       (实测 60 条文案里首句只有 4 种高频, 各出现 9-12 次)。
+       → 干货句里放 {word}(品类词), 运行时填成该商品**命中的那个关键词**
+         (同一类目下不同商品命中不同词: 收纳箱/整理箱/收纳筐…),
+         首句自然错开, 且句子的信息量没降。
+    """
+    out = str(tip or "")
+    if "{word}" in out:
+        out = out.replace("{word}", word or "这类东西")
+    if "{brand}" in out:
+        out = out.replace("{brand}", brand or "")
+    # 品牌可能为空 → 去掉残留的标点/空格, 别让句子看着缺了一块
+    out = re.sub(r"\s{2,}", " ", out).strip()
+    out = re.sub(r"，\s*，", "，", out)
+    out = re.sub(r"^\s*[，,、]\s*", "", out)
+    return out
 
 
 def build_warmup_copy(p: dict, idx: int, tip: str = "", day_offset: int = 0,
@@ -637,7 +661,7 @@ def _history_used_ids(exclude_date: str = "") -> set:
 def _select_products(picked: list, meta: dict, exclude_ids: set = None,
                      n: int = 5, max_per_label: int = 2,
                      max_per_brand: int = 1, max_per_form: int = 2,
-                     use_quota: bool = True):
+                     use_quota: bool = True, rotate: int = 0):
     """从候选池里挑 n 个商品, 尽量避开重复。
 
     约束(逐级放宽, 保证一定能凑满 n 个):
@@ -647,6 +671,13 @@ def _select_products(picked: list, meta: dict, exclude_ids: set = None,
 
     ⚠️ 选的时候**按子类目轮转取**, 不是按池子顺序取 ——
        否则同一子类目的商品会连着排(收纳/收纳/收纳/扫把/扫把), 观感依然重复。
+
+    ⚠️ rotate: 按日期轮转**子类目的出场顺序**(2026-11-09 加)。
+       原来 group_order 是固定的 → 每天开头的 5 个子类目都一样
+       (实测 10-29 ~ 11-06 连续 9 天都是"收纳折叠整理箱/布储物箱/清洁工具簸箕/
+       扫把套装组合/保鲜盒6件套", 品类看着完全没变)。
+       → 用 day_offset 旋转 group_order, 每天的起手品类就错开了,
+         而每个子类目的**消耗速率不变**(一轮各取一个), 池子不会偏向大类。
 
     ⚠️ use_quota: 只有**养号期垂直池**才需要这些配额。
        带货期的商品来自精选联盟接口, 没有 source_label(全是空串),
@@ -673,6 +704,27 @@ def _select_products(picked: list, meta: dict, exclude_ids: set = None,
             groups[label] = []
             group_order.append(label)
         groups[label].append(p)
+
+    # ⚠️ 2026-11-09: 按日期轮转出场顺序 —— 避免每天都是同一批子类目打头
+    # ⚠️ 2026-11-09 追加: 光"轮转 1 格"还不够 —— 相邻子类目往往同属一个大类
+    #    (收纳折叠整理箱 / 布储物箱 / 布衣收纳箱 / 衣物储物收纳箱 全是"收纳"家族),
+    #    步长 1 时连续几天全落在同一家族 → 观众看到的是"今天 5 条有 4 条是收纳"。
+    #    实测 25 天里有 19 天出现同家族 ≥3 条。
+    #    → 改成**跨步铺开**: 步长取与类目总数互质的数(保证不重复遍历),
+    #      一天内 5 个名额落在彼此隔开的位置上。
+    if group_order and rotate:
+        g_total = len(group_order)
+        start = rotate % g_total
+        stride = max(1, g_total // max(1, n))
+        while stride < g_total and math.gcd(stride, g_total) != 1:
+            stride += 1
+        if stride >= g_total:
+            stride = 1
+        order, i = [], start
+        for _ in range(g_total):
+            order.append(group_order[i])
+            i = (i + stride) % g_total
+        group_order = order
 
     def _meta_of(p):
         label = p.get("source_label", "")
@@ -703,6 +755,15 @@ def _select_products(picked: list, meta: dict, exclude_ids: set = None,
                     continue
                 p = groups[g][ptr[g]]
                 ptr[g] += 1
+                # ⚠️ 2026-11-09 根因修复: 指针前进了就算"有进展"。
+                #    原来 progressed 只在**真的选中商品**时才置位, 于是:
+                #      每轮扫 19 个组 → 各组第一个商品若全被"历史已发"跳过
+                #      → picked_here 仍是 0 → progressed 保持 False → break
+                #      → relax 轮次把**同样这 5 个商品**又选出来
+                #    实际后果: 11-12 之后每天循环同一组 5 个商品(模拟实测),
+                #    池子还有 96 个没用过也轮不到 —— 看着像池子不够, 其实是死循环。
+                #    → 只要指针动了就继续扫, 直到挑满 n 个或全部扫完。
+                progressed = True
                 pid = str(p.get("id", ""))
                 if pid in chosen_ids:
                     continue
@@ -839,8 +900,19 @@ def main():
     used_ids = _history_used_ids(exclude_date=d) if warmup else set()
     if used_ids:
         print(f"🧾 历史已发商品: {len(used_ids)} 个 (优先跳过)")
+    # ---- 日期偏移: 既用于选品时的子类目轮转, 也用于文案取句 ----
+    # ⚠️ 2026-11-09: 选品类轮转也要用它, 所以必须**在选品之前**算出来
+    try:
+        day_offset = int(datetime.strptime(d, "%Y-%m-%d").strftime("%j"))
+    except Exception:
+        day_offset = 0
+    # ⚠️ max_per_label=1: 当天**同一子类目不许出现两次**。
+    #    原来默认 2 → 一天里两个"收纳箱类"是允许的, 观众看到的是重复题材
+    #    (实测 25 天里 4 天出现当天子类目撞车)。
+    #    放宽轮(relax=1)仍然允许第 2 个 —— 池子不够时的兜底, 不影响常态。
     selected, notes = _select_products(picked, meta, exclude_ids=used_ids, n=5,
-                                       use_quota=warmup)
+                                       use_quota=warmup, rotate=day_offset,
+                                       max_per_label=1 if warmup else 2)
     if notes:
         shown = notes[:8]
         for nt in shown:
@@ -854,12 +926,6 @@ def main():
     print(f"🎯 选中 {len(selected)} 个 · 子类目分布: "
           f"{ {l: labels.count(l) for l in set(labels)} }")
     picked = selected
-
-    # ---- 文案取句的日期偏移: 隔天同一位置换句式, 当天内不重复 ----
-    try:
-        day_offset = int(datetime.strptime(d, "%Y-%m-%d").strftime("%j"))
-    except Exception:
-        day_offset = 0
 
     feed = []
     src_counter = {}      # 每个子类目已用几个 → tip 在**自己子类目**内轮转
@@ -892,11 +958,16 @@ def main():
             color_en_override = _color_en(p.get("color") or "#F2F2F2")
         sidx = src_counter.get(label, 0)
         src_counter[label] = sidx + 1
+        brand, word = _split_brand(name, keywords)
         # ⚠️ tip 必须取**该商品自己子类目**的干货, 不能按批次位置取。
         #    否则"保鲜盒怎么叠放"会配到一只扫把上, 读者一秒出戏。
         # ⚠️ 2026-11-08: 加日期偏移 —— 原来恒取 tips[0], 同一个子类目每天
         #    第一条永远是同一句干货, 连续看就是复读。加上偏移后隔天会换。
+        # ⚠️ 2026-11-09: 干货句扩到每类目 10 条 + {word} 参数化 ——
+        #    原来每类目只有 3 条, 同类目第 4 次出现时 tip 必然循环回第 1 条,
+        #    首句跟一周前完全一样(实测首句高频重复 9-12 次)。
         tip = tips[(day_offset + sidx) % len(tips)] if tips else ""
+        tip = _fill_tip(tip, word=word, brand=brand)
 
         item = {
             "id": p.get("id", i),
@@ -920,7 +991,6 @@ def main():
             "product_en": product_en,
             "color_en": color_en_override,
         }
-        brand, word = _split_brand(name, keywords)
         item["brand"] = brand
         item["product_word"] = word
         item["product_en"] = product_en

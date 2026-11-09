@@ -71,12 +71,52 @@ pick_proxy() {
 
 PROXY="$(pick_proxy || true)"
 
+# --- 第 2 层兜底: github.com 的某些 IP 段在本机被网络层挡住 ---
+# ⚠️ 2026-11-09 实测: DNS 把 github.com 解析到 20.205.243.166, TCP 443 直接超时
+#    (api.github.com 却正常 → 单域名路由问题, 不是本机网络坏了)。
+#    换一个 GitHub 段位就通: 140.82.112.3 / 140.82.114.3 / 20.27.177.113 实测 200。
+#    → 直连 push 失败时, 逐个探这些 IP, 用 http.curloptResolve 钉住能通的那个再推。
+#    ⚠️ 用 -c 一次性传参, **不改仓库配置**, 更不改 /etc/hosts。
+FALLBACK_IPS=(140.82.112.3 140.82.114.3 140.82.113.3 20.27.177.113 20.205.243.166)
+
+pick_ip() {
+  local ip code
+  for ip in "${FALLBACK_IPS[@]}"; do
+    code="$(curl -sS -o /dev/null -m 12 -w '%{http_code}' \
+            --resolve "github.com:443:${ip}" https://github.com/ 2>/dev/null)"
+    if [ "${code}" = "200" ]; then
+      echo "${ip}"; return 0
+    fi
+  done
+  return 1
+}
+
+do_push() {
+  # $1 = 代理(可空)  $2 = 钉住的 IP(可空)
+  local proxy="$1" ip="$2"
+  local -a opts=()
+  [ -n "${proxy}" ] && opts+=(-c "http.proxy=${proxy}" -c "https.proxy=${proxy}")
+  [ -n "${ip}" ] && opts+=(-c "http.curloptResolve=github.com:443:${ip}")
+  git "${opts[@]}" push "${REMOTE}" "${BRANCH}" 2>&1 | tee /tmp/xhs_push.log
+}
+
 if [ -n "${PROXY}" ]; then
   echo "🔌 探测到可用代理: ${PROXY}"
-  git -c http.proxy="${PROXY}" -c https.proxy="${PROXY}" push "${REMOTE}" "${BRANCH}" 2>&1 | tee /tmp/xhs_push.log
+  do_push "${PROXY}" ""
 else
   echo "🔌 未探测到可用代理 → 直连推送"
-  git -c http.proxy= -c https.proxy= push "${REMOTE}" "${BRANCH}" 2>&1 | tee /tmp/xhs_push.log
+  do_push "" ""
+fi
+
+# 直连/代理都失败 → 换 IP 段位再试
+if ! grep -qE "${BRANCH} -> ${BRANCH}|^[0-9a-f]{7}\.\.[0-9a-f]{7}" /tmp/xhs_push.log; then
+  IP="$(pick_ip || true)"
+  if [ -n "${IP}" ]; then
+    echo "🔁 直连未通 → 换 GitHub IP 段位重试: ${IP}"
+    do_push "" "${IP}"
+  else
+    echo "⚠️ 备用 IP 段位也都不通 —— 判定为网络问题, 本次 push 失败"
+  fi
 fi
 
 # --- 判据: 必须有 main -> main 或 SHA 区间行 ---

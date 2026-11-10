@@ -82,7 +82,10 @@ FALLBACK_IPS=(140.82.112.3 140.82.114.3 140.82.113.3 20.27.177.113 20.205.243.16
 pick_ip() {
   local ip code
   for ip in "${FALLBACK_IPS[@]}"; do
-    code="$(curl -sS -o /dev/null -m 12 -w '%{http_code}' \
+    # ⚠️ 2026-11-10 实测: 这里必须带 --noproxy '*'。
+    #    否则 curl 走环境变量里的死代理 (127.0.0.1:6696) → 所有备用 IP 都返回 000,
+    #    明明有通的路 (实测 140.82.114.3 → 200) 却被判成"都不通"。
+    code="$(curl -sS --noproxy '*' -o /dev/null -m 12 -w '%{http_code}' \
             --resolve "github.com:443:${ip}" https://github.com/ 2>/dev/null)"
     if [ "${code}" = "200" ]; then
       echo "${ip}"; return 0
@@ -95,11 +98,24 @@ do_push() {
   # $1 = 代理(可空)  $2 = 钉住的 IP(可空)
   local proxy="$1" ip="$2"
   local -a opts=()
-  [ -n "${proxy}" ] && opts+=(-c "http.proxy=${proxy}" -c "https.proxy=${proxy}")
+  if [ -n "${proxy}" ]; then
+    opts+=(-c "http.proxy=${proxy}" -c "https.proxy=${proxy}")
+  else
+    # ⚠️ 2026-11-10 实测: "未探测到可用代理" 只说明**本地代理端口没监听**,
+    #    但环境变量里的 HTTP_PROXY/HTTPS_PROXY 仍指向那个死端口,
+    #    git 照样走它 → "Failed to connect to 127.0.0.1 port 6696"。
+    #    → 真直连必须**双清**: env 变量 + git 配置(http.proxy 置空 = 禁用代理)。
+    opts+=(-c "http.proxy=" -c "https.proxy=")
+  fi
   [ -n "${ip}" ] && opts+=(-c "http.curloptResolve=github.com:443:${ip}")
   # ⚠️ macOS 自带 bash 3.2: 空数组在 set -u 下用 "${opts[@]}" 会报
   #    "unbound variable"。用 ${opts[@]+...} 兼容写法, 空数组时整个词消失。
-  git ${opts[@]+"${opts[@]}"} push "${REMOTE}" "${BRANCH}" 2>&1 | tee /tmp/xhs_push.log
+  if [ -n "${proxy}" ]; then
+    git ${opts[@]+"${opts[@]}"} push "${REMOTE}" "${BRANCH}" 2>&1 | tee /tmp/xhs_push.log
+  else
+    env -u HTTP_PROXY -u HTTPS_PROXY -u http_proxy -u https_proxy \
+      git ${opts[@]+"${opts[@]}"} push "${REMOTE}" "${BRANCH}" 2>&1 | tee /tmp/xhs_push.log
+  fi
 }
 
 if [ -n "${PROXY}" ]; then

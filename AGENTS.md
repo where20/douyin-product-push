@@ -214,6 +214,19 @@ python3 scripts/dy_api.py --live --category 日用百货
   逐个探这些 IP，用 `git -c http.curloptResolve=github.com:443:<ip>` 钉住能通的那个重推
   （一次性传参，**不改仓库配置、不改 /etc/hosts**）。
   SSH 22 端口也通（`git@github.com` 认证正常），但默认仍走 HTTPS。
+- **"直连推送"不等于真直连 —— env 里的死代理会偷走 git**（2026-11-10 实测，已修）：
+  本机有 `MCODE_SYSTEM_PROXY_INJECTED=1` 注入的 `HTTP_PROXY/HTTPS_PROXY=http://127.0.0.1:6696`。
+  clash 没起时这个端口**没人监听**，但 env 变量还在 → git 照样去连它 →
+  `Failed to connect to 127.0.0.1 port 6696`。
+  ⚠️ `push_with_probe.sh` 原先只探测代理端口、判"没有可用代理"就**直接 push**，
+  却**没清 env** → 名为直连、实为走死代理，必然失败。
+  → 已修：直连分支 `env -u HTTP_PROXY -u HTTPS_PROXY -u http_proxy -u https_proxy`
+  **并且** `git -c http.proxy= -c https.proxy=`（配置置空 = 禁用代理，双保险）。
+  → 连带 bug：兜底段 `pick_ip` 的 curl 没带 `--noproxy '*'` → 备用 IP 全被代理吃掉 →
+  误判"备用 IP 都不通"。已补 `--noproxy '*'`。
+  ⚠️ 当天实测真值（会随网络变，别当常量）：直连 github.com → **200**；
+  备用 IP 只有 `140.82.114.3` → 200，`140.82.112.3` / `140.82.113.3` / `20.27.177.113` → 000。
+  → **本机任何 curl 校验站点/接口，一律带 `--noproxy '*'`**（env 代理是注入的、时通时不通）。
 - **出图原本不幂等，复跑会白烧额度**（2026-10-29 实测踩到）：
   `gen_dy_images.py` 出图成功后会把 `_raw_*.jpg` 删掉，导致 `mmx_generate` 里
   「文件已存在就复用」的检查**永远不成立** → 每次复跑都重新调 mmx 出 15 张。

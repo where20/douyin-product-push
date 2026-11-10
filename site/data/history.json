@@ -1,11 +1,17 @@
 {
- "generated_at": "2026-11-09 17:05:28",
- "latest": "2026-11-09",
- "total_days": 12,
- "total_posts": 60,
- "total_images": 180,
+ "generated_at": "2026-11-10 15:30:03",
+ "latest": "2026-11-10",
+ "total_days": 13,
+ "total_posts": 65,
+ "total_images": 195,
  "stage": "warmup",
  "dates": [
+  {
+   "date": "2026-11-10",
+   "count": 5,
+   "stage": "warmup",
+   "image_count": 15
+  },
   {
    "date": "2026-11-09",
    "count": 5,

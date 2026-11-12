@@ -145,6 +145,28 @@ if ! grep -qE "${BRANCH} -> ${BRANCH}|^[0-9a-f]{7}\.\.[0-9a-f]{7}" /tmp/xhs_push
   fi
 fi
 
+# --- 第 3 层兜底: SSH 通道 (2026-11-12 新增) ---
+# ⚠️ 2026-11-12 实测: 某段时间 github.com 的 **443 全线不通**
+#    (直连 000 + 5 个备用 IP 全部 000), 但 **22 端口照常通**,
+#    `ssh -T git@github.com` 认证正常 → 用 SSH URL 再推一次就能过。
+#    → 从 HTTPS remote URL 推导 SSH URL, 不改仓库 remote 配置(一次性传参)。
+#    → 判据不变: 必须看到 SHA 区间行 / main -> main 行。
+if ! grep -qE "${BRANCH} -> ${BRANCH}|^[0-9a-f]{7}\.\.[0-9a-f]{7}" /tmp/xhs_push.log; then
+  REMOTE_URL="$(git remote get-url "$REMOTE" 2>/dev/null || echo '')"
+  SSH_URL="$(printf '%s' "${REMOTE_URL}" | sed -E 's#^https?://github\.com/#git@github.com:#')"
+  case "${SSH_URL}" in
+    git@github.com:*)
+      echo "🔗 443 全线不通 → 改走 SSH 通道: ${SSH_URL}"
+      env -u HTTP_PROXY -u HTTPS_PROXY -u http_proxy -u https_proxy \
+        GIT_SSH_COMMAND="ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o ConnectTimeout=15" \
+        git push "${SSH_URL}" "${BRANCH}:refs/heads/${BRANCH}" 2>&1 | tee /tmp/xhs_push.log
+      ;;
+    *)
+      echo "⚠️ remote 不是 github.com HTTPS 地址, 跳过 SSH 兜底"
+      ;;
+  esac
+fi
+
 # --- 判据: 必须有 main -> main 或 SHA 区间行 ---
 if grep -qE "${BRANCH} -> ${BRANCH}|^[0-9a-f]{7}\.\.[0-9a-f]{7}" /tmp/xhs_push.log; then
   echo "✅ push 确认成功(见上方 SHA 区间行)"

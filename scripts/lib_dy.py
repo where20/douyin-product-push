@@ -492,8 +492,16 @@ def assert_feed(data):
         if warmup:
             bad = [w for w in WARMUP_FORBIDDEN if w in copy]
             if bad:
+                # ⚠️ 2026-11-12: 带上命中片段, 否则只看到一个词根本查不出是哪句。
+                #    实踩: tip "端菜进冰箱磕到手是常事" 里的"到手"是"磕着手"的意思,
+                #    被子串匹配当成营销词"到手价" → 当天 build_feed 直接失败, 当天没内容。
+                snippet = ""
+                for w in bad:
+                    j = copy.find(w)
+                    snippet = f" | 命中片段: …{copy[max(0, j-18):j+len(w)+18]}…"
+                    break
                 _fail(f"{tag}.copy 含养号期禁写营销信号 {bad} → "
-                      f"新号带价格/下单词会被判营销号, 自然流量打折")
+                      f"新号带价格/下单词会被判营销号, 自然流量打折{snippet}")
 
         # 三图结构: cover/scene/price 三份 prompt, 且 image_prompts 里 color 对齐
         prompts = p["image_prompts"]

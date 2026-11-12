@@ -309,6 +309,18 @@ WARMUP_HOOKS = (
 )
 
 
+def _overlap_join(left: str, right: str, min_k: int = 1) -> str:
+    """拼接 left + right, 去掉边界上**重复的那一段**。
+
+    做法: 找 left 的后缀里最长的、同时也是 right 前缀的一段, 只保留一份。
+    """
+    n = min(len(left), len(right))
+    for k in range(n, min_k - 1, -1):
+        if left.endswith(right[:k]):
+            return left + right[k:]
+    return left + right
+
+
 def _fill_tip(tip: str, word: str = "", brand: str = "") -> str:
     """把干货句里的占位符替换成**这个商品自己的**词。
 
@@ -319,12 +331,29 @@ def _fill_tip(tip: str, word: str = "", brand: str = "") -> str:
        → 干货句里放 {word}(品类词), 运行时填成该商品**命中的那个关键词**
          (同一类目下不同商品命中不同词: 收纳箱/整理箱/收纳筐…),
          首句自然错开, 且句子的信息量没降。
+
+    ⚠️ 2026-11-12 修: 填词后必须**去掉边界重复**, 否则拼出复读词。
+       干货句模板里 {word} 前面常常已经写死了类目字
+       ("后备箱{word}要买能固定住的"), 而命中的关键词本身又带这个字
+       (word="后备箱收纳箱") → 拼出"后备箱后备箱收纳箱要买能固定住的"。
+       首句复读 = 低质感 = 掉权重, 且是稳定复现(2026-11-12 5 条里 1 条中招)。
+
+       两类重复都要覆盖:
+         前缀重叠: "后备箱" + "后备箱收纳箱"   → "后备箱收纳箱"
+         后缀重叠: "管道疏通" + "疏通完要冲水"   → "管道疏通完要冲水"
+       → 统一走 _overlap_join(最大重叠拼接)。
+         左边允许 1 字起("布"+"布料"→"布料"),
+         右边要求 2 字起 —— 1 字重叠有可能是**合法**的合成词
+         ("毛巾架"+"架子"→"毛巾架子" 是另一个词, 不能乱切)。
     """
     out = str(tip or "")
     if "{word}" in out:
-        out = out.replace("{word}", word or "这类东西")
+        pre, post = out.split("{word}", 1)
+        fill = word or "这类东西"
+        out = _overlap_join(_overlap_join(pre, fill, 1), post, 2)
     if "{brand}" in out:
-        out = out.replace("{brand}", brand or "")
+        pre, post = out.split("{brand}", 1)
+        out = _overlap_join(_overlap_join(pre, brand or "", 1), post, 2)
     # 品牌可能为空 → 去掉残留的标点/空格, 别让句子看着缺了一块
     out = re.sub(r"\s{2,}", " ", out).strip()
     out = re.sub(r"，\s*，", "，", out)

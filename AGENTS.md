@@ -238,6 +238,56 @@ python3 scripts/dy_api.py --live --category 日用百货
   同一天连跑三次流水线 → 飞书收到 3 条一模一样的卡片。
   → `feishu_push.py` 现在把清单的 sha256 写进 `output/{date}/.feishu_pushed`，
   清单没变就跳过推送。强制重推用 `--force`。该标记是本机状态，已 gitignore。
+- **mmx 服务端 RPC 超时 ≠ 配额用尽**（2026-11-12 实测踩到）：
+  报错长这样：`API error: rpc timeout: timeout=1m0s, to=amadeus-server-rpc-headless..., method=Play`
+  → 是**图像生成后端过载**（服务端 60s 没返回），不是额度问题。
+  判据：`mmx quota show` 的 `current_interval_remaining_percent` 还很高（当天 88~92%）。
+  → 脚本本身带 3 次重试（180s 超时 + 4s/10s 退避），多数能扛过去；
+  但**单张图可能拖 3~8 分钟**，15 张要 30~50 分钟。
+  ⚠️ **cron 的 30 分钟命令时限不够** → 会被截断。
+  → 正确姿势：截断后**直接重跑 `run_daily.sh`**（出图幂等，已出的跳过，不烧额度），
+  别拆脚本、别 `--force`。
+  ⚠️ 排查时别用"简单 prompt 试一次 mmx 很快"当证据 —— 当天实测同一条 prompt
+  简单版 14 秒、完整版 180 秒超时，**prompt 越复杂越容易被后端拖**。
+- **`{word}` 参数化会拼出复读词**（2026-11-12 实测踩到）：
+  干货句模板里 `{word}` 前面常常已经写死了类目字（`后备箱{word}要买能固定住的`），
+  而商品命中的关键词本身又带这个字（`后备箱收纳箱`）→
+  拼出 **`后备箱后备箱收纳箱要买能固定住的`**。首句复读 = 低质感 = 掉权重。
+  两类重叠都要覆盖：
+  - 前缀重叠：`后备箱` + `后备箱收纳箱` → `后备箱收纳箱`
+  - 后缀重叠：`{word}疏通完要冲大量水` + word=`管道疏通` → `管道疏通完要冲大量水`
+  → 已改成 `_overlap_join()`（最大重叠拼接）：左边 1 字起，右边 2 字起
+    （右边 1 字重叠有可能是**合法合成词**，如"毛巾架"+"架子"→"毛巾架子"，不能乱切）。
+  → 回归验证：320 个池商品 × 全部模板 = 3104 组，重复块 **49 → 0**。
+- **养号期禁用词是子串匹配，会误伤**（2026-11-12 实测踩到）：
+  `WARMUP_FORBIDDEN` 含 `"到手"`，而 tip 原文「端菜进冰箱**磕到手**是常事」
+  里的"到手"是"磕着手"的意思 → 被当成营销词"到手价" → **当天 build_feed 直接失败**。
+  ⚠️ 这个 bug 卡的是**具体日期**：命中哪天的选品组合就哪天挂（2026-11-13 / 2026-11-23）。
+  → 修法是**改模板措辞**（"最容易磕着手"），不是放宽守卫 —— 守卫是故意收紧的。
+  → 改完模板要**全量扫一遍模板库**有没有别的地雷：
+    ```bash
+    python3 -c "
+    import json,sys; sys.path.insert(0,'scripts')
+    from lib_dy import WARMUP_FORBIDDEN
+    for s in json.load(open('pool/sources.json'))['sources']:
+        for t in s.get('tips') or []:
+            for w in WARMUP_FORBIDDEN:
+                if w in t: print(s.get('label'), w, t)"
+    ```
+  → `lib_dy.py` 的报错现在会带**命中片段**，别再只看一个词去猜。
+- **改了文案不能复用旧的图床 URL**（2026-11-12 实测踩到）：
+  `publish_pack --reuse-upload` 只比对 **key 集合**（pid+role），**不比文件内容哈希**
+  → 改了文案 / 改了 tip（尾图大字跟着变）之后复用旧 URL = 图上是旧字、文案是新字
+  = **图文不符 = 假带货**。
+  → 所以修 `_fill_tip` 这种改动**不要回头改已发布当天的 feed**（改了要连带重传图床）。
+  → 只让后续日期生效。
+- **github.com 443 全线不通时，22 端口（SSH）还能用**（2026-11-12 实测）：
+  当天直连 443 → 000，5 个备用 IP 全部 000，但 `ssh -T git@github.com` 认证正常。
+  → `push_with_probe.sh` 已加**第 3 层兜底**：从 HTTPS remote 推导 SSH URL 再推一次
+    （`git@github.com:OWNER/REPO.git`，一次性传参，**不改 remote 配置**）。
+  ⚠️ 判据不变：必须看到 `main -> main` 或 SHA 区间行才算推成功。
+  ⚠️ 当天实测：**直连失败时反而是某个备用 IP 通了**（140.82.112.3 → 200），
+    先探 IP 再落 SSH，脚本顺序就是错的。
 
 ## 每日流程
 

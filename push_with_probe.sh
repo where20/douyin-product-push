@@ -25,8 +25,14 @@
 #   3. 都没有 → 直连(不设 http.proxy)
 #
 # 判据(不要只看 exit code):
-#   push 输出里必须有 `main -> main` 或 `<sha>..<sha>` 区间行,
-#   否则视为没推上去(git add 坏 pathspec 时 commit/push 会"看起来成功"却啥也没推)。
+#   1) 首选: push 输出里有 `main -> main` 或 `<sha>..<sha>` 区间行;
+#   2) 兜底: 没有区间行时, **直接问远端真实的 main SHA**(SSH 优先, 失败退 HTTPS),
+#      跟本地 HEAD 相等就算推成功了。
+#      ⚠️ 为什么要兜底: "包已送达但 sideband 断连" 时输出是
+#         "RPC failed / unexpected disconnect" + 重试的 "Everything up-to-date",
+#         没有区间行, 但远端其实**已经收到了**(2026-11-12 实测)。
+#         坏 pathspec 也会打 "Everything up-to-date" 却啥也没推 —— 所以必须问远端,
+#         不能只看那句话, 也不能只比本地跟踪引用(SSH 层推送不更新它)。
 set -u
 
 REMOTE="${1:-origin}"
@@ -173,12 +179,57 @@ if grep -qE "${BRANCH} -> ${BRANCH}|^[0-9a-f]{7}\.\.[0-9a-f]{7}" /tmp/xhs_push.l
   exit 0
 fi
 
-# --- 兜底判据: "Everything up-to-date" 是**歧义**的, 不能单独当成功 ---
-# ⚠️ 坏 pathspec 时 commit/push 会"看起来成功"却啥也没推, 输出同样是
-#    "Everything up-to-date" —— 所以不能拿它当成功信号。
-#    → 改看**本地 HEAD 是否等于远端跟踪引用**:
-#      push 成功 → 跟踪引用自动更新到 HEAD → 相等
-#      push 失败 → 跟踪引用停在旧值     → 不等 → 正确判失败
-echo "❌ 未见 '${BRANCH} -> ${BRANCH}' 或 SHA 区间行 —— 判定为未推送成功, 请排查" >&2
+# --- 兜底判据: 直接问远端"你到底收没收到" (2026-11-12 补实现) ---
+# ⚠️ 坑: **包已送达但 sideband 连接断了** → push 输出
+#    "RPC failed / send-pack: unexpected disconnect", 重试打印 "Everything up-to-date",
+#    日志里既没有 SHA 区间行也没有 main -> main, 但**远端其实已经有这个 commit 了**。
+#    (2026-11-12 15:30 实测: 脚本判 ❌, 用 api.github.com 核对 → 远端 main 已是该 SHA。)
+#    坏的 pathspec 也会打同样的 "Everything up-to-date" 却啥也没推 —— 所以不能只看这句话。
+#
+# → 正确判据: **问远端真实的 main SHA**, 跟本地 HEAD 比。
+#    ⚠️ 不能只比本地跟踪引用: 第 3 层 SSH 兜底是往 URL 推的
+#       (git push <url> <branch>:refs/heads/<branch>), **不会更新** refs/remotes/origin/main
+#       → 那条路径上跟踪引用永远停在旧值, 比相等会误判成失败。
+#    → 优先走 SSH(443 可能全线不通时 22 端口照常通), 再退回 HTTPS。
+#    → 确认成功后顺手把本地跟踪引用对齐, 让下次"远端已是最新"的早退逻辑生效。
+probe_remote_sha() {
+  local url="$1" out=""
+  case "${url}" in
+    git@github.com:*)
+      out="$(GIT_SSH_COMMAND="ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o ConnectTimeout=15" \
+             git ls-remote "${url}" "refs/heads/${BRANCH}" 2>/dev/null | awk 'NR==1{print $1}')"
+      ;;
+    https://*|http://*)
+      if [ -n "${PROXY:-}" ]; then
+        out="$(git -c "http.proxy=${PROXY}" -c "https.proxy=${PROXY}" \
+               ls-remote "${url}" "refs/heads/${BRANCH}" 2>/dev/null | awk 'NR==1{print $1}')"
+      fi
+      if [ -z "${out}" ]; then
+        out="$(env -u HTTP_PROXY -u HTTPS_PROXY -u http_proxy -u https_proxy \
+               git -c "http.proxy=" -c "https.proxy=" \
+               ls-remote "${url}" "refs/heads/${BRANCH}" 2>/dev/null | awk 'NR==1{print $1}')"
+      fi
+      ;;
+  esac
+  printf '%s' "${out}"
+}
+
+LOCAL_SHA="$(git rev-parse HEAD 2>/dev/null || echo '')"
+REMOTE_URL="$(git remote get-url "${REMOTE}" 2>/dev/null || echo '')"
+SSH_URL="$(printf '%s' "${REMOTE_URL}" | sed -E 's#^https?://github\.com/#git@github.com:#')"
+
+if [ -n "${LOCAL_SHA}" ]; then
+  ACTUAL_SHA="$(probe_remote_sha "${SSH_URL}")"
+  [ -z "${ACTUAL_SHA}" ] && ACTUAL_SHA="$(probe_remote_sha "${REMOTE_URL}")"
+  if [ "${ACTUAL_SHA}" = "${LOCAL_SHA}" ]; then
+    echo "✅ push 实际已成功: 远端 ${BRANCH} = ${LOCAL_SHA:0:7}"
+    echo "   (无 SHA 区间行是因为 sideband 断连, 已向远端核对确认)"
+    git update-ref "refs/remotes/${REMOTE}/${BRANCH}" "${LOCAL_SHA}" 2>/dev/null || true
+    exit 0
+  fi
+  echo "   远端实际 ${BRANCH}: ${ACTUAL_SHA:-取不到(网络不通)}"
+fi
+
+echo "❌ 未见 '${BRANCH} -> ${BRANCH}' 或 SHA 区间行, 且远端也没有本地 HEAD —— 判定为未推送成功, 请排查" >&2
 echo "   本地 HEAD: ${LOCAL_SHA:-取不到} / 远端 ${REMOTE}/${BRANCH}: ${REMOTE_SHA:-取不到}" >&2
 exit 1

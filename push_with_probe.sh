@@ -227,7 +227,7 @@ if [ -n "${LOCAL_SHA}" ]; then
     git update-ref "refs/remotes/${REMOTE}/${BRANCH}" "${LOCAL_SHA}" 2>/dev/null || true
     exit 0
   fi
-  echo "   远端实际 ${BRANCH}: ${ACTUAL_SHA:-取不到(网络不通)}"
+  echo "   远端实际 ${BRANCH}: ${ACTUAL_SHA:-取不到(远端无此分支, 或网络不通)}"
 fi
 
 echo "❌ 未见 '${BRANCH} -> ${BRANCH}' 或 SHA 区间行, 且远端也没有本地 HEAD —— 判定为未推送成功, 请排查" >&2

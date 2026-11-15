@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-15",
+  "host": "https://cloudimgs.iepose.cn",
+  "images": {
+    "100134288548": {
+      "cover": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100134288548_cover.jpg",
+      "scene": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100134288548_scene.jpg",
+      "price": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100134288548_price.jpg"
+    },
+    "100169080913": {
+      "cover": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100169080913_cover.jpg",
+      "scene": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100169080913_scene.jpg",
+      "price": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100169080913_price.jpg"
+    },
+    "100219092988": {
+      "cover": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100219092988_cover.jpg",
+      "scene": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100219092988_scene.jpg",
+      "price": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100219092988_price.jpg"
+    },
+    "100306647800": {
+      "cover": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100306647800_cover.jpg",
+      "scene": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100306647800_scene.jpg",
+      "price": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100306647800_price.jpg"
+    },
+    "100125581251": {
+      "cover": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100125581251_cover.jpg",
+      "scene": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100125581251_scene.jpg",
+      "price": "https://cloudimgs.iepose.cn/api/images/douyin_2026-11-15_p100125581251_price.jpg"
+    }
+  },
+  "uploaded": 15,
+  "failed": 0
+}
